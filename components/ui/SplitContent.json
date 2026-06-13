@@ -1,0 +1,35 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "div",
+      "style": {
+        "base": {
+          "display": "grid",
+          "gap": "60px",
+          "gridTemplateColumns": "1fr 1fr",
+          "position": "static"
+        },
+        "tablet": {
+          "gridTemplateColumns": "1fr"
+        },
+        "mobile": {}
+      },
+      "children": [
+        {
+          "type": "slot"
+        }
+      ],
+      "attributes": {
+        "fade": "{{fade}}"
+      }
+    },
+    "interface": {
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    },
+    "category": "ui"
+  }
+}

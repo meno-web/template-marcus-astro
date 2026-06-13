@@ -1,0 +1,41 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "select",
+      "style": {
+        "base": {
+          "padding": "12px 16px",
+          "fontSize": "16px",
+          "border": "1px solid",
+          "borderRadius": "8px",
+          "outline": "none",
+          "width": "100%",
+          "boxSizing": "border-box",
+          "fontFamily": "inherit",
+          "backgroundColor": "var(--background)",
+          "borderColor": "var(--border)",
+          "color": "var(--text)",
+          "cursor": "pointer"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "attributes": {
+        "name": "{{name}}"
+      },
+      "children": [
+        {
+          "type": "slot"
+        }
+      ]
+    },
+    "interface": {
+      "name": {
+        "type": "string",
+        "default": "select"
+      }
+    },
+    "category": "forms"
+  }
+}

@@ -1,0 +1,2 @@
+/*
+  Content-Security-Policy: default-src 'self'; frame-src https://player.vimeo.com https://www.youtube.com https://www.youtube-nocookie.com https://vimeo.com; style-src 'self' 'unsafe-inline' https://f.vimeocdn.com; img-src 'self' data: https:; script-src 'self' 'unsafe-inline' https://f.vimeocdn.com https://player.vimeo.com https://www.youtube.com https://s.ytimg.com; connect-src 'self' https://vimeo.com https://*.vimeocdn.com

@@ -1,0 +1,252 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "SectionHeader",
+          "props": {
+            "isCenter": true,
+            "maxWidth": "600px"
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Subtitle",
+              "if": "{{subtitle}}",
+              "props": {
+                "text": "{{subtitle}}",
+                "align": "center",
+                "fade": "0"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Heading",
+              "props": {
+                "text": "{{title}}",
+                "maxWidth": "",
+                "align": "center",
+                "size": "2",
+                "tag": "2",
+                "fade": "0.2"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Text",
+              "if": "{{text}}",
+              "props": {
+                "text": "{{text}}",
+                "size": "large",
+                "align": "center",
+                "maxWidth": "",
+                "fade": "0.4"
+              }
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "component": "Grid",
+          "props": {
+            "columns": "3",
+            "gap": "24",
+            "fade": "0.4"
+          },
+          "children": [
+            {
+              "type": "list",
+              "sourceType": "prop",
+              "source": "{{items}}",
+              "itemAs": "item",
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Card",
+                  "children": [
+                    {
+                      "type": "node",
+                      "tag": "div",
+                      "style": {
+                        "base": {
+                          "display": "flex",
+                          "flexDirection": "column",
+                          "height": "100%"
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "component",
+                          "component": "Heading",
+                          "props": {
+                            "text": "{{item.title}}",
+                            "size": "5",
+                            "tag": "3"
+                          }
+                        },
+                        {
+                          "type": "node",
+                          "tag": "div",
+                          "style": {
+                            "base": {
+                              "display": "flex",
+                              "alignItems": "baseline",
+                              "gap": "4px"
+                            }
+                          },
+                          "children": [
+                            {
+                              "type": "component",
+                              "component": "StatNumber",
+                              "props": {
+                                "text": "{{item.value}}"
+                              }
+                            },
+                            {
+                              "type": "component",
+                              "component": "Text",
+                              "props": {
+                                "text": "{{item.label}}",
+                                "variant": "light",
+                                "size": "small"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "component",
+                          "component": "Spacer",
+                          "props": {
+                            "size": "16"
+                          }
+                        },
+                        {
+                          "type": "component",
+                          "component": "Text",
+                          "props": {
+                            "text": "{{item.text}}",
+                            "variant": "light"
+                          }
+                        },
+                        {
+                          "type": "component",
+                          "component": "Spacer",
+                          "props": {
+                            "size": "32"
+                          }
+                        },
+                        {
+                          "type": "node",
+                          "tag": "div",
+                          "style": {
+                            "base": {
+                              "display": "flex"
+                            },
+                            "tablet": {},
+                            "mobile": {}
+                          },
+                          "children": [
+                            {
+                              "type": "component",
+                              "component": "Button",
+                              "props": {
+                                "text": "{{item.buttonText}}",
+                                "link": "{{item.link}}",
+                                "variant": "primary"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "subtitle": {
+        "type": "string",
+        "default": "Pricing"
+      },
+      "title": {
+        "type": "rich-text",
+        "default": "Simple, transparent pricing"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "Choose the plan that works best for you. No hidden fees."
+      },
+      "items": {
+        "type": "list",
+        "itemSchema": {
+          "title": {
+            "type": "string",
+            "default": "Plan Name"
+          },
+          "value": {
+            "type": "string",
+            "default": "$9"
+          },
+          "label": {
+            "type": "string",
+            "default": "/month"
+          },
+          "text": {
+            "type": "rich-text",
+            "default": "Feature 1\nFeature 2\nFeature 3"
+          },
+          "buttonText": {
+            "type": "string",
+            "default": "Get started"
+          },
+          "link": {
+            "type": "link",
+            "default": "#"
+          }
+        },
+        "default": [
+          {
+            "title": "Starter",
+            "value": "$9",
+            "label": "/month",
+            "text": "Up to 5 projects\nBasic analytics\nEmail support\n1 GB storage",
+            "buttonText": "Get started",
+            "link": "#"
+          },
+          {
+            "title": "Professional",
+            "value": "$29",
+            "label": "/month",
+            "text": "Unlimited projects\nAdvanced analytics\nPriority support\n10 GB storage",
+            "buttonText": "Get started",
+            "link": "#"
+          },
+          {
+            "title": "Enterprise",
+            "value": "$99",
+            "label": "/month",
+            "text": "Everything in Pro\nCustom integrations\nDedicated support\nUnlimited storage",
+            "buttonText": "Contact sales",
+            "link": "#"
+          }
+        ]
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    }
+  }
+}

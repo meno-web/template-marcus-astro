@@ -1,0 +1,247 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "SectionHeader",
+          "props": {
+            "isCenter": "{{isCenter}}",
+            "maxWidth": ""
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Subtitle",
+              "if": "{{subtitle}}",
+              "props": {
+                "text": "{{subtitle}}",
+                "fade": "0",
+                "align": {
+                  "_mapping": true,
+                  "prop": "isCenter",
+                  "values": {
+                    "default": "left",
+                    "true": "center",
+                    "false": "left"
+                  }
+                }
+              }
+            },
+            {
+              "type": "component",
+              "component": "Heading",
+              "props": {
+                "text": "{{title}}",
+                "maxWidth": "640px",
+                "fade": "0.2",
+                "align": {
+                  "_mapping": true,
+                  "prop": "isCenter",
+                  "values": {
+                    "default": "left",
+                    "true": "center",
+                    "false": "left"
+                  }
+                },
+                "size": "2",
+                "tag": "2"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Text",
+              "if": "{{text}}",
+              "props": {
+                "text": "{{text}}",
+                "size": "large",
+                "fade": "0.4",
+                "align": {
+                  "_mapping": true,
+                  "prop": "isCenter",
+                  "values": {
+                    "default": "left",
+                    "true": "center",
+                    "false": "left"
+                  }
+                },
+                "maxWidth": "580px"
+              }
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "component": "Grid",
+          "props": {
+            "columns": "1",
+            "gap": "24",
+            "fade": "0.4"
+          },
+          "children": [
+            {
+              "type": "list",
+              "sourceType": "prop",
+              "source": "{{items}}",
+              "itemAs": "item",
+              "children": [
+                {
+                  "type": "node",
+                  "tag": "div",
+                  "label": "Stat Item",
+                  "style": {
+                    "base": {
+                      "display": "flex",
+                      "flexDirection": "column",
+                      "gap": "8px",
+                      "marginBottom": "24px"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "node",
+                      "tag": "div",
+                      "label": "Label Row",
+                      "style": {
+                        "base": {
+                          "display": "flex",
+                          "justifyContent": "space-between",
+                          "alignItems": "center"
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "component",
+                          "component": "Text",
+                          "props": {
+                            "text": "{{item.label}}",
+                            "weight": "semibold"
+                          }
+                        },
+                        {
+                          "type": "component",
+                          "component": "Heading",
+                          "props": {
+                            "text": "{{item.value}}",
+                            "size": "5",
+                            "tag": "3",
+                            "color": "primary"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "node",
+                      "tag": "div",
+                      "label": "Progress Bar Background",
+                      "style": {
+                        "base": {
+                          "width": "100%",
+                          "height": "8px",
+                          "backgroundColor": "var(--bg-100)",
+                          "borderRadius": "4px",
+                          "overflow": "hidden"
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "node",
+                          "tag": "div",
+                          "label": "Progress Bar Fill",
+                          "style": {
+                            "base": {
+                              "width": "{{item.value}}%",
+                              "height": "100%",
+                              "backgroundColor": "var(--text)",
+                              "borderRadius": "4px",
+                              "transition": "width 0.3s ease"
+                            },
+                            "tablet": {},
+                            "mobile": {}
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "component",
+                      "component": "Text",
+                      "if": "{{item.description}}",
+                      "props": {
+                        "text": "{{item.description}}",
+                        "size": "small",
+                        "color": "light"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "subtitle": {
+        "type": "string",
+        "default": "Performance"
+      },
+      "title": {
+        "type": "rich-text",
+        "default": "Our achievements at a glance"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "Track record of excellence across key metrics."
+      },
+      "isCenter": {
+        "type": "boolean",
+        "default": false
+      },
+      "items": {
+        "type": "list",
+        "itemSchema": {
+          "label": {
+            "type": "string",
+            "default": "Metric"
+          },
+          "value": {
+            "type": "number",
+            "default": 75
+          },
+          "description": {
+            "type": "string",
+            "default": ""
+          }
+        },
+        "default": [
+          {
+            "label": "Customer Satisfaction",
+            "value": 95,
+            "description": "Based on annual surveys"
+          },
+          {
+            "label": "Project Success Rate",
+            "value": 88,
+            "description": "Projects delivered on time and budget"
+          },
+          {
+            "label": "Team Retention",
+            "value": 92,
+            "description": "Year-over-year retention"
+          }
+        ]
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    }
+  }
+}

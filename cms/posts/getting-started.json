@@ -1,0 +1,116 @@
+{
+  "_id": "getting-started",
+  "_filename": "getting-started",
+  "_createdAt": "2026-01-20T14:00:00.000Z",
+  "_updatedAt": "2026-03-13T10:00:00.000Z",
+  "title": "Lessons from Shooting a Documentary on a Tight Budget",
+  "slug": "getting-started",
+  "excerpt": "What I learned about resourcefulness, creative problem-solving, and letting the constraints guide the work when shooting a feature-length documentary with a skeleton crew.",
+  "content": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Last year I shot a feature-length documentary with a two-person crew and a budget that wouldn't cover catering on most commercial sets. It was one of the most challenging and rewarding projects I've worked on. Here's what it taught me."
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": null,
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Constraints Force Creativity"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "When you can't throw money at a problem, you have to think differently. We couldn't afford a full lighting package, so we scheduled around golden hour and scouted locations with strong natural light. We couldn't bring a dolly, so we found creative ways to use handheld movement that actually enhanced the intimacy of the story. Some of our best shots came from limitations we initially saw as setbacks."
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": null,
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Gear Matters Less Than You Think"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "We shot the entire project on a single camera body with two prime lenses. No gimbal, no drone, no elaborate rig. What made the footage work wasn't the equipment — it was understanding how to use light, composition, and timing to serve the story. I've seen films shot on cinema cameras that feel lifeless, and short films shot on DSLRs that punch way above their weight. The camera is a tool. The eye behind it is what matters."
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": null,
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Trust the Process in Post"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "With limited coverage, the edit became an exercise in restraint. We couldn't fix everything in post because there wasn't always a cutaway or B-roll to lean on. But that forced us to sit with moments longer, let silences breathe, and trust that the audience would stay engaged. The final cut was tighter and more honest than anything we could have assembled from hours of safety coverage."
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Budget doesn't define the quality of your work — your choices do. Every project, regardless of scale, is an opportunity to make something meaningful. That's the mindset I bring to every shoot."
+          }
+        ]
+      }
+    ]
+  },
+  "featuredImage": "/images/pasted-image-1773393474799.webp",
+  "publishedAt": "2026-01-20",
+  "_url": "/blog/getting-started"
+}

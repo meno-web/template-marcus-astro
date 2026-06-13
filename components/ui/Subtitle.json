@@ -1,0 +1,53 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "p",
+      "style": {
+        "base": {
+          "fontSize": "13px",
+          "fontWeight": "600",
+          "marginBottom": "16px",
+          "letterSpacing": "0em",
+          "lineHeight": "115%",
+          "color": {
+            "_mapping": true,
+            "prop": "variant",
+            "values": {
+              "default": "var(--text)",
+              "light": "var(--text-100)"
+            }
+          },
+          "textDecoration": "none",
+          "textTransform": "uppercase"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "attributes": {
+        "fade": "{{fade}}"
+      },
+      "children": [
+        "{{text}}"
+      ]
+    },
+    "interface": {
+      "text": {
+        "type": "string",
+        "default": "SUBTITLE"
+      },
+      "variant": {
+        "type": "select",
+        "default": "default",
+        "options": [
+          "default",
+          "light"
+        ]
+      },
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

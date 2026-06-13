@@ -1,0 +1,55 @@
+{
+  "root": {
+    "type": "component",
+    "component": "Layout",
+    "children": [
+      {
+        "type": "component",
+        "component": "CaseStudyBody"
+      }
+    ]
+  },
+  "meta": {
+    "title": "{{cms.title}}",
+    "description": "{{cms.description}}",
+    "source": "cms",
+    "cms": {
+      "id": "case-studies",
+      "name": "Case Studies",
+      "slugField": "slug",
+      "urlPattern": "/work/{{slug}}",
+      "fields": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "label": "Title"
+        },
+        "slug": {
+          "type": "string",
+          "required": true,
+          "label": "URL Slug"
+        },
+        "description": {
+          "type": "text",
+          "label": "Description"
+        },
+        "image": {
+          "type": "image",
+          "label": "Cover Image"
+        },
+        "content": {
+          "type": "rich-text",
+          "label": "Content"
+        },
+        "category": {
+          "type": "string",
+          "label": "Category"
+        },
+        "publishedAt": {
+          "type": "date",
+          "label": "Publish Date"
+        }
+      }
+    }
+  }
+}

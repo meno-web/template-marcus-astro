@@ -1,0 +1,180 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "spaceTop": "default",
+        "spaceBottom": "default",
+        "theme": "{{theme}}"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "SectionHeader",
+          "props": {
+            "isCenter": true,
+            "maxWidth": "450px"
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Subtitle",
+              "if": "{{subtitle}}",
+              "props": {
+                "text": "{{subtitle}}",
+                "align": "center",
+                "fade": "0"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Heading",
+              "props": {
+                "text": "{{title}}",
+                "maxWidth": "",
+                "align": "center",
+                "size": "2",
+                "tag": "2",
+                "fade": "0.2"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Text",
+              "if": "{{text}}",
+              "props": {
+                "text": "{{text}}",
+                "size": "large",
+                "align": "center",
+                "maxWidth": "",
+                "isMarginBottom": true,
+                "fade": "0.4"
+              }
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "component": "Grid",
+          "props": {
+            "columns": "2",
+            "gap": "24",
+            "fade": "0.4"
+          },
+          "children": [
+            {
+              "type": "list",
+              "sourceType": "prop",
+              "source": "{{items}}",
+              "itemAs": "item",
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Card",
+                  "props": {},
+                  "children": [
+                    {
+                      "type": "component",
+                      "component": "Heading",
+                      "props": {
+                        "text": "{{item.title}}",
+                        "size": "3",
+                        "tag": "3"
+                      }
+                    },
+                    {
+                      "type": "component",
+                      "component": "Text",
+                      "props": {
+                        "text": "{{item.text}}",
+                        "isMarginBottom": true
+                      }
+                    },
+                    {
+                      "type": "component",
+                      "component": "Spacer",
+                      "props": {
+                        "size": "24"
+                      }
+                    },
+                    {
+                      "type": "node",
+                      "tag": "div",
+                      "style": {
+                        "base": {
+                          "fontSize": "15px",
+                          "lineHeight": "1.8",
+                          "color": "var(--text-secondary)"
+                        }
+                      },
+                      "children": "{{item.features}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "subtitle": {
+        "type": "string",
+        "default": "Features"
+      },
+      "title": {
+        "type": "rich-text",
+        "default": "Learn more about our approach"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "We believe in transparency and sharing our process with you."
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      },
+      "items": {
+        "type": "list",
+        "itemSchema": {
+          "title": {
+            "type": "string",
+            "default": "Feature Title"
+          },
+          "text": {
+            "type": "rich-text",
+            "default": "Feature description goes here."
+          },
+          "features": {
+            "type": "rich-text",
+            "default": "Feature 1\nFeature 2\nFeature 3\nFeature 4"
+          }
+        },
+        "default": [
+          {
+            "title": "Team Management",
+            "text": "Manage your entire team from a single dashboard with fine-grained controls over who can access what.",
+            "features": "Role-based access control\nSSO support for enterprise identity providers\nTeam workspaces with granular permissions\nAudit logs for every action"
+          },
+          {
+            "title": "Security & Compliance",
+            "text": "Your data is protected with industry-leading security practices and compliance certifications.",
+            "features": "AES-256 encryption at rest and in transit\nSOC 2 Type II certified\nRegular third-party security audits\nGDPR and CCPA compliant"
+          },
+          {
+            "title": "Priority Support",
+            "text": "Your team gets the help they need, when they need it.",
+            "features": "Dedicated support channel for your organization\n24-hour response SLA\nHands-on onboarding and training\nDirect access to our engineering team for complex issues"
+          },
+          {
+            "title": "Custom Integrations",
+            "text": "Make the platform fit your workflow, not the other way around.",
+            "features": "Full API access\nWebhooks for automation\nCI/CD pipeline integration\nWhite-label options available"
+          }
+        ]
+      }
+    }
+  }
+}

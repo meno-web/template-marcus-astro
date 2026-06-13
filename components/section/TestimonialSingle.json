@@ -1,0 +1,142 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default",
+        "maxWidth": "900"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "Stack",
+          "props": {
+            "vertical": "top",
+            "horizontal": "center"
+          },
+          "children": [
+            {
+              "type": "node",
+              "tag": "blockquote",
+              "style": {
+                "base": {
+                  "margin": "0",
+                  "padding": "0"
+                }
+              },
+              "children": [
+                {
+                  "type": "component",
+                  "component": "QuoteText",
+                  "props": {
+                    "text": "{{quote}}",
+                    "maxWidth": "100%",
+                    "align": "center",
+                    "size": "2",
+                    "tag": "3",
+                    "fade": "0"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "component",
+              "component": "Spacer",
+              "props": {
+                "size": "32"
+              }
+            },
+            {
+              "type": "node",
+              "tag": "div",
+              "style": {
+                "base": {
+                  "display": "flex",
+                  "alignItems": "center",
+                  "gap": "16px"
+                }
+              },
+              "attributes": {
+                "fade": 0.2
+              },
+              "children": [
+                {
+                  "type": "node",
+                  "tag": "img",
+                  "style": {
+                    "base": {
+                      "width": "56px",
+                      "height": "56px",
+                      "borderRadius": "50%",
+                      "objectFit": "cover"
+                    }
+                  },
+                  "attributes": {
+                    "src": "{{avatar}}",
+                    "alt": "{{name}}"
+                  }
+                },
+                {
+                  "type": "node",
+                  "tag": "div",
+                  "children": [
+                    {
+                      "type": "node",
+                      "tag": "div",
+                      "style": {
+                        "base": {
+                          "fontWeight": "600",
+                          "color": "var(--text)"
+                        }
+                      },
+                      "children": "{{name}}"
+                    },
+                    {
+                      "type": "node",
+                      "tag": "div",
+                      "style": {
+                        "base": {
+                          "color": "var(--text-100)",
+                          "fontSize": "14px"
+                        },
+                        "tablet": {},
+                        "mobile": {}
+                      },
+                      "children": "{{role}}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "quote": {
+        "type": "rich-text",
+        "default": "\"This product has completely transformed how we work. I can't imagine going back to the old way of doing things.\""
+      },
+      "avatar": {
+        "type": "file",
+        "default": "/images/placeholder-img.webp",
+        "accept": "image/*"
+      },
+      "name": {
+        "type": "string",
+        "default": "Jane Smith"
+      },
+      "role": {
+        "type": "string",
+        "default": "CEO at Company"
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    }
+  }
+}

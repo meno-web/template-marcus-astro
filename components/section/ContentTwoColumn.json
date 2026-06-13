@@ -1,0 +1,204 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "SectionHeader",
+          "props": {
+            "isCenter": true,
+            "maxWidth": "500px"
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Subtitle",
+              "if": "{{subtitle}}",
+              "props": {
+                "text": "{{subtitle}}",
+                "fade": "0",
+                "align": "center"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Heading",
+              "props": {
+                "text": "{{title}}",
+                "maxWidth": "400px",
+                "fade": "0.2",
+                "align": "center",
+                "size": "2",
+                "tag": "2"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Text",
+              "if": "{{text}}",
+              "props": {
+                "text": "{{text}}",
+                "size": "large",
+                "fade": "0.4",
+                "align": "center",
+                "maxWidth": "",
+                "isMarginBottom": true
+              }
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "component": "Grid",
+          "props": {
+            "columns": "2",
+            "gap": "24"
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Card",
+              "props": {
+                "variant": "default",
+                "fade": "0.4"
+              },
+              "children": [
+                {
+                  "type": "node",
+                  "tag": "div",
+                  "style": {
+                    "base": {
+                      "color": "var(--text)"
+                    },
+                    "tablet": {},
+                    "mobile": {}
+                  },
+                  "children": [
+                    {
+                      "type": "component",
+                      "component": "Icon",
+                      "props": {
+                        "icon": "{{leftIcon}}",
+                        "size": "28"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "component",
+                  "component": "Spacer",
+                  "props": {
+                    "size": "3"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Text",
+                  "props": {
+                    "text": "{{leftText}}",
+                    "fade": "",
+                    "size": "default",
+                    "align": "left",
+                    "maxWidth": "100%"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "component",
+              "component": "Card",
+              "props": {
+                "variant": "default",
+                "fade": "0.6"
+              },
+              "children": [
+                {
+                  "type": "node",
+                  "tag": "div",
+                  "style": {
+                    "base": {
+                      "color": "var(--text)"
+                    },
+                    "tablet": {},
+                    "mobile": {}
+                  },
+                  "children": [
+                    {
+                      "type": "component",
+                      "component": "Icon",
+                      "props": {
+                        "icon": "{{rightIcon}}",
+                        "size": "28"
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "component",
+                  "component": "Spacer",
+                  "props": {
+                    "size": "3"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Text",
+                  "props": {
+                    "text": "{{rightText}}",
+                    "fade": "",
+                    "size": "default",
+                    "align": "left",
+                    "maxWidth": "100%"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "subtitle": {
+        "type": "string",
+        "default": "Features"
+      },
+      "title": {
+        "type": "rich-text",
+        "default": "Learn more about our approach"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "We believe in transparency and sharing our process with you."
+      },
+      "leftText": {
+        "type": "rich-text",
+        "default": "Our approach is built on years of experience and a deep understanding of what our customers need. We focus on delivering solutions that are both powerful and easy to use, ensuring that you can get started quickly without sacrificing functionality."
+      },
+      "rightText": {
+        "type": "rich-text",
+        "default": "We're committed to continuous improvement and innovation. Our team works tirelessly to bring you new features and enhancements that help you stay ahead of the competition. Your success is our priority, and we're here to support you every step of the way."
+      },
+      "leftIcon": {
+        "type": "select",
+        "default": "users",
+        "enumName": "icons"
+      },
+      "rightIcon": {
+        "type": "select",
+        "default": "eye",
+        "enumName": "icons"
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    }
+  }
+}

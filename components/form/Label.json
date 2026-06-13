@@ -1,0 +1,34 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "label",
+      "style": {
+        "base": {
+          "fontSize": "14px",
+          "fontWeight": "500",
+          "color": "var(--text)",
+          "display": "block"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "attributes": {
+        "for": "{{htmlFor}}"
+      },
+      "children": [
+        "{{text}}"
+      ]
+    },
+    "interface": {
+      "text": {
+        "type": "string",
+        "default": "Label"
+      },
+      "htmlFor": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

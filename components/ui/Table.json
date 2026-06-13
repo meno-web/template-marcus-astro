@@ -1,0 +1,37 @@
+{
+  "component": {
+    "interface": {
+      "maxWidth": {
+        "type": "string",
+        "default": "800px"
+      },
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    },
+    "structure": {
+      "type": "node",
+      "tag": "div",
+      "style": {
+        "base": {
+          "maxWidth": "{{maxWidth}}",
+          "margin": "0 auto",
+          "backgroundColor": "var(--bg)",
+          "borderRadius": "8px",
+          "overflow": "hidden",
+          "border": "1px solid",
+          "borderColor": "var(--border)"
+        }
+      },
+      "children": [
+        {
+          "type": "slot"
+        }
+      ],
+      "attributes": {
+        "fade": "{{fade}}"
+      }
+    }
+  }
+}

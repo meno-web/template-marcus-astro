@@ -1,0 +1,19 @@
+{
+  "memories": [
+    {
+      "id": "7269d64d-fbeb-484d-88a9-29ebe75b242e",
+      "title": "Icons",
+      "content": "If you want to use icon, please check list of available icons in file enums.json",
+      "enabled": true,
+      "createdAt": "2026-03-05T07:30:48.482Z"
+    },
+    {
+      "id": "5d89d1f0-c6fc-45c4-9577-101f7b24672c",
+      "title": "Response Style",
+      "content": "Output JSON code directly. Keep explanations to 2-3 lines maximum. Don't write long text responses — focus on code.",
+      "enabled": true,
+      "createdAt": "2026-03-05T07:45:55.780Z"
+    }
+  ],
+  "skills": []
+}

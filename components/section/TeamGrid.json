@@ -1,0 +1,194 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "SectionHeader",
+          "props": {
+            "isCenter": true,
+            "maxWidth": "600px"
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Subtitle",
+              "if": "{{subtitle}}",
+              "props": {
+                "text": "{{subtitle}}",
+                "align": "center",
+                "fade": "0"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Heading",
+              "props": {
+                "text": "{{title}}",
+                "maxWidth": "",
+                "align": "center",
+                "size": "2",
+                "tag": "2",
+                "fade": "0.2"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Text",
+              "if": "{{text}}",
+              "props": {
+                "text": "{{text}}",
+                "size": "large",
+                "align": "center",
+                "maxWidth": "",
+                "fade": "0.4"
+              }
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "component": "Grid",
+          "props": {
+            "columns": "4",
+            "gap": "24",
+            "fade": "0.4"
+          },
+          "children": [
+            {
+              "type": "list",
+              "sourceType": "prop",
+              "source": "{{items}}",
+              "itemAs": "item",
+              "children": [
+                {
+                  "type": "node",
+                  "tag": "div",
+                  "style": {
+                    "base": {
+                      "textAlign": "center"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "node",
+                      "tag": "div",
+                      "style": {
+                        "base": {
+                          "width": "160px",
+                          "height": "160px",
+                          "borderRadius": "50%",
+                          "overflow": "hidden",
+                          "marginBottom": "16px",
+                          "marginLeft": "auto",
+                          "marginRight": "auto"
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "component",
+                          "component": "Image",
+                          "props": {
+                            "image": "{{item.image}}",
+                            "alt": "{{item.title}}",
+                            "objectFit": "cover",
+                            "width": "100%",
+                            "height": "100%"
+                          }
+                        }
+                      ]
+                    },
+                    {
+                      "type": "component",
+                      "component": "Heading",
+                      "props": {
+                        "text": "{{item.title}}",
+                        "size": "5",
+                        "tag": "3",
+                        "align": "center"
+                      }
+                    },
+                    {
+                      "type": "component",
+                      "component": "Text",
+                      "props": {
+                        "text": "{{item.text}}",
+                        "size": "small",
+                        "variant": "light",
+                        "align": "center"
+                      }
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "subtitle": {
+        "type": "string",
+        "default": "Our Team"
+      },
+      "title": {
+        "type": "rich-text",
+        "default": "Meet the people behind our success"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "Our talented team is dedicated to delivering exceptional results."
+      },
+      "items": {
+        "type": "list",
+        "itemSchema": {
+          "image": {
+            "type": "file",
+            "default": "/images/placeholder-img.webp"
+          },
+          "title": {
+            "type": "string",
+            "default": "Name"
+          },
+          "text": {
+            "type": "string",
+            "default": "Role"
+          }
+        },
+        "default": [
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Sarah Johnson",
+            "text": "CEO & Founder"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Michael Chen",
+            "text": "CTO"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Emily Rodriguez",
+            "text": "Design Lead"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "David Kim",
+            "text": "Engineering Lead"
+          }
+        ]
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    }
+  }
+}

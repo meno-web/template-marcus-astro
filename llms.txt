@@ -1,0 +1,24 @@
+# Meno Studio
+
+> AI-first visual website editor
+
+Meno Studio is an AI-powered web builder that turns your ideas into production-ready websites. Describe what you want, refine it visually, and publish—all in one place.
+
+## Features
+
+- AI-First Editing: Built-in AI assistant that understands your project
+- Visual Editor: Drag-and-drop page builder with live preview
+- Built-in CMS: Custom content collections with typed fields
+- Multi Language: Localized content with language-specific URLs
+- Git Version Control: Every change is a commit with full audit trail
+- Own Your Data: Files stored in your repository, zero vendor lock-in
+
+## Links
+
+- Website: https://meno.so
+- GitHub: https://github.com/meno-so/studio
+- Download: https://github.com/meno-so/studio/releases
+
+## Contact
+
+- Sales: /contact-sales

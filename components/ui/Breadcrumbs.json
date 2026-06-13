@@ -1,0 +1,134 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "nav",
+      "label": "breadcrumbs",
+      "attributes": {
+        "aria-label": "Breadcrumbs",
+        "fade": "{{fade}}"
+      },
+      "children": [
+        {
+          "type": "node",
+          "tag": "ol",
+          "style": {
+            "base": {
+              "display": "flex",
+              "flexWrap": "wrap",
+              "alignItems": "center",
+              "gap": "12px",
+              "listStyle": "none",
+              "padding": "0",
+              "margin": "0"
+            },
+            "tablet": {},
+            "mobile": {}
+          },
+          "children": [
+            {
+              "type": "list",
+              "sourceType": "prop",
+              "source": "items",
+              "tag": false,
+              "itemAs": "item",
+              "children": [
+                {
+                  "type": "node",
+                  "tag": "li",
+                  "style": {
+                    "base": {
+                      "display": "flex",
+                      "alignItems": "center",
+                      "gap": "4px"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "link",
+                      "href": "{{item.href}}",
+                      "style": {
+                        "base": {
+                          "color": "var(--text-100)",
+                          "fontSize": "var(--ts-fs)",
+                          "textDecoration": "none"
+                        }
+                      },
+                      "interactiveStyles": [
+                        {
+                          "name": "on hover",
+                          "postfix": ":hover",
+                          "style": {
+                            "base": {
+                              "color": "var(--text)"
+                            }
+                          }
+                        }
+                      ],
+                      "children": [
+                        "{{item.label}}"
+                      ]
+                    },
+                    {
+                      "type": "node",
+                      "tag": "span",
+                      "if": "{{itemLast}}",
+                      "style": {
+                        "base": {
+                          "color": "var(--text-100)",
+                          "fontSize": "var(--ts-fs)"
+                        }
+                      },
+                      "children": " / "
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "items": {
+        "type": "list",
+        "itemSchema": {
+          "label": {
+            "type": "string",
+            "default": "Page"
+          },
+          "href": {
+            "type": "link",
+            "default": {
+              "href": "#"
+            }
+          }
+        },
+        "default": [
+          {
+            "label": "Home",
+            "href": {
+              "href": "/"
+            }
+          },
+          {
+            "label": "Features",
+            "href": {
+              "href": "#features"
+            }
+          },
+          {
+            "label": "Detail",
+            "href": {
+              "href": "#"
+            }
+          }
+        ]
+      },
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

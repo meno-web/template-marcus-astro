@@ -1,0 +1,78 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "form",
+      "style": {
+        "base": {
+          "display": "flex",
+          "flexDirection": "column",
+          "gap": "16px"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "attributes": {
+        "action": "{{action}}",
+        "method": "{{method}}",
+        "data-submit-handler": "{{submitHandler}}",
+        "data-success-message": "{{successMessage}}",
+        "data-error-message": "{{errorMessage}}"
+      },
+      "children": [
+        {
+          "type": "slot"
+        },
+        {
+          "type": "node",
+          "tag": "div",
+          "attributes": {
+            "data-form-message": "true"
+          },
+          "style": {
+            "base": {
+              "display": "none",
+              "padding": "12px 16px",
+              "borderRadius": "6px",
+              "marginTop": "8px",
+              "fontSize": "14px"
+            },
+            "tablet": {},
+            "mobile": {}
+          }
+        }
+      ]
+    },
+    "interface": {
+      "action": {
+        "type": "string",
+        "default": ""
+      },
+      "method": {
+        "type": "select",
+        "default": "post",
+        "options": [
+          "get",
+          "post"
+        ]
+      },
+      "submitHandler": {
+        "type": "select",
+        "default": "native",
+        "options": [
+          "native",
+          "fetch"
+        ]
+      },
+      "successMessage": {
+        "type": "string",
+        "default": "Form submitted successfully!"
+      },
+      "errorMessage": {
+        "type": "string",
+        "default": "Something went wrong. Please try again."
+      }
+    },
+    "category": "forms"
+  }
+}

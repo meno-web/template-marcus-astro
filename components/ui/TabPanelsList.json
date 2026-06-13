@@ -1,0 +1,27 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "div",
+      "style": {
+        "base": {
+          "width": "100%"
+        }
+      },
+      "children": [
+        {
+          "type": "slot"
+        }
+      ],
+      "attributes": {
+        "fade": "{{fade}}"
+      }
+    },
+    "interface": {
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,58 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "label",
+      "style": {
+        "base": {
+          "display": "flex",
+          "alignItems": "center",
+          "gap": "8px",
+          "fontSize": "16px",
+          "color": "var(--text)",
+          "cursor": "pointer"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "children": [
+        {
+          "type": "node",
+          "tag": "input",
+          "style": {
+            "base": {
+              "width": "18px",
+              "height": "18px",
+              "cursor": "pointer",
+              "accentColor": "var(--primary)"
+            },
+            "tablet": {},
+            "mobile": {}
+          },
+          "attributes": {
+            "type": "checkbox",
+            "name": "{{name}}"
+          }
+        },
+        {
+          "type": "node",
+          "tag": "span",
+          "children": [
+            "{{label}}"
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "name": {
+        "type": "string",
+        "default": "checkbox"
+      },
+      "label": {
+        "type": "string",
+        "default": "Checkbox label"
+      }
+    },
+    "category": "forms"
+  }
+}

@@ -1,0 +1,65 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "video",
+      "style": {
+        "base": {
+          "width": "100%",
+          "maxWidth": "100%",
+          "height": "auto",
+          "display": "block"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "attributes": {
+        "src": "{{src}}",
+        "poster": "{{poster}}",
+        "controls": "{{controls}}",
+        "autoPlay": "{{autoPlay}}",
+        "loop": "{{loop}}",
+        "muted": "{{muted}}",
+        "playsInline": "{{playsInline}}",
+        "fade": "{{fade}}"
+      },
+      "children": []
+    },
+    "interface": {
+      "src": {
+        "type": "file",
+        "default": "",
+        "accept": "video/*"
+      },
+      "poster": {
+        "type": "file",
+        "default": "",
+        "accept": "image/*"
+      },
+      "controls": {
+        "type": "boolean",
+        "default": true
+      },
+      "autoPlay": {
+        "type": "boolean",
+        "default": false
+      },
+      "loop": {
+        "type": "boolean",
+        "default": false
+      },
+      "muted": {
+        "type": "boolean",
+        "default": false
+      },
+      "playsInline": {
+        "type": "boolean",
+        "default": true
+      },
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "root": {
+    "type": "component",
+    "component": "Layout",
+    "children": [
+      {
+        "type": "component",
+        "component": "BlogPostBody"
+      }
+    ]
+  },
+  "meta": {
+    "title": "{{cms.title}}",
+    "description": "{{cms.excerpt}}",
+    "source": "cms",
+    "cms": {
+      "id": "posts",
+      "name": "Blog Posts",
+      "slugField": "slug",
+      "urlPattern": "/blog/{{slug}}",
+      "fields": {
+        "title": {
+          "type": "string",
+          "required": true,
+          "label": "Title"
+        },
+        "slug": {
+          "type": "string",
+          "required": true,
+          "label": "URL Slug"
+        },
+        "excerpt": {
+          "type": "text",
+          "label": "Excerpt"
+        },
+        "content": {
+          "type": "rich-text",
+          "label": "Content"
+        },
+        "featuredImage": {
+          "type": "image",
+          "label": "Featured Image"
+        },
+        "publishedAt": {
+          "type": "date",
+          "label": "Publish Date"
+        }
+      }
+    }
+  }
+}

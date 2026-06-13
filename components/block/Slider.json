@@ -1,0 +1,229 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "div",
+      "label": "Slider",
+      "style": {
+        "base": {
+          "position": "relative",
+          "--columns": {
+            "_mapping": true,
+            "prop": "columns",
+            "values": {
+              "1": "1",
+              "2": "2",
+              "3": "3",
+              "4": "4"
+            }
+          },
+          "--gap": "{{gap}}",
+          "--peek": {
+            "_mapping": true,
+            "prop": "cropped",
+            "values": {
+              "true": "0",
+              "false": "0.2"
+            }
+          }
+        }
+      },
+      "children": [
+        {
+          "type": "node",
+          "tag": "div",
+          "label": "Viewport",
+          "style": {
+            "base": {}
+          },
+          "attributes": {
+            "data-el": "viewport"
+          },
+          "children": [
+            {
+              "type": "node",
+              "tag": "div",
+              "label": "Container",
+              "style": {
+                "base": {
+                  "display": "flex",
+                  "gap": "{{gap}}px"
+                }
+              },
+              "attributes": {
+                "data-el": "container"
+              },
+              "children": [
+                {
+                  "type": "slot"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "node",
+          "tag": "div",
+          "label": "Navigation",
+          "style": {
+            "base": {
+              "display": "flex",
+              "gap": "8px",
+              "justifyContent": "center",
+              "marginTop": "24px"
+            },
+            "tablet": {},
+            "mobile": {}
+          },
+          "children": [
+            {
+              "type": "node",
+              "tag": "button",
+              "label": "Prev button",
+              "style": {
+                "base": {
+                  "width": "44px",
+                  "height": "44px",
+                  "borderRadius": "50%",
+                  "backgroundColor": "var(--bg-200)",
+                  "border": "1px solid",
+                  "display": "flex",
+                  "alignItems": "center",
+                  "justifyContent": "center",
+                  "cursor": "pointer",
+                  "transition": "background-color 0.2s ease, border-color 0.2s ease",
+                  "padding": "0",
+                  "color": "var(--text)",
+                  "paddingRight": "2px",
+                  "borderColor": "var(--bg-200)"
+                },
+                "tablet": {},
+                "mobile": {}
+              },
+              "interactiveStyles": [
+                {
+                  "postfix": ":hover",
+                  "style": {
+                    "base": {
+                      "borderColor": "var(--border)"
+                    }
+                  }
+                }
+              ],
+              "attributes": {
+                "data-el": "prev",
+                "aria-label": "Previous slide"
+              },
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Icon",
+                  "props": {
+                    "icon": "chevron-left",
+                    "size": 20
+                  }
+                }
+              ]
+            },
+            {
+              "type": "node",
+              "tag": "button",
+              "label": "Next button",
+              "style": {
+                "base": {
+                  "width": "44px",
+                  "height": "44px",
+                  "borderRadius": "50%",
+                  "backgroundColor": "var(--bg-200)",
+                  "border": "1px solid",
+                  "display": "flex",
+                  "alignItems": "center",
+                  "justifyContent": "center",
+                  "cursor": "pointer",
+                  "transition": "background-color 0.2s ease, border-color 0.2s ease",
+                  "padding": "0",
+                  "color": "var(--text)",
+                  "paddingLeft": "2px",
+                  "borderColor": "var(--bg-200)"
+                },
+                "tablet": {},
+                "mobile": {}
+              },
+              "interactiveStyles": [
+                {
+                  "postfix": ":hover",
+                  "style": {
+                    "base": {
+                      "borderColor": "var(--border)"
+                    }
+                  }
+                }
+              ],
+              "attributes": {
+                "data-el": "next",
+                "aria-label": "Next slide"
+              },
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Icon",
+                  "props": {
+                    "icon": "chevron-right",
+                    "size": 20
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "node",
+          "tag": "div",
+          "label": "Pagination",
+          "style": {
+            "base": {
+              "display": "flex",
+              "justifyContent": "center",
+              "gap": "8px",
+              "marginTop": "24px"
+            },
+            "tablet": {},
+            "mobile": {}
+          },
+          "attributes": {
+            "data-el": "pagination"
+          }
+        }
+      ]
+    },
+    "interface": {
+      "autoplay": {
+        "type": "boolean",
+        "default": false
+      },
+      "loop": {
+        "type": "boolean",
+        "default": true
+      },
+      "columns": {
+        "type": "select",
+        "default": "3",
+        "options": [
+          "1",
+          "2",
+          "3",
+          "4"
+        ]
+      },
+      "gap": {
+        "type": "number",
+        "default": 24
+      },
+      "cropped": {
+        "type": "boolean",
+        "default": true
+      }
+    },
+    "css": ".embla-dot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: var(--border);\n  opacity: 1;\n  border: none;\n  padding: 0;\n  cursor: pointer;\n  transition: background 0.2s ease;\n}\n.embla-dot.is-active {\n  background: var(--text);\n}\n\n/* Viewport: scrollable by default, Embla overrides with inline overflow:hidden */\n[data-el=\"viewport\"] {\n  overflow-x: auto;\n  scroll-snap-type: x mandatory;\n  -webkit-overflow-scrolling: touch;\n  scrollbar-width: none;\n}\n[data-el=\"viewport\"]::-webkit-scrollbar {\n  display: none;\n}\n\n/* Slide sizing via CSS custom properties */\n[data-el=\"container\"] > * {\n  flex: 0 0 calc((100% - (var(--columns, 3) - 1) * var(--gap, 24) * 1px) / var(--columns, 3));\n  min-width: 0;\n  scroll-snap-align: start;\n}\n\n/* Tablet: max 2 columns */\n@media (max-width: 1024px) {\n  [data-el=\"container\"] > * {\n    flex: 0 0 calc((100% - (min(var(--columns, 3), 2) - 1) * var(--gap, 24) * 1px) / min(var(--columns, 3), 2));\n  }\n}\n\n/* Mobile: always 1 column */\n@media (max-width: 540px) {\n  [data-el=\"container\"] > * {\n    flex: 0 0 100%;\n  }\n}\n"
+  }
+}

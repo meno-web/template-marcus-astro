@@ -1,0 +1,111 @@
+{
+  "root": {
+    "type": "component",
+    "component": "Layout",
+    "children": [
+      {
+        "type": "component",
+        "component": "PageHeaderCentered",
+        "props": {
+          "theme": "dark",
+          "subtitle": "Portfolio",
+          "title": "Selected <span>work</span>",
+          "text": "A curated collection of films, commercials, music videos, and branded content — each project shaped by intentional storytelling and cinematic craft."
+        }
+      },
+      {
+        "type": "component",
+        "component": "Section",
+        "props": {
+          "theme": "muted",
+          "spaceTop": "default"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "CaseStudiesList"
+          }
+        ]
+      },
+      {
+        "type": "component",
+        "component": "Section",
+        "props": {
+          "theme": "dark",
+          "spaceTop": "default"
+        },
+        "children": [
+          {
+            "type": "component",
+            "component": "Stack",
+            "props": {
+              "vertical": "top",
+              "horizontal": "center"
+            },
+            "children": [
+              {
+                "type": "component",
+                "component": "Heading",
+                "props": {
+                  "text": "Let's create something <span>together</span>",
+                  "maxWidth": "540px",
+                  "align": "center",
+                  "size": "1",
+                  "tag": "2",
+                  "fade": "0"
+                }
+              },
+              {
+                "type": "component",
+                "component": "Text",
+                "if": "Currently booking projects for 2026. Reach out to discuss your next film, commercial, or campaign.",
+                "props": {
+                  "text": "Currently booking projects for 2026. Reach out to discuss your next film, commercial, or campaign.",
+                  "size": "large",
+                  "align": "center",
+                  "maxWidth": "450px",
+                  "isMarginBottom": true,
+                  "fade": "0.2"
+                }
+              },
+              {
+                "type": "component",
+                "component": "ButtonList",
+                "if": "Start a conversation",
+                "props": {
+                  "justify": "center",
+                  "fade": "0.4"
+                },
+                "children": [
+                  {
+                    "type": "component",
+                    "component": "Button",
+                    "props": {
+                      "text": "Start a conversation",
+                      "link": "#",
+                      "variant": "primary"
+                    }
+                  },
+                  {
+                    "type": "component",
+                    "component": "Button",
+                    "if": "",
+                    "props": {
+                      "text": "",
+                      "link": "#",
+                      "variant": "secondary"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "meta": {
+    "title": "Work — Marcus Cole",
+    "description": "Selected films, commercials, music videos, and branded content by Marcus Cole."
+  }
+}

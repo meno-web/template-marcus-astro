@@ -1,0 +1,169 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "Stack",
+          "props": {
+            "vertical": "top",
+            "horizontal": "center"
+          },
+          "children": [
+            {
+              "type": "node",
+              "tag": "div",
+              "style": {
+                "base": {
+                  "maxWidth": "600px",
+                  "textAlign": "center",
+                  "display": "flex",
+                  "flexDirection": "column",
+                  "alignItems": "center"
+                },
+                "tablet": {},
+                "mobile": {}
+              },
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Heading",
+                  "props": {
+                    "text": "{{title}}",
+                    "maxWidth": "",
+                    "align": "center",
+                    "size": "2",
+                    "tag": "2",
+                    "fade": "0"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Text",
+                  "if": "{{text}}",
+                  "props": {
+                    "text": "{{text}}",
+                    "size": "large",
+                    "align": "center",
+                    "maxWidth": "460px",
+                    "isMarginBottom": true,
+                    "fade": "0.2"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Spacer",
+                  "props": {
+                    "size": "32"
+                  }
+                },
+                {
+                  "type": "node",
+                  "tag": "div",
+                  "style": {
+                    "base": {
+                      "width": "100%",
+                      "maxWidth": "460px"
+                    },
+                    "tablet": {},
+                    "mobile": {}
+                  },
+                  "children": [
+                    {
+                      "type": "component",
+                      "component": "Form",
+                      "children": [
+                        {
+                          "type": "node",
+                          "tag": "div",
+                          "style": {
+                            "base": {
+                              "display": "flex",
+                              "gap": "8px"
+                            },
+                            "tablet": {},
+                            "mobile": {}
+                          },
+                          "children": [
+                            {
+                              "type": "component",
+                              "component": "Input",
+                              "props": {
+                                "placeholder": "{{placeholderText}}"
+                              }
+                            },
+                            {
+                              "type": "component",
+                              "component": "Submit",
+                              "props": {
+                                "text": "{{buttonText}}"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ],
+                  "attributes": {
+                    "fade": 0.4
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Spacer",
+                  "props": {
+                    "size": "24"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Text",
+                  "props": {
+                    "text": "{{privacyText}}",
+                    "size": "small",
+                    "variant": "light",
+                    "align": "center",
+                    "fade": "0.6"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "title": {
+        "type": "rich-text",
+        "default": "Subscribe to our newsletter"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "Get the latest updates, articles, and resources delivered straight to your inbox."
+      },
+      "placeholderText": {
+        "type": "string",
+        "default": "Enter your email"
+      },
+      "buttonText": {
+        "type": "string",
+        "default": "Subscribe"
+      },
+      "privacyText": {
+        "type": "string",
+        "default": "We respect your privacy. Unsubscribe at any time."
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    }
+  }
+}

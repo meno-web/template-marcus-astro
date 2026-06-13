@@ -1,0 +1,179 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "maxWidth": "640",
+        "spaceTop": "default"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "SectionHeader",
+          "props": {
+            "isCenter": true,
+            "maxWidth": "500px"
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Heading",
+              "props": {
+                "text": "{{title}}",
+                "size": "2",
+                "tag": "2",
+                "fade": "0",
+                "align": "center"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Text",
+              "if": "{{text}}",
+              "props": {
+                "text": "{{text}}",
+                "size": "large",
+                "fade": "0.2",
+                "align": "center"
+              }
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "component": "Form",
+          "props": {
+            "action": "/api/send-email",
+            "method": "post",
+            "submitHandler": "fetch",
+            "successMessage": "Thank you for your submission",
+            "errorMessage": "Something went wrong. Please try later."
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "FormField",
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Label",
+                  "props": {
+                    "text": "Name",
+                    "htmlFor": "name"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Input",
+                  "props": {
+                    "inputType": "text",
+                    "name": "name",
+                    "placeholder": "John Doe",
+                    "text": "Name"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "component",
+              "component": "FormField",
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Label",
+                  "props": {
+                    "text": "Email",
+                    "htmlFor": "email"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Input",
+                  "props": {
+                    "inputType": "email",
+                    "name": "email",
+                    "placeholder": "johndoe@email.com"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "component",
+              "component": "FormField",
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Label",
+                  "props": {
+                    "text": "Phone",
+                    "htmlFor": "phone"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Input",
+                  "props": {
+                    "inputType": "tel",
+                    "name": "phone",
+                    "placeholder": "0 000 000 000"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "component",
+              "component": "FormField",
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Label",
+                  "props": {
+                    "text": "Message",
+                    "htmlFor": "message"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Textarea",
+                  "props": {
+                    "name": "message",
+                    "placeholder": "Message",
+                    "rows": 6
+                  }
+                }
+              ]
+            },
+            {
+              "type": "component",
+              "component": "Submit",
+              "props": {
+                "text": "{{buttonText}}"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "title": {
+        "type": "rich-text",
+        "default": "Get in touch"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "Have a question or want to learn more? Fill out the form below and we'll get back to you."
+      },
+      "theme": {
+        "type": "select",
+        "default": "light",
+        "enumName": "theme"
+      },
+      "buttonText": {
+        "type": "string",
+        "default": "Send Message"
+      }
+    }
+  }
+}

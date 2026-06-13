@@ -1,0 +1,514 @@
+{
+  "version": 1,
+  "images": {
+    "Screenshot-2026-01-09-at-09.32.53.webp": {
+      "filename": "Screenshot-2026-01-09-at-09.32.53.webp",
+      "originalFilename": "Screenshot-2026-01-09-at-09.32.53.png",
+      "width": 3420,
+      "height": 2138,
+      "blurHash": "data:image/webp;base64,UklGRkAAAABXRUJQVlA4IDQAAAAQAwCdASogABQAPzmOvlevKaYjqAqp4CcJZwDKtBcKwIAA/u4gtLjWB2Cu08/rRq4GAAAA",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "Screenshot-2026-01-09-at-09.32.53-500.webp",
+          "avifFilename": "Screenshot-2026-01-09-at-09.32.53-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "Screenshot-2026-01-09-at-09.32.53-800.webp",
+          "avifFilename": "Screenshot-2026-01-09-at-09.32.53-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "Screenshot-2026-01-09-at-09.32.53-1080.webp",
+          "avifFilename": "Screenshot-2026-01-09-at-09.32.53-1080.avif"
+        },
+        {
+          "width": 1600,
+          "webpFilename": "Screenshot-2026-01-09-at-09.32.53-1600.webp",
+          "avifFilename": "Screenshot-2026-01-09-at-09.32.53-1600.avif"
+        },
+        {
+          "width": 2400,
+          "webpFilename": "Screenshot-2026-01-09-at-09.32.53-2400.webp",
+          "avifFilename": "Screenshot-2026-01-09-at-09.32.53-2400.avif"
+        }
+      ],
+      "createdAt": "2026-01-14T14:27:41.514Z",
+      "updatedAt": "2026-01-14T14:27:41.514Z"
+    },
+    "Screenshot-2026-01-13-at-15.48.27.webp": {
+      "filename": "Screenshot-2026-01-13-at-15.48.27.webp",
+      "originalFilename": "Screenshot-2026-01-13-at-15.48.27.png",
+      "width": 2732,
+      "height": 1980,
+      "blurHash": "data:image/webp;base64,UklGRjgAAABXRUJQVlA4ICwAAADQAgCdASogABcAPzmUwVmvKicjqAgB4CcJaQAAPaOgAP7trt0lHByV5IAAAA==",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "Screenshot-2026-01-13-at-15.48.27-500.webp",
+          "avifFilename": "Screenshot-2026-01-13-at-15.48.27-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "Screenshot-2026-01-13-at-15.48.27-800.webp",
+          "avifFilename": "Screenshot-2026-01-13-at-15.48.27-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "Screenshot-2026-01-13-at-15.48.27-1080.webp",
+          "avifFilename": "Screenshot-2026-01-13-at-15.48.27-1080.avif"
+        },
+        {
+          "width": 1600,
+          "webpFilename": "Screenshot-2026-01-13-at-15.48.27-1600.webp",
+          "avifFilename": "Screenshot-2026-01-13-at-15.48.27-1600.avif"
+        },
+        {
+          "width": 2400,
+          "webpFilename": "Screenshot-2026-01-13-at-15.48.27-2400.webp",
+          "avifFilename": "Screenshot-2026-01-13-at-15.48.27-2400.avif"
+        }
+      ],
+      "createdAt": "2026-01-14T14:28:49.580Z",
+      "updatedAt": "2026-01-14T14:28:49.580Z"
+    },
+    "Screenshot-2026-01-13-at-15.53.03.webp": {
+      "filename": "Screenshot-2026-01-13-at-15.53.03.webp",
+      "originalFilename": "Screenshot-2026-01-13-at-15.53.03.png",
+      "width": 3340,
+      "height": 2138,
+      "blurHash": "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAADwAgCdASogABQAPzmUwFmvKiajqAgB4CcJaQAAPfn8AAD+7lstS3tgAAA=",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "Screenshot-2026-01-13-at-15.53.03-500.webp",
+          "avifFilename": "Screenshot-2026-01-13-at-15.53.03-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "Screenshot-2026-01-13-at-15.53.03-800.webp",
+          "avifFilename": "Screenshot-2026-01-13-at-15.53.03-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "Screenshot-2026-01-13-at-15.53.03-1080.webp",
+          "avifFilename": "Screenshot-2026-01-13-at-15.53.03-1080.avif"
+        },
+        {
+          "width": 1600,
+          "webpFilename": "Screenshot-2026-01-13-at-15.53.03-1600.webp",
+          "avifFilename": "Screenshot-2026-01-13-at-15.53.03-1600.avif"
+        },
+        {
+          "width": 2400,
+          "webpFilename": "Screenshot-2026-01-13-at-15.53.03-2400.webp",
+          "avifFilename": "Screenshot-2026-01-13-at-15.53.03-2400.avif"
+        }
+      ],
+      "createdAt": "2026-01-14T14:29:27.798Z",
+      "updatedAt": "2026-01-14T14:29:27.798Z"
+    },
+    "Screenshot-2026-01-14-at-11.49.00.webp": {
+      "filename": "Screenshot-2026-01-14-at-11.49.00.webp",
+      "originalFilename": "Screenshot-2026-01-14-at-11.49.00.png",
+      "width": 3330,
+      "height": 2044,
+      "blurHash": "data:image/webp;base64,UklGRjYAAABXRUJQVlA4ICoAAADwAgCdASogABQAPzmSv1ovKaakKAgB4CcJaQAAPaUIAAD+7exxmd40cAA=",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "Screenshot-2026-01-14-at-11.49.00-500.webp",
+          "avifFilename": "Screenshot-2026-01-14-at-11.49.00-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "Screenshot-2026-01-14-at-11.49.00-800.webp",
+          "avifFilename": "Screenshot-2026-01-14-at-11.49.00-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "Screenshot-2026-01-14-at-11.49.00-1080.webp",
+          "avifFilename": "Screenshot-2026-01-14-at-11.49.00-1080.avif"
+        },
+        {
+          "width": 1600,
+          "webpFilename": "Screenshot-2026-01-14-at-11.49.00-1600.webp",
+          "avifFilename": "Screenshot-2026-01-14-at-11.49.00-1600.avif"
+        },
+        {
+          "width": 2400,
+          "webpFilename": "Screenshot-2026-01-14-at-11.49.00-2400.webp",
+          "avifFilename": "Screenshot-2026-01-14-at-11.49.00-2400.avif"
+        }
+      ],
+      "createdAt": "2026-01-14T14:29:48.517Z",
+      "updatedAt": "2026-01-14T14:29:48.517Z"
+    },
+    "placeholder-img.webp": {
+      "filename": "placeholder-img.webp",
+      "originalFilename": "Placeholder-Image.jpg",
+      "width": 1200,
+      "height": 1200,
+      "blurHash": "data:image/webp;base64,UklGRjIAAABXRUJQVlA4ICYAAADQAgCdASogACAAPzmWwlmvKqcjqAgB4CcJaQAAPaOgAP7rrgAAAA==",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "placeholder-img-500.webp",
+          "avifFilename": "placeholder-img-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "placeholder-img-800.webp",
+          "avifFilename": "placeholder-img-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "placeholder-img-1080.webp",
+          "avifFilename": "placeholder-img-1080.avif"
+        }
+      ],
+      "createdAt": "2026-02-21T14:53:45.425Z",
+      "updatedAt": "2026-02-21T14:54:46.490Z"
+    },
+    "gradient-bg.webp": {
+      "filename": "gradient-bg.webp",
+      "originalFilename": "gradient-bg.webp",
+      "width": 2880,
+      "height": 2248,
+      "blurHash": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4WAoAAAAQAAAAHwAAGAAAQUxQSAoAAAABB1CEiAhERP8DVlA4ICYAAADQAgCdASogABkAPzmYw1ovKqekKAgB4CcJaQAAPaOgAP7vckAAAA==",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "gradient-bg-500.webp",
+          "avifFilename": "gradient-bg-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "gradient-bg-800.webp",
+          "avifFilename": "gradient-bg-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "gradient-bg-1080.webp",
+          "avifFilename": "gradient-bg-1080.avif"
+        },
+        {
+          "width": 1600,
+          "webpFilename": "gradient-bg-1600.webp",
+          "avifFilename": "gradient-bg-1600.avif"
+        },
+        {
+          "width": 2400,
+          "webpFilename": "gradient-bg-2400.webp",
+          "avifFilename": "gradient-bg-2400.avif"
+        }
+      ],
+      "createdAt": "2026-03-13T09:06:05.787Z",
+      "updatedAt": "2026-03-13T09:06:05.787Z"
+    },
+    "pasted-image-1773393474799.webp": {
+      "filename": "pasted-image-1773393474799.webp",
+      "originalFilename": "pasted-image-1773393474799.png",
+      "width": 1335,
+      "height": 1780,
+      "blurHash": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAABQAwCdASoYACAAPzmIuVOvP6WisBgMA/AnCWUAwoAXQjaIAAD+6O8UyMOFldi+In1yLcQeNmkjCKw2AAA=",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "pasted-image-1773393474799-500.webp",
+          "avifFilename": "pasted-image-1773393474799-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "pasted-image-1773393474799-800.webp",
+          "avifFilename": "pasted-image-1773393474799-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "pasted-image-1773393474799-1080.webp",
+          "avifFilename": "pasted-image-1773393474799-1080.avif"
+        }
+      ],
+      "createdAt": "2026-03-13T09:17:58.702Z",
+      "updatedAt": "2026-03-13T09:17:58.702Z"
+    },
+    "pasted-image-1773393938666.webp": {
+      "filename": "pasted-image-1773393938666.webp",
+      "originalFilename": "pasted-image-1773393938666.png",
+      "width": 2109,
+      "height": 1200,
+      "blurHash": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAACQAwCdASogABIAPzmQvFY/uyYksBgIA/AnCWkAADtxfr0/fOIAAP7QMAFkszKhTICX1x4cAAA=",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "pasted-image-1773393938666-500.webp",
+          "avifFilename": "pasted-image-1773393938666-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "pasted-image-1773393938666-800.webp",
+          "avifFilename": "pasted-image-1773393938666-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "pasted-image-1773393938666-1080.webp",
+          "avifFilename": "pasted-image-1773393938666-1080.avif"
+        },
+        {
+          "width": 1600,
+          "webpFilename": "pasted-image-1773393938666-1600.webp",
+          "avifFilename": "pasted-image-1773393938666-1600.avif"
+        }
+      ],
+      "createdAt": "2026-03-13T09:25:41.733Z",
+      "updatedAt": "2026-03-13T09:25:41.733Z"
+    },
+    "pasted-image-1773394149639.webp": {
+      "filename": "pasted-image-1773394149639.webp",
+      "originalFilename": "pasted-image-1773394149639.png",
+      "width": 1335,
+      "height": 1780,
+      "blurHash": "data:image/webp;base64,UklGRkIAAABXRUJQVlA4IDYAAAAQAwCdASoYACAAPzmKu1WvKbOjKA1ScCcJZwDIXBnP9MAA/utTJw6MafJJBJyNud8oXtCAAAA=",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "pasted-image-1773394149639-500.webp",
+          "avifFilename": "pasted-image-1773394149639-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "pasted-image-1773394149639-800.webp",
+          "avifFilename": "pasted-image-1773394149639-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "pasted-image-1773394149639-1080.webp",
+          "avifFilename": "pasted-image-1773394149639-1080.avif"
+        }
+      ],
+      "createdAt": "2026-03-13T09:29:13.049Z",
+      "updatedAt": "2026-03-13T09:29:13.049Z"
+    },
+    "pasted-image-1773394322253.webp": {
+      "filename": "pasted-image-1773394322253.webp",
+      "originalFilename": "pasted-image-1773394322253.png",
+      "width": 1335,
+      "height": 1780,
+      "blurHash": "data:image/webp;base64,UklGRkgAAABXRUJQVlA4IDwAAAAwAwCdASoYACAAPzmMulYvMSWjsBgIAiAnCWMAuwAWqfzwAP7oajueg8pzBRpRaVDJ/lYP/XqrsLTb3AA=",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "pasted-image-1773394322253-500.webp",
+          "avifFilename": "pasted-image-1773394322253-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "pasted-image-1773394322253-800.webp",
+          "avifFilename": "pasted-image-1773394322253-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "pasted-image-1773394322253-1080.webp",
+          "avifFilename": "pasted-image-1773394322253-1080.avif"
+        }
+      ],
+      "createdAt": "2026-03-13T09:32:06.059Z",
+      "updatedAt": "2026-03-13T09:32:06.059Z"
+    },
+    "pasted-image-1773395950332.webp": {
+      "filename": "pasted-image-1773395950332.webp",
+      "originalFilename": "pasted-image-1773395950332.png",
+      "width": 390,
+      "height": 378,
+      "blurHash": "data:image/webp;base64,UklGRkwAAABXRUJQVlA4IEAAAAAwAwCdASogAB8APzGCtlO9v6UoN/VYA/AmCWUAtOgWZx68AP7Vyb0PcZGA+Hg7jwpPISNgGBdbRpBtcZl2IAAA",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [],
+      "createdAt": "2026-03-13T09:59:10.547Z",
+      "updatedAt": "2026-03-13T09:59:10.547Z"
+    },
+    "pasted-image-1773402373324.webp": {
+      "filename": "pasted-image-1773402373324.webp",
+      "originalFilename": "pasted-image-1773402373324.png",
+      "width": 1335,
+      "height": 1780,
+      "blurHash": "data:image/webp;base64,UklGRkoAAABXRUJQVlA4ID4AAACQAwCdASoYACAAPzl8vVQ/tS2jMBgMA/AnCWcAxzAWKMj1BgwAAP7dDzWzs95an5t/aEHC5BPn6AW2oAAAAA==",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "pasted-image-1773402373324-500.webp",
+          "avifFilename": "pasted-image-1773402373324-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "pasted-image-1773402373324-800.webp",
+          "avifFilename": "pasted-image-1773402373324-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "pasted-image-1773402373324-1080.webp",
+          "avifFilename": "pasted-image-1773402373324-1080.avif"
+        }
+      ],
+      "createdAt": "2026-03-13T11:46:17.079Z",
+      "updatedAt": "2026-03-13T11:46:17.079Z"
+    },
+    "pasted-image-1773403817119.webp": {
+      "filename": "pasted-image-1773403817119.webp",
+      "originalFilename": "pasted-image-1773403817119.png",
+      "width": 558,
+      "height": 538,
+      "blurHash": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAACQBACdASogAB8APzmGt1S/sD+jMBgMA/AnCWUAygBURKE5+daTw7yntOvlTYAA/FyMH/8MWOV2+AsXYLQdaR9I/h2dPd+ZGgAAAA==",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "pasted-image-1773403817119-500.webp",
+          "avifFilename": "pasted-image-1773403817119-500.avif"
+        }
+      ],
+      "createdAt": "2026-03-13T12:10:18.019Z",
+      "updatedAt": "2026-03-13T12:10:18.019Z"
+    },
+    "pasted-image-1773403864245.webp": {
+      "filename": "pasted-image-1773403864245.webp",
+      "originalFilename": "pasted-image-1773403864245.png",
+      "width": 1226,
+      "height": 1068,
+      "blurHash": "data:image/webp;base64,UklGRlYAAABXRUJQVlA4IEoAAAAwBACdASogABwAPzmOvlavKaauKAqp4CcJZwDE2BEO8KbkA5sGRtZOpYAA/suKJ37219agAuX3eFKaYrtU5S551dL6G2ltWPXAAA==",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "pasted-image-1773403864245-500.webp",
+          "avifFilename": "pasted-image-1773403864245-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "pasted-image-1773403864245-800.webp",
+          "avifFilename": "pasted-image-1773403864245-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "pasted-image-1773403864245-1080.webp",
+          "avifFilename": "pasted-image-1773403864245-1080.avif"
+        }
+      ],
+      "createdAt": "2026-03-13T12:11:06.932Z",
+      "updatedAt": "2026-03-13T12:11:06.932Z"
+    },
+    "pasted-image-1773415883515.webp": {
+      "filename": "pasted-image-1773415883515.webp",
+      "originalFilename": "pasted-image-1773415883515.png",
+      "width": 1335,
+      "height": 1780,
+      "blurHash": "data:image/webp;base64,UklGRlgAAABXRUJQVlA4IEwAAAAwBQCdASoYACAAPzmcxFu/qyclqAgD8CcJZwC+SAyDXf95cBdGvIq57vBDl7GZP8J0AAD+r21aNh6A/+3hgoCnwZ4RjBptonkrUAAA",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "pasted-image-1773415883515-500.webp",
+          "avifFilename": "pasted-image-1773415883515-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "pasted-image-1773415883515-800.webp",
+          "avifFilename": "pasted-image-1773415883515-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "pasted-image-1773415883515-1080.webp",
+          "avifFilename": "pasted-image-1773415883515-1080.avif"
+        }
+      ],
+      "createdAt": "2026-03-13T15:31:27.317Z",
+      "updatedAt": "2026-03-13T15:31:27.317Z"
+    },
+    "pasted-image-1773415908791.webp": {
+      "filename": "pasted-image-1773415908791.webp",
+      "originalFilename": "pasted-image-1773415908791.png",
+      "width": 1335,
+      "height": 1780,
+      "blurHash": "data:image/webp;base64,UklGRk4AAABXRUJQVlA4IEIAAAAwAwCdASoYACAAPzWAt1O/qCUit/VYA/AmiWcAyrQZj/MAAP6R+mnhPK2zHZUSpcHf9TZD/rG/04sv2hokJzTcWgA=",
+      "formats": {
+        "avif": true,
+        "webp": true
+      },
+      "variants": [
+        {
+          "width": 500,
+          "webpFilename": "pasted-image-1773415908791-500.webp",
+          "avifFilename": "pasted-image-1773415908791-500.avif"
+        },
+        {
+          "width": 800,
+          "webpFilename": "pasted-image-1773415908791-800.webp",
+          "avifFilename": "pasted-image-1773415908791-800.avif"
+        },
+        {
+          "width": 1080,
+          "webpFilename": "pasted-image-1773415908791-1080.webp",
+          "avifFilename": "pasted-image-1773415908791-1080.avif"
+        }
+      ],
+      "createdAt": "2026-03-13T15:31:52.523Z",
+      "updatedAt": "2026-03-13T15:31:52.523Z"
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "component": {
+    "defineVars": true,
+    "interface": {
+      "singleOpen": { "type": "boolean", "default": false }
+    },
+    "structure": {
+      "type": "node",
+      "tag": "dl",
+      "style": {
+        "base": {
+          "display": "flex",
+          "flexDirection": "column",
+          "gap": "0"
+        }
+      },
+      "children": [{ "type": "slot" }]
+    }
+  }
+}

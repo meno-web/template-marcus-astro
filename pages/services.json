@@ -1,0 +1,168 @@
+{
+  "meta": {
+    "title": "Services — Marcus Cole",
+    "description": "Cinematography, directing, color grading, and post-production services. From concept to final cut, Marcus delivers cinematic storytelling for films, commercials, and brands."
+  },
+  "root": {
+    "type": "component",
+    "component": "Layout",
+    "children": [
+      {
+        "type": "component",
+        "component": "PageHeaderCentered",
+        "props": {
+          "title": "Services",
+          "text": "End-to-end filmmaking services — from pre-production planning to final delivery. Every project is approached with cinematic precision and a commitment to authentic storytelling.",
+          "theme": "dark"
+        }
+      },
+      {
+        "type": "component",
+        "component": "FeatureIconGrid",
+        "props": {
+          "theme": "muted",
+          "subtitle": "What I Offer",
+          "title": "Cinematic services for every <span>stage</span>",
+          "text": "Whether you need a single service or full production support, each offering is tailored to your project's unique vision and goals.",
+          "columns": "3",
+          "items": [
+            {
+              "icon": "video",
+              "title": "Cinematography",
+              "text": "Camera work, lighting design, and composition that captures the emotion and atmosphere your story demands."
+            },
+            {
+              "icon": "clapperboard",
+              "title": "Directing",
+              "text": "Creative leadership from concept through final cut — guiding performances, shaping narrative, and ensuring a cohesive vision."
+            },
+            {
+              "icon": "palette",
+              "title": "Color Grading",
+              "text": "Precise color work that sets the mood and visual tone, tailored to each project's story and aesthetic."
+            },
+            {
+              "icon": "film",
+              "title": "Commercial Production",
+              "text": "Brand films, product spots, and campaign content crafted to resonate with your audience and elevate your message."
+            },
+            {
+              "icon": "music",
+              "title": "Music Videos",
+              "text": "Visual storytelling that amplifies the artist's vision and brings tracks to life with cinematic energy."
+            },
+            {
+              "icon": "monitor",
+              "title": "Post-Production",
+              "text": "Editing, sound design, and finishing that transform raw footage into a polished, ready-to-deliver piece."
+            }
+          ]
+        }
+      },
+      {
+        "type": "component",
+        "component": "FeatureSplitImageRight",
+        "props": {
+          "theme": "dark",
+          "subtitle": "Cinematography",
+          "title": "Capturing stories through <span>light and motion</span>",
+          "text": "Every frame is intentional. I work closely with directors and producers to develop a visual language that serves the narrative — from intimate documentary work to high-energy commercial shoots. My approach combines technical precision with an instinct for authentic moments.",
+          "image": "/images/placeholder-img.webp"
+        }
+      },
+      {
+        "type": "component",
+        "component": "FeatureSplitImageLeft",
+        "props": {
+          "theme": "muted",
+          "subtitle": "Directing",
+          "title": "From concept to <span>final cut</span>",
+          "text": "Directing is about more than calling shots — it's about creating an environment where the best work happens. I bring a collaborative approach to every project, working with talent and crew to shape a cohesive vision from pre-production through delivery.",
+          "image": "/images/placeholder-img.webp"
+        }
+      },
+      {
+        "type": "component",
+        "component": "StepsCards",
+        "props": {
+          "theme": "dark",
+          "subtitle": "Process",
+          "title": "How a project comes <span>together</span>",
+          "text": "A proven workflow that keeps every production on track from first conversation to final delivery.",
+          "items": [
+            {
+              "value": "01",
+              "title": "Discovery & Brief",
+              "text": "We start with a conversation about your vision, goals, audience, and timeline to align on the creative direction."
+            },
+            {
+              "value": "02",
+              "title": "Pre-Production",
+              "text": "Scripting, storyboarding, location scouting, and crew assembly — building the foundation for a smooth shoot."
+            },
+            {
+              "value": "03",
+              "title": "Production",
+              "text": "On-set execution with full creative oversight — cinematography, directing, and capturing every moment with intention."
+            },
+            {
+              "value": "04",
+              "title": "Post & Delivery",
+              "text": "Editing, color grading, sound design, and final review. You receive a polished piece ready for release."
+            }
+          ]
+        }
+      },
+      {
+        "type": "component",
+        "component": "StatsLargeNumbers",
+        "props": {
+          "theme": "muted",
+          "subtitle": "Track Record",
+          "title": "Numbers that speak for <span>themselves</span>",
+          "text": "Years of experience across film, commercial, and branded content production.",
+          "isCenter": true,
+          "items": [
+            {
+              "value": "12+",
+              "label": "Years of Experience",
+              "description": ""
+            },
+            {
+              "value": "80+",
+              "label": "Projects Delivered",
+              "description": ""
+            },
+            {
+              "value": "30+",
+              "label": "Brand Partners",
+              "description": ""
+            },
+            {
+              "value": "6",
+              "label": "Festival Selections",
+              "description": ""
+            }
+          ]
+        }
+      },
+      {
+        "type": "component",
+        "component": "CTACentered",
+        "props": {
+          "theme": "dark",
+          "title": "Ready to start your <span>next project</span>?",
+          "text": "Currently booking for 2026. Let's talk about your film, commercial, or campaign and bring your vision to life.",
+          "buttonText": "Get in touch",
+          "buttonLink": {
+            "href": "/contact"
+          },
+          "secondaryButtonText": "View selected work",
+          "secondaryButtonLink": {
+            "href": "/work"
+          }
+        }
+      }
+    ]
+  }
+}

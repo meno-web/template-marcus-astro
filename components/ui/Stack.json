@@ -1,0 +1,71 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "div",
+      "style": {
+        "base": {
+          "display": "flex",
+          "flexDirection": "column",
+          "justifyContent": {
+            "_mapping": true,
+            "prop": "vertical",
+            "values": {
+              "center": "center",
+              "spaceBetween": "spaceBetween",
+              "top": "flex-start",
+              "bottom": "flex-end"
+            }
+          },
+          "alignItems": {
+            "_mapping": true,
+            "prop": "horizontal",
+            "values": {
+              "left": "flex-start",
+              "center": "center",
+              "right": "flex-end",
+              "spaceBetween": "space-between"
+            }
+          }
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "children": [
+        {
+          "type": "slot"
+        }
+      ],
+      "attributes": {
+        "fade": "{{fade}}"
+      }
+    },
+    "interface": {
+      "vertical": {
+        "type": "select",
+        "default": "left",
+        "options": [
+          "top",
+          "center",
+          "bottom",
+          "spaceBetween"
+        ]
+      },
+      "horizontal": {
+        "type": "select",
+        "default": "left",
+        "options": [
+          "left",
+          "center",
+          "right",
+          "spaceBetween"
+        ]
+      },
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    },
+    "category": "ui"
+  }
+}

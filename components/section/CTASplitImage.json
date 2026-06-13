@@ -1,0 +1,130 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "SplitContent",
+          "children": [
+            {
+              "type": "component",
+              "component": "Stack",
+              "props": {
+                "vertical": "center",
+                "horizontal": "left"
+              },
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Heading",
+                  "props": {
+                    "text": "{{title}}",
+                    "maxWidth": "100%",
+                    "align": "left",
+                    "size": "2",
+                    "tag": "2",
+                    "fade": "0"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Text",
+                  "if": "{{text}}",
+                  "props": {
+                    "text": "{{text}}",
+                    "size": "large",
+                    "align": "left",
+                    "maxWidth": "100%",
+                    "isMarginBottom": true,
+                    "fade": "0.2"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "ButtonList",
+                  "if": "{{buttonText}}",
+                  "props": {
+                    "justify": "flex-start",
+                    "fade": "0.4"
+                  },
+                  "children": [
+                    {
+                      "type": "component",
+                      "component": "Button",
+                      "props": {
+                        "text": "{{buttonText}}",
+                        "link": "{{buttonLink}}",
+                        "variant": "primary"
+                      }
+                    },
+                    {
+                      "type": "component",
+                      "component": "Button",
+                      "if": "{{secondaryButtonText}}",
+                      "props": {
+                        "text": "{{secondaryButtonText}}",
+                        "link": "{{secondaryButtonLink}}",
+                        "variant": "secondary"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "component",
+              "component": "Image",
+              "props": {
+                "image": "{{image}}",
+                "rounded": "large",
+                "fade": "0.4"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "title": {
+        "type": "rich-text",
+        "default": "Take the next step today"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "Start your free trial and see the difference for yourself. No credit card required."
+      },
+      "buttonText": {
+        "type": "string",
+        "default": "Get started"
+      },
+      "buttonLink": {
+        "type": "link",
+        "default": "#"
+      },
+      "secondaryButtonText": {
+        "type": "string",
+        "default": "Learn more"
+      },
+      "secondaryButtonLink": {
+        "type": "link",
+        "default": "#"
+      },
+      "image": {
+        "type": "file",
+        "accept": "image/*",
+        "default": "/images/placeholder-img.webp"
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    }
+  }
+}

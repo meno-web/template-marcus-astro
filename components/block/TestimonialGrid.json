@@ -1,0 +1,36 @@
+{
+  "component": {
+    "interface": {
+      "columns": { "type": "select", "default": "3", "options": ["2", "3", "4"] }
+    },
+    "structure": {
+      "type": "node",
+      "tag": "div",
+      "style": {
+        "base": {
+          "display": "grid",
+          "gridTemplateColumns": {
+            "_mapping": true,
+            "prop": "columns",
+            "values": {
+              "2": "repeat(2, 1fr)",
+              "3": "repeat(3, 1fr)",
+              "4": "repeat(4, 1fr)"
+            }
+          },
+          "gap": "24px",
+          "alignItems": "stretch"
+        },
+        "tablet": {
+          "gridTemplateColumns": "repeat(2, 1fr)",
+          "gap": "20px"
+        },
+        "mobile": {
+          "gridTemplateColumns": "1fr",
+          "gap": "16px"
+        }
+      },
+      "children": [{ "type": "slot" }]
+    }
+  }
+}

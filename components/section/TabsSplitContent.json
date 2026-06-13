@@ -1,0 +1,204 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "SectionHeader",
+          "props": {
+            "vertical": "top",
+            "horizontal": "center",
+            "isCenter": true
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Heading",
+              "props": {
+                "text": "{{title}}",
+                "maxWidth": "640px",
+                "align": "center",
+                "size": "2",
+                "tag": "2",
+                "fade": "0"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Text",
+              "if": "{{text}}",
+              "props": {
+                "text": "{{text}}",
+                "size": "large",
+                "align": "center",
+                "maxWidth": "580px",
+                "isMarginBottom": true,
+                "fade": "0.2"
+              }
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "component": "Tab",
+          "props": {
+            "fade": "0.4"
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "TabButtonsList",
+              "children": [
+                {
+                  "type": "list",
+                  "sourceType": "prop",
+                  "source": "{{items}}",
+                  "itemAs": "item",
+                  "children": [
+                    {
+                      "type": "component",
+                      "component": "TabButton",
+                      "props": {
+                        "isActive": "{{itemFirst}}",
+                        "text": "{{item.tabTitle}}"
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "component",
+              "component": "Spacer",
+              "props": {
+                "size": "32"
+              }
+            },
+            {
+              "type": "component",
+              "component": "TabPanelsList",
+              "children": [
+                {
+                  "type": "list",
+                  "sourceType": "prop",
+                  "source": "{{items}}",
+                  "itemAs": "item",
+                  "children": [
+                    {
+                      "type": "component",
+                      "component": "TabPanel",
+                      "props": {
+                        "isOpen": "{{itemFirst}}"
+                      },
+                      "children": [
+                        {
+                          "type": "component",
+                          "component": "SplitContent",
+                          "props": {
+                            "vertical": "top",
+                            "horizontal": "center"
+                          },
+                          "children": [
+                            {
+                              "type": "component",
+                              "component": "Stack",
+                              "props": {
+                                "vertical": "center"
+                              },
+                              "children": [
+                                {
+                                  "type": "component",
+                                  "component": "Heading",
+                                  "props": {
+                                    "text": "{{item.title}}",
+                                    "size": "2"
+                                  }
+                                },
+                                {
+                                  "type": "component",
+                                  "component": "Text",
+                                  "props": {
+                                    "text": "{{item.text}}"
+                                  }
+                                }
+                              ]
+                            },
+                            {
+                              "type": "component",
+                              "component": "Image",
+                              "props": {
+                                "image": "{{item.image}}",
+                                "height": "420px"
+                              }
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "title": {
+        "type": "rich-text",
+        "default": "Ready to build something great?"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "Start customizing this template today. It only takes a few minutes to make it yours."
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      },
+      "items": {
+        "type": "list",
+        "itemSchema": {
+          "tabTitle": {
+            "type": "string",
+            "default": "Tab"
+          },
+          "title": {
+            "type": "string",
+            "default": "Tab"
+          },
+          "text": {
+            "type": "rich-text",
+            "default": "Text"
+          },
+          "image": {
+            "type": "file",
+            "accept": "image/*",
+            "default": "/images/placeholder-img.webp"
+          }
+        },
+        "default": [
+          {
+            "tabTitle": "Tab 1",
+            "title": "Tab 1",
+            "text": "Text",
+            "image": "/images/placeholder-img.webp"
+          },
+          {
+            "tabTitle": "Tab 2",
+            "title": "Tab 2",
+            "text": "Text",
+            "image": "/images/placeholder-img.webp"
+          }
+        ]
+      }
+    }
+  }
+}

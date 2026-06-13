@@ -1,0 +1,225 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default",
+        "cropped": "{{!cropped}}"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "SectionHeader",
+          "props": {
+            "isCenter": true,
+            "maxWidth": "600px"
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Subtitle",
+              "if": "{{subtitle}}",
+              "props": {
+                "text": "{{subtitle}}",
+                "align": "center",
+                "fade": "0"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Heading",
+              "props": {
+                "text": "{{title}}",
+                "maxWidth": "",
+                "align": "center",
+                "size": "2",
+                "tag": "2",
+                "fade": "0.2"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Text",
+              "if": "{{text}}",
+              "props": {
+                "text": "{{text}}",
+                "size": "large",
+                "align": "center",
+                "maxWidth": "360px",
+                "fade": "0.4"
+              }
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "component": "Slider",
+          "props": {
+            "gap": 20,
+            "autoplay": "{{autoplay}}",
+            "loop": "{{loop}}",
+            "columns": "3",
+            "cropped": "{{cropped}}",
+            "fade": "0.4"
+          },
+          "children": [
+            {
+              "type": "list",
+              "sourceType": "prop",
+              "source": "{{items}}",
+              "itemAs": "item",
+              "children": [
+                {
+                  "type": "node",
+                  "tag": "div",
+                  "label": "Card",
+                  "style": {
+                    "base": {
+                      "backgroundColor": "var(--bg-100)",
+                      "borderRadius": "12px",
+                      "overflow": "hidden"
+                    },
+                    "tablet": {},
+                    "mobile": {}
+                  },
+                  "children": [
+                    {
+                      "type": "component",
+                      "component": "Image",
+                      "props": {
+                        "image": "{{item.image}}",
+                        "aspectRatio": "16/9",
+                        "height": "auto",
+                        "width": "100%"
+                      }
+                    },
+                    {
+                      "type": "node",
+                      "tag": "div",
+                      "label": "Card Body",
+                      "style": {
+                        "base": {
+                          "padding": "24px"
+                        }
+                      },
+                      "children": [
+                        {
+                          "type": "component",
+                          "component": "Heading",
+                          "props": {
+                            "text": "{{item.title}}",
+                            "size": "4"
+                          }
+                        },
+                        {
+                          "type": "component",
+                          "component": "Text",
+                          "props": {
+                            "size": "default",
+                            "variant": "default",
+                            "text": "{{item.text}}"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "subtitle": {
+        "type": "string",
+        "default": "Features"
+      },
+      "title": {
+        "type": "rich-text",
+        "default": "What we offer"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "Explore our range of services designed to help your business grow"
+      },
+      "items": {
+        "type": "list",
+        "itemSchema": {
+          "image": {
+            "type": "file",
+            "default": "/images/placeholder-img.webp"
+          },
+          "title": {
+            "type": "string",
+            "default": "Card title"
+          },
+          "text": {
+            "type": "rich-text"
+          }
+        },
+        "default": [
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Strategy & Planning",
+            "text": "We develop comprehensive strategies tailored to your business goals and market position"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Design & Branding",
+            "text": "Create a memorable brand identity that resonates with your target audience"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Development",
+            "text": "Build robust, scalable solutions using the latest technologies and best practices"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Marketing",
+            "text": "Drive growth through data-driven marketing campaigns and optimization"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Analytics",
+            "text": "Gain actionable insights from your data to make informed business decisions"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Consulting",
+            "text": "Expert guidance to help you navigate challenges and seize new opportunities"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Support",
+            "text": "Reliable ongoing support to keep your systems running smoothly around the clock"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "title": "Optimization",
+            "text": "Fine-tune your processes and performance for maximum efficiency and results"
+          }
+        ]
+      },
+      "autoplay": {
+        "type": "boolean",
+        "default": false
+      },
+      "loop": {
+        "type": "boolean",
+        "default": true
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      },
+      "cropped": {
+        "type": "boolean",
+        "default": false
+      }
+    }
+  }
+}

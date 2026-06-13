@@ -1,0 +1,78 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default",
+        "maxWidth": "900"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "Stack",
+          "props": {
+            "vertical": "top",
+            "horizontal": "center"
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Subtitle",
+              "if": "{{subtitle}}",
+              "props": {
+                "text": "{{subtitle}}",
+                "align": "center",
+                "fade": "0"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Heading",
+              "props": {
+                "text": "{{title}}",
+                "maxWidth": "640px",
+                "align": "center",
+                "size": "2",
+                "tag": "2",
+                "fade": "0.2"
+              }
+            },
+            {
+              "type": "component",
+              "component": "Text",
+              "if": "{{text}}",
+              "props": {
+                "text": "{{text}}",
+                "size": "large",
+                "align": "center",
+                "maxWidth": "100%",
+                "fade": "0.4"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "subtitle": {
+        "type": "string",
+        "default": "Content 01"
+      },
+      "title": {
+        "type": "rich-text",
+        "default": "Our story and mission"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "We started with a simple idea: make technology work for everyone. Today, we're proud to serve thousands of customers worldwide with solutions that truly make a difference."
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    }
+  }
+}

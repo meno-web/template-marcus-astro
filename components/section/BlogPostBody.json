@@ -1,0 +1,92 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "cropped": false
+      },
+      "children": [
+        {
+          "type": "node",
+          "tag": "article",
+          "style": {
+            "base": {
+              "maxWidth": "720px",
+              "margin": "0 auto"
+            }
+          },
+          "children": [
+            {
+              "type": "node",
+              "tag": "header",
+              "style": {
+                "base": {
+                  "marginBottom": "32px"
+                }
+              },
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Image",
+                  "props": {
+                    "aspectRatio": "16/6",
+                    "image": "{{cms.featuredImage}}",
+                    "rounded": "medium",
+                    "fade": "0"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Spacer",
+                  "props": {
+                    "size": "32"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Heading",
+                  "props": {
+                    "text": "{{cms.title}}",
+                    "size": "2",
+                    "tag": "1",
+                    "fade": "0.2"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Text",
+                  "props": {
+                    "text": "{{cms.publishedAt}}",
+                    "size": "small",
+                    "variant": "lighter",
+                    "fade": "0.4"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "component",
+              "component": "Spacer",
+              "props": {
+                "size": "32"
+              }
+            },
+            {
+              "type": "component",
+              "component": "RichText"
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    }
+  }
+}

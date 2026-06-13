@@ -1,0 +1,115 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "div",
+      "label": "tooltip wrapper",
+      "style": {
+        "base": {
+          "position": "relative",
+          "display": "inline-flex"
+        }
+      },
+      "attributes": {
+        "data-el": "tooltip",
+        "fade": "{{fade}}"
+      },
+      "interactiveStyles": [
+        {
+          "name": "show on hover",
+          "postfix": ":hover [data-el='tooltip-content']",
+          "style": {
+            "base": {
+              "opacity": "1",
+              "visibility": "visible",
+              "transform": {
+                "_mapping": true,
+                "prop": "position",
+                "values": {
+                  "top": "translateX(-50%) translateY(0)",
+                  "bottom": "translateX(-50%) translateY(0)"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "children": [
+        {
+          "type": "slot"
+        },
+        {
+          "type": "node",
+          "tag": "div",
+          "label": "tooltip content",
+          "attributes": {
+            "data-el": "tooltip-content",
+            "role": "tooltip"
+          },
+          "style": {
+            "base": {
+              "position": "absolute",
+              "left": "50%",
+              "transform": {
+                "_mapping": true,
+                "prop": "position",
+                "values": {
+                  "top": "translateX(-50%) translateY(4px)",
+                  "bottom": "translateX(-50%) translateY(-4px)"
+                }
+              },
+              "bottom": {
+                "_mapping": true,
+                "prop": "position",
+                "values": {
+                  "top": "calc(100% + 6px)",
+                  "bottom": "auto"
+                }
+              },
+              "top": {
+                "_mapping": true,
+                "prop": "position",
+                "values": {
+                  "top": "auto",
+                  "bottom": "calc(100% + 6px)"
+                }
+              },
+              "backgroundColor": "var(--text)",
+              "color": "var(--bg)",
+              "fontSize": "12px",
+              "fontWeight": "500",
+              "lineHeight": "1",
+              "padding": "6px 10px",
+              "borderRadius": "6px",
+              "whiteSpace": "nowrap",
+              "pointerEvents": "none",
+              "opacity": "0",
+              "visibility": "hidden",
+              "transition": "opacity 0.15s ease, visibility 0.15s ease, transform 0.15s ease",
+              "zIndex": "10"
+            }
+          },
+          "children": "{{text}}"
+        }
+      ]
+    },
+    "interface": {
+      "text": {
+        "type": "string",
+        "default": "Tooltip text"
+      },
+      "position": {
+        "type": "select",
+        "default": "top",
+        "options": [
+          "top",
+          "bottom"
+        ]
+      },
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

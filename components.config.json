@@ -1,0 +1,10 @@
+{
+  "componentTypes": [
+    {
+      "id": "section",
+      "label": "section",
+      "color": "#6b7280",
+      "description": ""
+    }
+  ]
+}

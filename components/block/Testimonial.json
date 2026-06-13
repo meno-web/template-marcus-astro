@@ -1,0 +1,121 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "blockquote",
+      "attributes": {
+        "fade": "{{fade}}"
+      },
+      "style": {
+        "base": {
+          "backgroundColor": "var(--bg-100)",
+          "borderRadius": "6px",
+          "padding": "32px",
+          "margin": "0",
+          "display": "flex",
+          "flexDirection": "column",
+          "gap": "24px",
+          "height": "100%",
+          "boxSizing": "border-box",
+          "justifyContent": "space-between"
+        },
+        "tablet": {
+          "padding": "24px",
+          "gap": "20px"
+        },
+        "mobile": {
+          "padding": "20px",
+          "gap": "16px"
+        }
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "Text",
+          "props": {
+            "text": "{{quote}}",
+            "size": "large"
+          }
+        },
+        {
+          "type": "node",
+          "tag": "footer",
+          "style": {
+            "base": {
+              "display": "flex",
+              "alignItems": "center",
+              "gap": "12px"
+            }
+          },
+          "children": [
+            {
+              "type": "component",
+              "component": "Image",
+              "props": {
+                "image": "{{avatar}}",
+                "alt": "{{name}}",
+                "objectFit": "cover",
+                "rounded": "large",
+                "height": "48px",
+                "width": "48px"
+              }
+            },
+            {
+              "type": "node",
+              "tag": "div",
+              "style": {
+                "base": {
+                  "display": "flex",
+                  "flexDirection": "column",
+                  "gap": "0"
+                }
+              },
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Heading",
+                  "props": {
+                    "text": "{{name}}",
+                    "size": "6",
+                    "tag": "3"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Text",
+                  "props": {
+                    "text": "{{role}}",
+                    "size": "small",
+                    "variant": "light"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "quote": {
+        "type": "string",
+        "default": "This product has transformed how we work. Highly recommended!"
+      },
+      "name": {
+        "type": "string",
+        "default": "John Doe"
+      },
+      "role": {
+        "type": "string",
+        "default": "Design Engineer"
+      },
+      "avatar": {
+        "type": "file",
+        "default": "/images/placeholder-img.webp"
+      },
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

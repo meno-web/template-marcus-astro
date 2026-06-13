@@ -1,0 +1,14 @@
+[cmsrt] h1,
+[cmsrt] h2,
+[cmsrt] h3,
+[cmsrt] h4,
+[cmsrt] h5,
+[cmsrt] h6 {
+  font-weight: 450;
+  margin-top: 32px;
+  margin-bottom: 4px;
+}
+
+[cmsrt] h2 {
+  font-size: 36px;
+}

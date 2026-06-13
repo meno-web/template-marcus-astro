@@ -1,0 +1,352 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "default",
+        "maxWidth": "900"
+      },
+      "children": [
+        {
+          "type": "node",
+          "tag": "div",
+          "label": "Testimonial Slider",
+          "style": {
+            "base": {
+              "position": "relative"
+            }
+          },
+          "attributes": {
+            "data-el": "slider"
+          },
+          "children": [
+            {
+              "type": "node",
+              "tag": "div",
+              "label": "Slides",
+              "style": {
+                "base": {
+                  "position": "relative"
+                }
+              },
+              "attributes": {
+                "data-el": "slides"
+              },
+              "children": [
+                {
+                  "type": "list",
+                  "sourceType": "prop",
+                  "source": "{{items}}",
+                  "itemAs": "item",
+                  "children": [
+                    {
+                      "type": "node",
+                      "tag": "div",
+                      "label": "Slide",
+                      "if": "{{item.isVisible || !isEditorMode}}",
+                      "style": {
+                        "base": {
+                          "display": "flex",
+                          "flexDirection": "column",
+                          "alignItems": "center"
+                        }
+                      },
+                      "attributes": {
+                        "data-el": "slide"
+                      },
+                      "children": [
+                        {
+                          "type": "node",
+                          "tag": "blockquote",
+                          "style": {
+                            "base": {
+                              "margin": "0",
+                              "padding": "0"
+                            }
+                          },
+                          "children": [
+                            {
+                              "type": "component",
+                              "component": "QuoteText",
+                              "props": {
+                                "text": "{{item.quote}}",
+                                "maxWidth": "100%",
+                                "align": "center",
+                                "size": "2",
+                                "tag": "3",
+                                "fade": "0"
+                              }
+                            }
+                          ]
+                        },
+                        {
+                          "type": "component",
+                          "component": "Spacer",
+                          "props": {
+                            "size": "32"
+                          }
+                        },
+                        {
+                          "type": "node",
+                          "tag": "div",
+                          "style": {
+                            "base": {
+                              "display": "flex",
+                              "alignItems": "center",
+                              "gap": "16px"
+                            }
+                          },
+                          "children": [
+                            {
+                              "type": "node",
+                              "tag": "img",
+                              "style": {
+                                "base": {
+                                  "width": "56px",
+                                  "height": "56px",
+                                  "borderRadius": "50%",
+                                  "objectFit": "cover"
+                                }
+                              },
+                              "attributes": {
+                                "src": "{{item.avatar}}",
+                                "alt": "{{item.name}}"
+                              }
+                            },
+                            {
+                              "type": "node",
+                              "tag": "div",
+                              "children": [
+                                {
+                                  "type": "node",
+                                  "tag": "div",
+                                  "style": {
+                                    "base": {
+                                      "fontWeight": "600",
+                                      "color": "var(--text)"
+                                    }
+                                  },
+                                  "children": "{{item.name}}"
+                                },
+                                {
+                                  "type": "node",
+                                  "tag": "div",
+                                  "style": {
+                                    "base": {
+                                      "color": "var(--text-100)",
+                                      "fontSize": "14px"
+                                    }
+                                  },
+                                  "children": "{{item.role}}"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "node",
+              "tag": "div",
+              "label": "Navigation",
+              "style": {
+                "base": {
+                  "display": "flex",
+                  "gap": "8px",
+                  "justifyContent": "center",
+                  "marginTop": "24px"
+                }
+              },
+              "attributes": {
+                "data-el": "nav"
+              },
+              "children": [
+                {
+                  "type": "node",
+                  "tag": "button",
+                  "label": "Prev button",
+                  "style": {
+                    "base": {
+                      "width": "44px",
+                      "height": "44px",
+                      "borderRadius": "50%",
+                      "backgroundColor": "var(--bg)",
+                      "border": "1px solid var(--border)",
+                      "display": "flex",
+                      "alignItems": "center",
+                      "justifyContent": "center",
+                      "cursor": "pointer",
+                      "transition": "background-color 0.2s ease, border-color 0.2s ease",
+                      "padding": "0",
+                      "color": "var(--text)",
+                      "paddingRight": "2px"
+                    }
+                  },
+                  "interactiveStyles": [
+                    {
+                      "postfix": ":hover",
+                      "style": {
+                        "base": {
+                          "backgroundColor": "var(--bg-100)",
+                          "borderColor": "var(--text)"
+                        }
+                      }
+                    }
+                  ],
+                  "attributes": {
+                    "data-el": "prev",
+                    "aria-label": "Previous testimonial"
+                  },
+                  "children": [
+                    {
+                      "type": "component",
+                      "component": "Icon",
+                      "props": {
+                        "icon": "chevron-left",
+                        "size": 20
+                      }
+                    }
+                  ]
+                },
+                {
+                  "type": "node",
+                  "tag": "button",
+                  "label": "Next button",
+                  "style": {
+                    "base": {
+                      "width": "44px",
+                      "height": "44px",
+                      "borderRadius": "50%",
+                      "backgroundColor": "var(--bg)",
+                      "border": "1px solid var(--border)",
+                      "display": "flex",
+                      "alignItems": "center",
+                      "justifyContent": "center",
+                      "cursor": "pointer",
+                      "transition": "background-color 0.2s ease, border-color 0.2s ease",
+                      "padding": "0",
+                      "color": "var(--text)",
+                      "paddingLeft": "2px"
+                    }
+                  },
+                  "interactiveStyles": [
+                    {
+                      "postfix": ":hover",
+                      "style": {
+                        "base": {
+                          "backgroundColor": "var(--bg-100)",
+                          "borderColor": "var(--text)"
+                        }
+                      }
+                    }
+                  ],
+                  "attributes": {
+                    "data-el": "next",
+                    "aria-label": "Next testimonial"
+                  },
+                  "children": [
+                    {
+                      "type": "component",
+                      "component": "Icon",
+                      "props": {
+                        "icon": "chevron-right",
+                        "size": 20
+                      }
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "node",
+              "tag": "div",
+              "label": "Pagination",
+              "style": {
+                "base": {
+                  "display": "flex",
+                  "justifyContent": "center",
+                  "gap": "8px",
+                  "marginTop": "24px"
+                }
+              },
+              "attributes": {
+                "data-el": "pagination"
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "items": {
+        "type": "list",
+        "itemSchema": {
+          "quote": {
+            "type": "rich-text",
+            "default": "\"This product has completely transformed how we work.\""
+          },
+          "avatar": {
+            "type": "file",
+            "default": "/images/placeholder-img.webp",
+            "accept": "image/*"
+          },
+          "name": {
+            "type": "string",
+            "default": "Jane Smith"
+          },
+          "role": {
+            "type": "string",
+            "default": "CEO at Company"
+          },
+          "isVisible": {
+            "type": "boolean",
+            "default": true
+          }
+        },
+        "default": [
+          {
+            "quote": "\"This product has completely transformed how we work. I can't imagine going back to the old way of doing things.\"",
+            "avatar": "/images/placeholder-img.webp",
+            "name": "Jane Smith",
+            "role": "CEO at Company",
+            "isVisible": true
+          },
+          {
+            "quote": "\"The best investment we've made this year. Our team productivity has increased dramatically.\"",
+            "avatar": "/images/placeholder-img.webp",
+            "name": "John Doe",
+            "role": "CTO at Startup",
+            "isVisible": false
+          },
+          {
+            "quote": "\"Outstanding support and a product that truly delivers on its promises. Highly recommended.\"",
+            "avatar": "/images/placeholder-img.webp",
+            "name": "Sarah Johnson",
+            "role": "Director at Agency",
+            "isVisible": false
+          }
+        ]
+      },
+      "autoplay": {
+        "type": "boolean",
+        "default": false
+      },
+      "loop": {
+        "type": "boolean",
+        "default": true
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    },
+    "css": ".ts-dot {\n  width: 8px;\n  height: 8px;\n  border-radius: 50%;\n  background: var(--border);\n  border: none;\n  padding: 0;\n  cursor: pointer;\n  transition: background 0.2s ease;\n}\n.ts-dot.is-active {\n  background: var(--text);\n}\n.is-initialized [data-el=\"slide\"] {\n  opacity: 0;\n  position: absolute;\n  top: 0;\n  left: 0;\n  width: 100%;\n  transform: translateY(16px);\n  transition: opacity 0.5s ease, transform 0.5s ease;\n}\n.is-initialized [data-el=\"slide\"].is-active {\n  opacity: 1;\n  position: relative;\n  transform: translateY(0);\n}\n"
+  }
+}

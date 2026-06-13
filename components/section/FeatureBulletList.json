@@ -1,0 +1,146 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "text": "Key benefit — A short description of what makes this feature stand out",
+        "theme": "{{theme}}"
+      },
+      "children": [
+        {
+          "type": "component",
+          "component": "SplitContent",
+          "children": [
+            {
+              "type": "node",
+              "tag": "div",
+              "style": {
+                "display": "flex",
+                "flexDirection": "column",
+                "justifyContent": "center"
+              },
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Heading",
+                  "props": {
+                    "text": "{{title}}",
+                    "size": "2",
+                    "tag": "2",
+                    "align": "left",
+                    "fade": "0"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Text",
+                  "if": "{{text}}",
+                  "props": {
+                    "text": "{{text}}",
+                    "fade": "0.2"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Spacer",
+                  "props": {
+                    "size": "24"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "BulletList",
+                  "if": "{{items.length}}",
+                  "children": [
+                    {
+                      "type": "list",
+                      "sourceType": "prop",
+                      "source": "{{items}}",
+                      "itemAs": "item",
+                      "children": [
+                        {
+                          "type": "component",
+                          "component": "BulletItem",
+                          "props": {
+                            "text": "{{item.text}}",
+                            "fade": "{{0.4+itemIndex*0.2}}"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "node",
+              "tag": "div",
+              "style": {
+                "base": {
+                  "display": "flex",
+                  "alignItems": "flex-start"
+                },
+                "tablet": {},
+                "mobile": {}
+              },
+              "children": [
+                {
+                  "type": "component",
+                  "component": "Image",
+                  "props": {
+                    "image": "{{image}}",
+                    "objectFit": "contain",
+                    "height": "auto",
+                    "border": true,
+                    "rounded": "large",
+                    "fade": "0.4"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "title": {
+        "type": "rich-text",
+        "default": "A powerful tool designed for your workflow"
+      },
+      "text": {
+        "type": "rich-text",
+        "default": "Streamline your process with an intuitive interface that puts you in control. Focus on what matters while we handle the complexity."
+      },
+      "image": {
+        "type": "file",
+        "default": "/images/placeholder-img.webp"
+      },
+      "items": {
+        "type": "list",
+        "itemSchema": {
+          "text": {
+            "type": "string",
+            "default": "List item"
+          }
+        },
+        "default": [
+          {
+            "text": "Intuitive interface — Get started quickly without a steep learning curve"
+          },
+          {
+            "text": "Real-time collaboration — Work together with your team seamlessly"
+          },
+          {
+            "text": "Flexible and extensible — Adapt the platform to fit your specific needs"
+          }
+        ]
+      },
+      "theme": {
+        "type": "select",
+        "default": "primary",
+        "enumName": "theme"
+      }
+    }
+  }
+}

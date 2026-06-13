@@ -1,0 +1,31 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "div",
+      "style": {
+        "base": {
+          "display": "flex",
+          "gap": "8px",
+          "justifyContent": "center"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "children": [
+        {
+          "type": "slot"
+        }
+      ],
+      "attributes": {
+        "fade": "{{fade}}"
+      }
+    },
+    "interface": {
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

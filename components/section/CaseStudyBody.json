@@ -1,0 +1,141 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "cropped": false
+      },
+      "children": [
+        {
+          "type": "node",
+          "tag": "article",
+          "style": {
+            "base": {
+              "maxWidth": "900px",
+              "margin": "0 auto"
+            }
+          },
+          "children": [
+            {
+              "type": "node",
+              "tag": "header",
+              "style": {
+                "base": {
+                  "marginBottom": "40px"
+                }
+              },
+              "children": [
+                {
+                  "type": "link",
+                  "href": "/work",
+                  "style": {
+                    "base": {
+                      "display": "inline-flex",
+                      "alignItems": "center",
+                      "gap": "6px",
+                      "color": "var(--text-200)",
+                      "textDecoration": "none",
+                      "fontSize": "14px",
+                      "marginBottom": "24px",
+                      "transition": "color 0.2s ease"
+                    }
+                  },
+                  "interactiveStyles": [
+                    {
+                      "postfix": ":hover",
+                      "style": {
+                        "base": {
+                          "color": "var(--text)"
+                        }
+                      }
+                    }
+                  ],
+                  "children": [
+                    {
+                      "type": "embed",
+                      "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"16\" height=\"16\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><path d=\"M15 18l-6-6 6-6\"/></svg>",
+                      "style": {
+                        "base": {
+                          "height": "16px"
+                        }
+                      }
+                    },
+                    {
+                      "type": "node",
+                      "tag": "span",
+                      "children": "Back to Work"
+                    }
+                  ]
+                },
+                {
+                  "type": "component",
+                  "component": "Text",
+                  "props": {
+                    "text": "{{cms.category}}",
+                    "size": "small",
+                    "variant": "lighter",
+                    "fade": "0"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Spacer",
+                  "props": {
+                    "size": "8"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Heading",
+                  "props": {
+                    "text": "{{cms.title}}",
+                    "size": "1",
+                    "tag": "1",
+                    "fade": "0.2"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Spacer",
+                  "props": {
+                    "size": "24"
+                  }
+                },
+                {
+                  "type": "component",
+                  "component": "Image",
+                  "props": {
+                    "aspectRatio": "16/9",
+                    "image": "{{cms.image}}",
+                    "rounded": "medium",
+                    "fade": "0.4"
+                  }
+                }
+              ]
+            },
+            {
+              "type": "component",
+              "component": "Spacer",
+              "props": {
+                "size": "32"
+              }
+            },
+            {
+              "type": "component",
+              "component": "RichText"
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "theme": {
+        "type": "select",
+        "default": "dark",
+        "enumName": "theme"
+      }
+    }
+  }
+}

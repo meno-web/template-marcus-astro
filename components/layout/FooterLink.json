@@ -1,0 +1,30 @@
+{
+  "component": {
+    "structure": {
+      "type": "link",
+      "href": "{{link}}",
+      "style": {
+        "base": {
+          "fontSize": "16px",
+          "lineHeight": "1.6",
+          "color": "var(--text)",
+          "textDecoration": "none"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "children": [
+        "{{text}}"
+      ]
+    },
+    "interface": {
+      "text": {
+        "type": "string",
+        "default": "Link"
+      },
+      "link": {
+        "type": "link"
+      }
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "root": {
+    "type": "component",
+    "component": "Layout",
+    "children": [
+      {
+        "type": "component",
+        "component": "Error404"
+      }
+    ]
+  },
+  "meta": {
+    "title": "Page Not Found"
+  }
+}

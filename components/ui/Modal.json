@@ -1,0 +1,123 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "div",
+      "label": "Modal",
+      "style": {
+        "base": {
+          "position": "fixed",
+          "top": "0",
+          "left": "0",
+          "width": "100%",
+          "height": "100%",
+          "display": "flex",
+          "alignItems": "center",
+          "justifyContent": "center",
+          "zIndex": "1000",
+          "opacity": "0",
+          "visibility": "hidden",
+          "transition": "opacity 0.3s ease, visibility 0.3s ease"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "interactiveStyles": [
+        {
+          "name": "is open",
+          "postfix": ".is-open",
+          "style": {
+            "base": {
+              "visibility": "visible",
+              "opacity": "1"
+            }
+          },
+          "previewProp": "isOpen"
+        }
+      ],
+      "attributes": {
+        "data-modal-id": "{{modalId}}",
+        "fade": "{{fade}}"
+      },
+      "children": [
+        {
+          "type": "node",
+          "tag": "div",
+          "label": "Backdrop",
+          "style": {
+            "base": {
+              "position": "absolute",
+              "width": "100%",
+              "height": "100%",
+              "backgroundColor": "rgba(0,0,0,0.2)"
+            },
+            "tablet": {},
+            "mobile": {}
+          },
+          "attributes": {
+            "data-el": "backdrop"
+          },
+          "children": []
+        },
+        {
+          "type": "embed",
+          "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"24\" height=\"24\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\" stroke-linecap=\"round\" stroke-linejoin=\"round\" class=\"lucide lucide-x-icon lucide-x\"><path d=\"M18 6 6 18\"/><path d=\"m6 6 12 12\"/></svg>",
+          "label": "Close Button",
+          "style": {
+            "base": {
+              "position": "absolute",
+              "top": "16px",
+              "right": "16px",
+              "zIndex": "1001",
+              "color": "var(--text)",
+              "width": "40px",
+              "height": "40px",
+              "cursor": "pointer",
+              "display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center",
+              "padding": "0",
+              "backgroundColor": "var(--bg)",
+              "borderRadius": " 4px",
+              "transition": "background-color .2s"
+            },
+            "tablet": {},
+            "mobile": {}
+          },
+          "interactiveStyles": [
+            {
+              "name": "on hover",
+              "postfix": ":hover",
+              "style": {
+                "base": {
+                  "backgroundColor": "var(--bg-100)"
+                }
+              }
+            }
+          ],
+          "attributes": {
+            "data-el": "close-btn"
+          },
+          "text": "×"
+        },
+        {
+          "type": "slot"
+        }
+      ]
+    },
+    "interface": {
+      "modalId": {
+        "type": "string",
+        "default": "modal"
+      },
+      "isOpen": {
+        "type": "boolean",
+        "default": false
+      },
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,256 @@
+{
+  "component": {
+    "structure": {
+      "type": "component",
+      "component": "Section",
+      "props": {
+        "theme": "{{theme}}",
+        "spaceTop": "{{spaceTop}}",
+        "spaceBottom": "{{spaceBottom}}"
+      },
+      "children": [
+        {
+          "type": "node",
+          "tag": "div",
+          "label": "Marquee container",
+          "attributes": {
+            "fade": 0
+          },
+          "style": {
+            "base": {
+              "overflow": "hidden"
+            }
+          },
+          "children": [
+            {
+              "type": "node",
+              "tag": "div",
+              "label": "Marquee track",
+              "style": {
+                "base": {
+                  "display": "flex",
+                  "width": "max-content",
+                  "animationName": "marquee-scroll",
+                  "animationTimingFunction": "linear",
+                  "animationIterationCount": "infinite",
+                  "animationDuration": {
+                    "_mapping": true,
+                    "prop": "speed",
+                    "values": {
+                      "slow": "60s",
+                      "normal": "30s",
+                      "fast": "15s"
+                    }
+                  }
+                },
+                "tablet": {},
+                "mobile": {}
+              },
+              "interactiveStyles": [
+                {
+                  "prefix": "",
+                  "postfix": ":hover",
+                  "style": {
+                    "base": {
+                      "animationPlayState": "paused"
+                    }
+                  }
+                }
+              ],
+              "attributes": {
+                "data-el": "track"
+              },
+              "children": [
+                {
+                  "type": "node",
+                  "tag": "div",
+                  "label": "List 1",
+                  "style": {
+                    "base": {
+                      "display": "flex",
+                      "alignItems": "center",
+                      "gap": "{{gap}}",
+                      "flexShrink": "0",
+                      "paddingRight": "{{gap}}"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "list",
+                      "sourceType": "prop",
+                      "source": "{{items}}",
+                      "children": [
+                        {
+                          "type": "node",
+                          "tag": "img",
+                          "style": {
+                            "base": {
+                              "height": "{{imageHeight}}",
+                              "width": "auto",
+                              "opacity": "0.6",
+                              "transition": "opacity 0.2s ease",
+                              "flexShrink": "0"
+                            }
+                          },
+                          "interactiveStyles": [
+                            {
+                              "prefix": "",
+                              "postfix": ":hover",
+                              "style": {
+                                "base": {
+                                  "opacity": "1"
+                                }
+                              }
+                            }
+                          ],
+                          "attributes": {
+                            "src": "{{item.image}}",
+                            "alt": "{{item.alt}}"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "node",
+                  "tag": "div",
+                  "label": "List 2",
+                  "style": {
+                    "base": {
+                      "display": "flex",
+                      "alignItems": "center",
+                      "gap": "{{gap}}",
+                      "flexShrink": "0",
+                      "paddingRight": "{{gap}}"
+                    }
+                  },
+                  "children": [
+                    {
+                      "type": "list",
+                      "sourceType": "prop",
+                      "source": "{{items}}",
+                      "children": [
+                        {
+                          "type": "node",
+                          "tag": "img",
+                          "style": {
+                            "base": {
+                              "height": "{{imageHeight}}",
+                              "width": "auto",
+                              "opacity": "0.6",
+                              "transition": "opacity 0.2s ease",
+                              "flexShrink": "0"
+                            }
+                          },
+                          "interactiveStyles": [
+                            {
+                              "prefix": "",
+                              "postfix": ":hover",
+                              "style": {
+                                "base": {
+                                  "opacity": "1"
+                                }
+                              }
+                            }
+                          ],
+                          "attributes": {
+                            "src": "{{item.image}}",
+                            "alt": "{{item.alt}}"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    "interface": {
+      "theme": {
+        "type": "select",
+        "default": "light",
+        "enumName": "theme"
+      },
+      "items": {
+        "type": "list",
+        "itemSchema": {
+          "image": {
+            "type": "file",
+            "default": "/images/placeholder-img.webp",
+            "accept": "image/*"
+          },
+          "alt": {
+            "type": "string",
+            "default": "Logo"
+          }
+        },
+        "default": [
+          {
+            "image": "/images/placeholder-img.webp",
+            "alt": "Company 1"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "alt": "Company 2"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "alt": "Company 3"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "alt": "Company 4"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "alt": "Company 5"
+          },
+          {
+            "image": "/images/placeholder-img.webp",
+            "alt": "Company 6"
+          }
+        ]
+      },
+      "speed": {
+        "type": "select",
+        "default": "normal",
+        "options": [
+          "slow",
+          "normal",
+          "fast"
+        ]
+      },
+      "imageHeight": {
+        "type": "string",
+        "default": "40px"
+      },
+      "gap": {
+        "type": "string",
+        "default": "48px"
+      },
+      "spaceTop": {
+        "type": "select",
+        "default": "default",
+        "options": [
+          "default",
+          "small",
+          "none"
+        ]
+      },
+      "spaceBottom": {
+        "type": "select",
+        "default": "default",
+        "options": [
+          "default",
+          "small",
+          "none"
+        ]
+      }
+    },
+    "css": "@keyframes marquee-scroll {\n  0% { transform: translateX(0); }\n  100% { transform: translateX(-50%); }\n}\n"
+  }
+}

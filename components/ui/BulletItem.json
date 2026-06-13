@@ -1,0 +1,77 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "li",
+      "style": {
+        "base": {
+          "color": "var(--text)",
+          "lineHeight": "1.6",
+          "listStyle": "none",
+          "display": "flex",
+          "alignItems": "flex-start",
+          "gap": "12px",
+          "margin": "0"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "attributes": {
+        "fade": "{{fade}}"
+      },
+      "children": [
+        {
+          "type": "node",
+          "tag": "span",
+          "style": {
+            "base": {
+              "width": "28px",
+              "height": "28px",
+              "borderRadius": "50%",
+              "backgroundColor": "var(--text)",
+              "display": "flex",
+              "alignItems": "center",
+              "justifyContent": "center",
+              "minWidth": "28px"
+            },
+            "tablet": {},
+            "mobile": {}
+          },
+          "children": [
+            {
+              "type": "embed",
+              "html": "<svg xmlns=\"http://www.w3.org/2000/svg\" width=\"12\" height=\"12\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"3\" stroke-linecap=\"round\" stroke-linejoin=\"round\"><polyline points=\"20 6 9 17 4 12\"></polyline></svg>",
+              "style": {
+                "base": {
+                  "color": "var(--bg)",
+                  "display": "flex",
+                  "height": "12px"
+                },
+                "tablet": {},
+                "mobile": {}
+              }
+            }
+          ]
+        },
+        {
+          "type": "component",
+          "component": "Text",
+          "props": {
+            "text": "{{text}}",
+            "isMarginBottom": false
+          }
+        }
+      ]
+    },
+    "interface": {
+      "text": {
+        "type": "rich-text",
+        "default": "List item"
+      },
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

@@ -1,0 +1,92 @@
+{
+  "siteUrl": "https://example.com",
+  "editor": {
+    "theme": "light"
+  },
+  "breakpoints": {
+    "tablet": {
+      "breakpoint": 1024,
+      "previewPoint": 880
+    },
+    "mobile": {
+      "breakpoint": 540,
+      "previewPoint": 375
+    }
+  },
+  "fonts": [
+    {
+      "path": "/fonts/instrument-serif-400.woff2",
+      "family": "Instrument Serif",
+      "weight": 400
+    },
+    {
+      "path": "/fonts/instrument-sans-variable.woff2",
+      "family": "Instrument Sans",
+      "weight": 400,
+      "weightMax": 700
+    }
+  ],
+  "responsiveScales": {
+    "enabled": true,
+    "baseReference": 16,
+    "fontSize": {
+      "tablet": 0.88,
+      "mobile": 0.75
+    },
+    "padding": {
+      "tablet": 0.75,
+      "mobile": 0.5
+    },
+    "margin": {
+      "tablet": 0.7,
+      "mobile": 0.45
+    },
+    "gap": {
+      "tablet": 0.65,
+      "mobile": 0.4
+    }
+  },
+  "prefetch": {
+    "enabled": false
+  },
+  "icons": {
+    "favicon": "/icons/icon-32.png",
+    "appleTouchIcon": "/icons/icon-180.png"
+  },
+  "baseComponent": "Layout",
+  "csp": {
+    "scriptSrc": [
+      "https://cdn.jsdelivr.net"
+    ],
+    "styleSrc": [
+      "https://cdn.jsdelivr.net"
+    ]
+  },
+  "i18n": {
+    "locales": [
+      {
+        "code": "en",
+        "name": "English",
+        "nativeName": "English",
+        "langTag": "en-US",
+        "icon": ""
+      }
+    ]
+  },
+  "libraries": {
+    "js": [
+      {
+        "url": "/libraries/fade.js",
+        "mode": "defer",
+        "position": "body-end"
+      }
+    ],
+    "css": [
+      {
+        "url": "/libraries/fade.css",
+        "disableEditor": true
+      }
+    ]
+  },
+  "name": "template-marcus-astro"
+}

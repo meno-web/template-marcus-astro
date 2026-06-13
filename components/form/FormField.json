@@ -1,0 +1,24 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "div",
+      "style": {
+        "base": {
+          "display": "flex",
+          "flexDirection": "column",
+          "marginBottom": "12px",
+          "gap": "8px"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "children": [
+        {
+          "type": "slot"
+        }
+      ]
+    },
+    "interface": {}
+  }
+}

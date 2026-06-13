@@ -1,0 +1,64 @@
+{
+  "component": {
+    "structure": {
+      "type": "node",
+      "tag": "button",
+      "label": "Tab",
+      "style": {
+        "base": {
+          "padding": "12px 20px",
+          "fontSize": "16px",
+          "fontWeight": "500",
+          "backgroundColor": "transparent",
+          "border": "none",
+          "borderBottom": "2px solid transparent",
+          "color": "var(--text)",
+          "cursor": "pointer",
+          "transition": "all 0.2s ease",
+          "whiteSpace": "nowrap"
+        },
+        "tablet": {},
+        "mobile": {}
+      },
+      "interactiveStyles": [
+        {
+          "postfix": ":hover",
+          "style": {
+            "base": {
+              "color": "var(--text)",
+              "backgroundColor": "var(--bg-100)"
+            }
+          }
+        },
+        {
+          "postfix": ".is-active",
+          "style": {
+            "base": {
+              "color": "var(--primary)",
+              "borderColor": "var(--primary)"
+            }
+          }
+        }
+      ],
+      "attributes": {
+        "data-tab-button": "true",
+        "class": "{{isActive ? \"is-active\" : \"\"}}",
+        "fade": "{{fade}}"
+      },
+      "children": "{{text}}"
+    },
+    "interface": {
+      "isActive": {
+        "type": "boolean"
+      },
+      "text": {
+        "type": "string",
+        "default": "Tab"
+      },
+      "fade": {
+        "type": "string",
+        "default": ""
+      }
+    }
+  }
+}

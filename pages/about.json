@@ -1,0 +1,96 @@
+{
+  "root": {
+    "type": "component",
+    "component": "Layout",
+    "children": [
+      {
+        "type": "component",
+        "component": "PageHeaderCentered",
+        "props": {
+          "theme": "dark",
+          "title": "About <span>Marcus</span>",
+          "text": "Filmmaker, cinematographer, and visual storyteller with over a decade of experience crafting authentic narratives for screen."
+        }
+      },
+      {
+        "type": "component",
+        "component": "FeatureSplitImageLeft",
+        "props": {
+          "theme": "light",
+          "subtitle": "The Story",
+          "title": "A passion for <span>visual storytelling</span>",
+          "text": "Marcus Cole is a filmmaker and cinematographer based in Los Angeles. With roots in documentary filmmaking and a deep love for cinematic craft, he brings a thoughtful, story-first approach to every project — whether it's a feature film, a brand campaign, or a music video.",
+          "image": "/images/pasted-image-1773402373324.webp"
+        }
+      },
+      {
+        "type": "component",
+        "component": "ContentTwoColumn",
+        "props": {
+          "theme": "muted",
+          "subtitle": "Philosophy",
+          "title": "How I approach <span>every project</span>",
+          "text": "Every frame should serve the story. Every choice — from lens selection to lighting — should be intentional.",
+          "leftIcon": "users",
+          "rightIcon": "eye",
+          "leftText": "I believe filmmaking is a collaborative art. The best work happens when there's trust between the director, the crew, and the talent. I bring a calm, focused energy to set and work closely with every department to ensure we're all telling the same story.",
+          "rightText": "My background spans narrative films, documentaries, commercials, and music videos. This range has given me a versatile eye and the ability to adapt my approach to the unique demands of each project. I'm as comfortable on a run-and-gun doc shoot as I am on a fully crewed commercial set."
+        }
+      },
+      {
+        "type": "component",
+        "component": "TimelineVertical",
+        "props": {
+          "theme": "light",
+          "subtitle": "Journey",
+          "title": "The path so far",
+          "text": "Key milestones that have shaped my career and craft.",
+          "items": [
+            {
+              "title": "Started in documentary filmmaking",
+              "text": "Began shooting independent documentaries, learning to find story in real moments and available light."
+            },
+            {
+              "title": "First commercial projects",
+              "text": "Transitioned into commercial work, bringing a cinematic sensibility to brand storytelling and campaign films."
+            },
+            {
+              "title": "Expanded into narrative & music videos",
+              "text": "Took on narrative short films and music videos, collaborating with artists and directors across genres."
+            },
+            {
+              "title": "Full-service filmmaker",
+              "text": "Now working across all formats — directing, shooting, and overseeing post-production for clients and collaborators worldwide."
+            }
+          ]
+        }
+      },
+      {
+        "type": "component",
+        "component": "TestimonialSingle",
+        "props": {
+          "theme": "muted",
+          "quote": "Marcus brought a level of craft and intention to our project that elevated everything. His eye for light and motion is extraordinary.",
+          "avatar": "/images/pasted-image-1773395950332.webp",
+          "name": "Sarah Chen",
+          "role": "Creative Director, Anomaly"
+        }
+      },
+      {
+        "type": "component",
+        "component": "CTACentered",
+        "props": {
+          "theme": "dark",
+          "title": "Want to work <span>together</span>?",
+          "text": "I'm always open to new collaborations. Whether you have a project in mind or just want to say hello, let's connect.",
+          "buttonText": "Get in touch",
+          "secondaryButtonText": "View selected work"
+        }
+      }
+    ]
+  },
+  "meta": {
+    "title": "About — Marcus Cole",
+    "description": "Learn about Marcus Cole, a filmmaker and cinematographer specializing in narrative films, commercials, and visual storytelling."
+  }
+}
