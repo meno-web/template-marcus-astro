@@ -51,7 +51,7 @@
     {
       "name": "Heading",
       "cssVar": "--h-fw",
-      "value": "554",
+      "value": "450",
       "type": "none",
       "group": "font-weight"
     },
