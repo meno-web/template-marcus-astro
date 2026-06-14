@@ -1,0 +1,136 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import FooterLink from './FooterLink.astro';
+import Section from '../ui/Section.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  brandName: { type: "string", default: "Marcus Cole" },
+  tagline: { type: "string", default: "Filmmaker & Cinematographer" },
+  column1Title: { type: "string", default: "Work" },
+  column1Links: {
+    type: "list",
+    itemSchema: {
+      text: { type: "string", default: "Link" },
+      href: { type: "link", default: "/" }
+    },
+    default: [
+      { text: "Filmography", href: "/" },
+      { text: "Commercials", href: "/" },
+      { text: "Music Videos", href: "/" }
+    ]
+  },
+  column2Title: { type: "string", default: "Info" },
+  column2Links: {
+    type: "list",
+    itemSchema: {
+      text: { type: "string", default: "Link" },
+      href: { type: "link", default: "/" }
+    },
+    default: [
+      { text: "About", href: "/" },
+      { text: "Process", href: "/" },
+      { text: "Equipment", href: "/" }
+    ]
+  },
+  column3Title: { type: "string", default: "Connect" },
+  column3Links: {
+    type: "list",
+    itemSchema: {
+      text: { type: "string", default: "Link" },
+      href: { type: "link", default: "/" }
+    },
+    default: [
+      { text: "Contact", href: "/" },
+      { text: "Instagram", href: "/" },
+      { text: "Vimeo", href: "/" }
+    ]
+  },
+  copyright: {
+    type: "string",
+    default: "© 2026 Marcus Cole. All rights reserved."
+  },
+  theme: { type: "select", default: "light", enumName: "theme" }
+});
+const {
+  brandName,
+  tagline,
+  column1Title,
+  column1Links,
+  column2Title,
+  column2Links,
+  column3Title,
+  column3Links,
+  copyright,
+  theme,
+  class: className,
+} = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <div class={style({
+      base: {
+        display: "grid",
+        gridTemplateColumns: "2fr 1fr 1fr 1fr",
+        gap: "40px"
+      },
+      tablet: { gridTemplateColumns: "1fr 1fr" },
+      mobile: { gridTemplateColumns: "1fr" }
+    }, __props)}>
+    <div>
+      <div class={style({
+          base: {
+            fontSize: "22px",
+            fontWeight: "700",
+            color: "var(--text)",
+            marginBottom: "16px",
+            letterSpacing: "-0.01em"
+          },
+          tablet: {},
+          mobile: {}
+        }, __props)}>{brandName}</div>
+      <Text text={tagline} maxWidth="320px" />
+    </div>
+    <div>
+      <Subtitle text={column1Title} variant="default" />
+      <nav class={style({ base: { display: "flex", flexDirection: "column", gap: "12px" } }, __props)}>
+        {list(column1Links).map((link, linkIndex) => (
+          <FooterLink link={{ href: link.href }} text={link.text} />
+        ))}
+      </nav>
+    </div>
+    <div>
+      <Subtitle text={column2Title} variant="default" />
+      <nav class={style({ base: { display: "flex", flexDirection: "column", gap: "12px" } }, __props)}>
+        {list(column2Links).map((link, linkIndex) => (
+          <FooterLink link={{ href: link.href }} text={link.text} />
+        ))}
+      </nav>
+    </div>
+    <div>
+      <Subtitle text={column3Title} variant="default" />
+      <nav class={style({ base: { display: "flex", flexDirection: "column", gap: "12px" } }, __props)}>
+        {list(column3Links).map((link, linkIndex) => (
+          <FooterLink link={{ href: link.href }} text={link.text} />
+        ))}
+      </nav>
+    </div>
+  </div>
+  <div class={style({
+      base: {
+        borderTop: "1px solid var(--border)",
+        marginTop: "48px",
+        paddingTop: "24px",
+        display: "flex",
+        justifyContent: "space-between",
+        alignItems: "center"
+      },
+      mobile: { flexDirection: "column", gap: "16px", textAlign: "center" }
+    }, __props)}>
+    <Text text={copyright} size="small" />
+    <div class={style({ base: { display: "flex", gap: "24px" } }, __props)}>
+      <FooterLink link={{ href: "" }} text="Privacy policy" />
+      <FooterLink text="Terms of Service" link={{ href: "" }} />
+    </div>
+  </div>
+</Section>

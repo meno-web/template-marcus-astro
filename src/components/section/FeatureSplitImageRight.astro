@@ -1,0 +1,49 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Button from '../ui/Button.astro';
+import ButtonList from '../ui/ButtonList.astro';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import Section from '../ui/Section.astro';
+import SplitContent from '../ui/SplitContent.astro';
+import Stack from '../ui/Stack.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "Feature" },
+  title: {
+    type: "rich-text",
+    default: "Powerful feature that makes a difference"
+  },
+  text: {
+    type: "rich-text",
+    default: "This feature helps you accomplish your goals faster and more efficiently than ever before."
+  },
+  image: {
+    type: "file",
+    default: "/images/placeholder-img.webp",
+    accept: "image/*"
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { subtitle, title, text, image, theme, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SplitContent>
+    <Stack vertical="center" horizontal="left">
+      {subtitle && (
+        <Subtitle text={subtitle} align="left" fade="0" />
+      )}
+      <Heading text={title} maxWidth="100%" align="left" size="1" tag="2" fade="0.2" />
+      {text && (
+        <Text text={text} size="large" align="left" maxWidth="100%" fade="0.4" />
+      )}
+      <ButtonList fade="0.6">
+        <Button text="Get started" link="" variant="primary" />
+        <Button text="Learn more" link="" variant="secondary" isMarginTop={false} />
+      </ButtonList>
+    </Stack>
+    <Image image={image} rounded="large" fade="0.4" />
+  </SplitContent>
+</Section>

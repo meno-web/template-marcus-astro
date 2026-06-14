@@ -1,0 +1,126 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "Compare" },
+  title: { type: "rich-text", default: "Choose the right plan" },
+  text: {
+    type: "rich-text",
+    default: "See how our plans compare and find the perfect fit for your needs."
+  },
+  column1Title: { type: "string", default: "Basic" },
+  column2Title: { type: "string", default: "Pro" },
+  items: {
+    type: "list",
+    itemSchema: {
+      title: { type: "string", default: "Feature name" },
+      value: { type: "string", default: "-" },
+      label: { type: "string", default: "Yes" }
+    },
+    default: [
+      { title: "Number of projects", value: "5", label: "Unlimited" },
+      { title: "Team members", value: "2", label: "Unlimited" },
+      { title: "Storage", value: "1 GB", label: "100 GB" },
+      { title: "Priority support", value: "-", label: "Yes" },
+      { title: "Custom integrations", value: "-", label: "Yes" }
+    ]
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const {
+  subtitle,
+  title,
+  text,
+  column1Title,
+  column2Title,
+  items,
+  theme,
+  class: className,
+} = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SectionHeader isCenter={true} maxWidth="600px">
+    {subtitle && (
+      <Subtitle text={subtitle} fade="0" align="center" />
+    )}
+    <Heading text={title} maxWidth="" fade="0.2" align="center" size="2" tag="2" />
+    {text && (
+      <Text text={text} size="large" fade="0.4" align="center" maxWidth="" />
+    )}
+  </SectionHeader>
+  <div class={style({ base: { overflowX: "auto" } }, __props)} fade={0.4}>
+    <table class={style({ base: { width: "100%", borderCollapse: "collapse", minWidth: "500px" } }, __props)}>
+      <thead>
+        <tr>
+          <th class={style({
+              base: {
+                textAlign: "left",
+                padding: "16px 24px",
+                fontSize: "14px",
+                fontWeight: "600",
+                color: "var(--text-secondary)",
+                borderBottom: "2px solid var(--border)",
+                textTransform: "uppercase",
+                letterSpacing: "0.5px"
+              }
+            }, __props)}>Feature</th>
+          <th class={style({
+              base: {
+                textAlign: "center",
+                padding: "16px 24px",
+                fontSize: "16px",
+                fontWeight: "600",
+                color: "var(--text)",
+                borderBottom: "2px solid var(--border)"
+              }
+            }, __props)}>{column1Title}</th>
+          <th class={style({
+              base: {
+                textAlign: "center",
+                padding: "16px 24px",
+                fontSize: "16px",
+                fontWeight: "600",
+                color: "var(--text)",
+                borderBottom: "2px solid ",
+                backgroundColor: "var(--bg-100)"
+              },
+              tablet: {},
+              mobile: {}
+            }, __props)}>{column2Title}</th>
+        </tr>
+      </thead>
+      {list(items).map((item, itemIndex) => (
+        <tr>
+          <td class={style({
+              base: {
+                padding: "16px 24px",
+                fontSize: "15px",
+                color: "var(--text)",
+                borderBottom: "1px solid var(--border-100)"
+              }
+            }, __props)}>{item.title}</td>
+          <td class={style({
+              base: {
+                textAlign: "center",
+                padding: "16px 24px",
+                borderBottom: "1px solid var(--border-100)"
+              }
+            }, __props)}>{item.value}</td>
+          <td class={style({
+              base: {
+                textAlign: "center",
+                padding: "16px 24px",
+                borderBottom: "1px solid var(--border-100)",
+                backgroundColor: "var(--surface)"
+              }
+            }, __props)}>{item.label}</td>
+        </tr>
+      ))}
+    </table>
+  </div>
+</Section>

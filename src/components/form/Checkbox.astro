@@ -1,0 +1,35 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  name: { type: "string", default: "checkbox" },
+  label: { type: "string", default: "Checkbox label" }
+});
+const { name, label, class: className } = __props;
+
+const __meno = { category: "forms" };
+---
+<label class={style({
+    base: {
+      display: "flex",
+      alignItems: "center",
+      gap: "8px",
+      fontSize: "16px",
+      color: "var(--text)",
+      cursor: "pointer"
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })}>
+  <input class={style({
+      base: {
+        width: "18px",
+        height: "18px",
+        cursor: "pointer",
+        accentColor: "var(--primary)"
+      },
+      tablet: {},
+      mobile: {}
+    }, __props)} type="checkbox" name={name || undefined} />
+  <span>{label}</span>
+</label>

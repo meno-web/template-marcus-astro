@@ -1,0 +1,47 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  text: { type: "string", default: "Badge" },
+  variant: {
+    type: "select",
+    default: "default",
+    options: ["default", "primary", "success", "warning"]
+  },
+  fade: { type: "string", default: "" }
+});
+const { text, variant, fade, class: className } = __props;
+---
+<span class={style({
+    base: {
+      display: "inline-flex",
+      alignItems: "center",
+      fontSize: "13px",
+      fontWeight: "500",
+      lineHeight: "1",
+      padding: "4px 10px",
+      borderRadius: "100px",
+      backgroundColor: {
+        _mapping: true,
+        prop: "variant",
+        values: {
+          default: "var(--bg-100)",
+          primary: "var(--primary)",
+          success: "#16a34a",
+          warning: "#f59e0b"
+        }
+      },
+      color: {
+        _mapping: true,
+        prop: "variant",
+        values: {
+          default: "var(--text)",
+          primary: "#fff",
+          success: "#fff",
+          warning: "#fff"
+        }
+      }
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true, label: "badge" })} fade={fade || undefined}>{text}</span>

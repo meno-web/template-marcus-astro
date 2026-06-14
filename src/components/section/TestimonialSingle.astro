@@ -1,0 +1,47 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import QuoteText from '../ui/QuoteText.astro';
+import Section from '../ui/Section.astro';
+import Spacer from '../ui/Spacer.astro';
+import Stack from '../ui/Stack.astro';
+
+const __props = resolveProps(Astro, {
+  quote: {
+    type: "rich-text",
+    default: "\"This product has completely transformed how we work. I can't imagine going back to the old way of doing things.\""
+  },
+  avatar: {
+    type: "file",
+    default: "/images/placeholder-img.webp",
+    accept: "image/*"
+  },
+  name: { type: "string", default: "Jane Smith" },
+  role: { type: "string", default: "CEO at Company" },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { quote, avatar, name, role, theme, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" maxWidth="900" class={style({}, __props, { root: true })}>
+  <Stack vertical="top" horizontal="center">
+    <blockquote class={style({ base: { margin: "0", padding: "0" } }, __props)}><QuoteText text={quote} maxWidth="100%" align="center" size="2" tag="3" fade="0" /></blockquote>
+    <Spacer size="32" />
+    <div class={style({ base: { display: "flex", alignItems: "center", gap: "16px" } }, __props)} fade={0.2}>
+      <img class={style({
+          base: {
+            width: "56px",
+            height: "56px",
+            borderRadius: "50%",
+            objectFit: "cover"
+          }
+        }, __props)} src={avatar || undefined} alt={name || undefined} />
+      <div>
+        <div class={style({ base: { fontWeight: "600", color: "var(--text)" } }, __props)}>{name}</div>
+        <div class={style({
+            base: { color: "var(--text-100)", fontSize: "14px" },
+            tablet: {},
+            mobile: {}
+          }, __props)}>{role}</div>
+      </div>
+    </div>
+  </Stack>
+</Section>

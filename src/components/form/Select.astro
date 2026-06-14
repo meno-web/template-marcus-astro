@@ -1,0 +1,28 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  name: { type: "string", default: "select" }
+});
+const { name, class: className } = __props;
+
+const __meno = { category: "forms" };
+---
+<select class={style({
+    base: {
+      padding: "12px 16px",
+      fontSize: "16px",
+      border: "1px solid",
+      borderRadius: "8px",
+      outline: "none",
+      width: "100%",
+      boxSizing: "border-box",
+      fontFamily: "inherit",
+      backgroundColor: "var(--background)",
+      borderColor: "var(--border)",
+      color: "var(--text)",
+      cursor: "pointer"
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} name={name || undefined}><slot /></select>

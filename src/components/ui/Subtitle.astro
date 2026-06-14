@@ -1,0 +1,28 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  text: { type: "string", default: "SUBTITLE" },
+  variant: { type: "select", default: "default", options: ["default", "light"] },
+  fade: { type: "string", default: "" }
+});
+const { text, variant, fade, class: className } = __props;
+---
+<p class={style({
+    base: {
+      fontSize: "13px",
+      fontWeight: "600",
+      marginBottom: "16px",
+      letterSpacing: "0em",
+      lineHeight: "115%",
+      color: {
+        _mapping: true,
+        prop: "variant",
+        values: { default: "var(--text)", light: "var(--text-100)" }
+      },
+      textDecoration: "none",
+      textTransform: "uppercase"
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} fade={fade || undefined}>{text}</p>

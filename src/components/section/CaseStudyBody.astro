@@ -1,0 +1,48 @@
+---
+import { i18n, resolveProps, style } from 'meno-astro';
+import { Embed, Link } from 'meno-astro/components';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import RichText from '../ui/RichText.astro';
+import Section from '../ui/Section.astro';
+import Spacer from '../ui/Spacer.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  theme: { type: "select", default: "dark", enumName: "theme" }
+});
+const { theme, class: className } = __props;
+const { cms } = Astro.props;
+---
+<Section theme={theme} cropped={false} cms={cms} class={style({}, __props, { root: true })}>
+  <article class={style({ base: { maxWidth: "900px", margin: "0 auto" } }, __props)}>
+    <header class={style({ base: { marginBottom: "40px" } }, __props)}>
+      <Link href="/work" class={style({
+          base: {
+            display: "inline-flex",
+            alignItems: "center",
+            gap: "6px",
+            color: "var(--text-200)",
+            textDecoration: "none",
+            fontSize: "14px",
+            marginBottom: "24px",
+            transition: "color 0.2s ease"
+          }
+        }, __props, {
+          interactive: [
+            { postfix: ":hover", style: { base: { color: "var(--text)" } } }
+          ]
+        })}>
+        <Embed html={`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>`} class={style({ base: { height: "16px" } }, __props)} />
+        <span>Back to Work</span>
+      </Link>
+      <Text text={i18n(cms.category)} size="small" variant="lighter" fade="0" cms={cms} />
+      <Spacer size="8" cms={cms} />
+      <Heading text={i18n(cms.title)} size="1" tag="1" fade="0.2" cms={cms} />
+      <Spacer size="24" cms={cms} />
+      <Image aspectRatio="16/9" image={i18n(cms.image)} rounded="medium" fade="0.4" cms={cms} />
+    </header>
+    <Spacer size="32" cms={cms} />
+    <RichText cms={cms} />
+  </article>
+</Section>

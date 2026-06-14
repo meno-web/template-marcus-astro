@@ -1,0 +1,66 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Form from '../form/Form.astro';
+import Heading from '../ui/Heading.astro';
+import Input from '../form/Input.astro';
+import Section from '../ui/Section.astro';
+import Spacer from '../ui/Spacer.astro';
+import Stack from '../ui/Stack.astro';
+import Submit from '../form/Submit.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  title: { type: "rich-text", default: "Subscribe to our newsletter" },
+  text: {
+    type: "rich-text",
+    default: "Get the latest updates, articles, and resources delivered straight to your inbox."
+  },
+  placeholderText: { type: "string", default: "Enter your email" },
+  buttonText: { type: "string", default: "Subscribe" },
+  privacyText: {
+    type: "string",
+    default: "We respect your privacy. Unsubscribe at any time."
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const {
+  title,
+  text,
+  placeholderText,
+  buttonText,
+  privacyText,
+  theme,
+  class: className,
+} = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <Stack vertical="top" horizontal="center">
+    <div class={style({
+        base: {
+          maxWidth: "600px",
+          textAlign: "center",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center"
+        },
+        tablet: {},
+        mobile: {}
+      }, __props)}>
+      <Heading text={title} maxWidth="" align="center" size="2" tag="2" fade="0" />
+      {text && (
+        <Text text={text} size="large" align="center" maxWidth="460px" isMarginBottom={true} fade="0.2" />
+      )}
+      <Spacer size="32" />
+      <div class={style({ base: { width: "100%", maxWidth: "460px" }, tablet: {}, mobile: {} }, __props)} fade={0.4}>
+        <Form>
+          <div class={style({ base: { display: "flex", gap: "8px" }, tablet: {}, mobile: {} }, __props)}>
+            <Input placeholder={placeholderText} />
+            <Submit text={buttonText} />
+          </div>
+        </Form>
+      </div>
+      <Spacer size="24" />
+      <Text text={privacyText} size="small" variant="light" align="center" fade="0.6" />
+    </div>
+  </Stack>
+</Section>

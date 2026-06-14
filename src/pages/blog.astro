@@ -1,0 +1,55 @@
+---
+import { getCollection } from 'astro:content';
+import { getCollectionList, i18n, style } from 'meno-astro';
+import { BaseLayout, Link } from 'meno-astro/components';
+import Heading from '../components/ui/Heading.astro';
+import Image from '../components/ui/Image.astro';
+import Layout from '../components/layout/Layout.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import Spacer from '../components/ui/Spacer.astro';
+import Text from '../components/ui/Text.astro';
+import '../styles/theme.css';
+
+const meta = {
+  title: "Blog",
+  description: "Thoughts on cinematography, filmmaking process, and the craft behind the camera"
+};
+
+const postsList = await getCollectionList("posts", { sort: { field: "publishedAt", direction: "desc" } }, Astro, getCollection);
+---
+<BaseLayout meta={meta}>
+  <Layout>
+    <Section theme="primary">
+      <SectionHeader>
+        <Heading text="Blog" size="1" tag="1" fade="0" />
+        <Text text="Latest articles and insights from our team." fade="0.2" />
+      </SectionHeader>
+      {postsList.map((post, postIndex) => (
+        <Link href={i18n(post._url)} class={style({
+            base: {
+              display: "grid",
+              gridTemplateColumns: "400px 1fr",
+              gap: "32px",
+              alignItems: "start",
+              paddingTop: "32px",
+              paddingBottom: "32px",
+              borderBottom: "1px solid var(--border-100)",
+              textDecoration: "none",
+              color: "inherit"
+            },
+            tablet: { gridTemplateColumns: "200px 1fr", gap: "24px" },
+            mobile: { gridTemplateColumns: "1fr", gap: "16px" }
+          })}>
+          <Image image={i18n(post.featuredImage)} alt={i18n(post.title)} objectFit="cover" height="100%" border={true} rounded="medium" />
+          <div class={style({ base: { display: "flex", flexDirection: "column" }, tablet: {}, mobile: {} })}>
+            <Text text={i18n(post.publishedAt)} size="small" variant="light" />
+            <Spacer size="8" />
+            <Heading text={i18n(post.title)} tag="2" size="4" />
+            <Text text={i18n(post.excerpt)} variant="light" size="default" />
+          </div>
+        </Link>
+      ))}
+    </Section>
+  </Layout>
+</BaseLayout>

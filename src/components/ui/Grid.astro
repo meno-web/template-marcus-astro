@@ -1,0 +1,48 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  columns: {
+    type: "select",
+    default: "2",
+    options: ["1", "2", "3", "4", "5", "6"]
+  },
+  gap: { type: "select", default: "16", options: ["16", "24", "32", "40"] },
+  fade: { type: "string", default: "" }
+});
+const { columns, gap, fade, class: className } = __props;
+---
+<div class={style({
+    base: {
+      display: "grid",
+      gridTemplateColumns: {
+        _mapping: true,
+        prop: "columns",
+        values: {
+          "1": "1fr",
+          "2": "repeat(2, 1fr)",
+          "3": "repeat(3, 1fr)",
+          "4": "repeat(4, 1fr)",
+          "5": "repeat(5, 1fr)",
+          "6": "repeat(6, 1fr)"
+        }
+      },
+      gap: {
+        _mapping: true,
+        prop: "gap",
+        values: {
+          "2": "24px",
+          "3": "",
+          "4": "",
+          "5": "",
+          "6": "",
+          "16": "16px",
+          "24": "24px",
+          "32": "32px",
+          "40": "40px"
+        }
+      }
+    },
+    tablet: { gridTemplateColumns: "repeat(2, 1fr)" },
+    mobile: { gridTemplateColumns: "1fr" }
+  }, __props, { root: true, label: "grid" })} fade={fade || undefined}><slot /></div>

@@ -1,0 +1,45 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import Spacer from '../ui/Spacer.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  href: { type: "link", default: "#" },
+  image: { type: "string" },
+  title: { type: "string", default: "Post Title" },
+  date: { type: "string", default: "" },
+  excerpt: { type: "string", default: "" },
+  fade: { type: "string", default: "" }
+});
+const { href, image, title, date, excerpt, fade, class: className } = __props;
+---
+<a class={style({
+    base: {
+      display: "grid",
+      gridTemplateColumns: "400px 1fr",
+      gap: "32px",
+      alignItems: "start",
+      paddingTop: "32px",
+      paddingBottom: "32px",
+      borderBottom: "1px solid var(--border-100)",
+      textDecoration: "none",
+      color: "inherit"
+    },
+    tablet: { gridTemplateColumns: "200px 1fr", gap: "24px" },
+    mobile: { gridTemplateColumns: "1fr", gap: "16px" }
+  }, __props, {
+    root: true,
+    interactive: [
+      { postfix: ":hover h2", style: { base: { color: "var(--primary)" } } }
+    ]
+  })} href={href || undefined} fade={fade || undefined}>
+  <Image image={image} alt={title} objectFit="cover" height="100%" border={true} rounded="medium" />
+  <div class={style({ base: { display: "flex", flexDirection: "column" }, tablet: {}, mobile: {} }, __props)}>
+    <Text text={date} size="small" variant="light" />
+    <Spacer size="8" />
+    <Heading text={title} tag="2" size="4" />
+    <Text text={excerpt} variant="light" size="default" />
+  </div>
+</a>

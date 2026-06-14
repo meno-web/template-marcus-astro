@@ -1,0 +1,30 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Button from '../ui/Button.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import Stack from '../ui/Stack.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { theme, class: className } = __props;
+---
+<Section theme={theme} spaceTop="large" class={style({}, __props, { root: true })}>
+  <Stack vertical="center" horizontal="center">
+    <span class={style({
+        base: {
+          fontSize: "120px",
+          fontWeight: "700",
+          lineHeight: "1",
+          color: "var(--primary)",
+          marginBottom: "24px"
+        },
+        mobile: { fontSize: "80px" }
+      }, __props)} fade={0}>404</span>
+    <Heading text="Page not found" size="2" tag="1" align="center" fade="0.2" />
+    <Text text="The page you're looking for doesn't exist or has been moved." align="center" maxWidth="320px" isMarginBottom={true} fade="0.4" />
+    <Button text="Back to Home" variant="primary" isMarginTop={true} link={{ href: "/" }} fade="0.6" />
+  </Stack>
+</Section>

@@ -1,0 +1,51 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Form from '../form/Form.astro';
+import FormField from '../form/FormField.astro';
+import Heading from '../ui/Heading.astro';
+import Input from '../form/Input.astro';
+import Label from '../form/Label.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Submit from '../form/Submit.astro';
+import Text from '../ui/Text.astro';
+import Textarea from '../form/Textarea.astro';
+
+const __props = resolveProps(Astro, {
+  title: { type: "rich-text", default: "Get in touch" },
+  text: {
+    type: "rich-text",
+    default: "Have a question or want to learn more? Fill out the form below and we'll get back to you."
+  },
+  theme: { type: "select", default: "light", enumName: "theme" },
+  buttonText: { type: "string", default: "Send Message" }
+});
+const { title, text, theme, buttonText, class: className } = __props;
+---
+<Section theme={theme} maxWidth="640" spaceTop="default" class={style({}, __props, { root: true })}>
+  <SectionHeader isCenter={true} maxWidth="500px">
+    <Heading text={title} size="2" tag="2" fade="0" align="center" />
+    {text && (
+      <Text text={text} size="large" fade="0.2" align="center" />
+    )}
+  </SectionHeader>
+  <Form action="/api/send-email" method="post" submitHandler="fetch" successMessage="Thank you for your submission" errorMessage="Something went wrong. Please try later.">
+    <FormField>
+      <Label text="Name" htmlFor="name" />
+      <Input inputType="text" name="name" placeholder="John Doe" text="Name" />
+    </FormField>
+    <FormField>
+      <Label text="Email" htmlFor="email" />
+      <Input inputType="email" name="email" placeholder="johndoe@email.com" />
+    </FormField>
+    <FormField>
+      <Label text="Phone" htmlFor="phone" />
+      <Input inputType="tel" name="phone" placeholder="0 000 000 000" />
+    </FormField>
+    <FormField>
+      <Label text="Message" htmlFor="message" />
+      <Textarea name="message" placeholder="Message" rows={6} />
+    </FormField>
+    <Submit text={buttonText} />
+  </Form>
+</Section>

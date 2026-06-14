@@ -1,0 +1,11 @@
+---
+import { BaseLayout } from 'meno-astro/components';
+import Error404 from '../components/section/Error404.astro';
+import Layout from '../components/layout/Layout.astro';
+import '../styles/theme.css';
+
+const meta = { title: "Page Not Found" };
+---
+<BaseLayout meta={meta}>
+  <Layout><Error404 /></Layout>
+</BaseLayout>

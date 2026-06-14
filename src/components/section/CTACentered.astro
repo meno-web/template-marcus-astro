@@ -1,0 +1,48 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Button from '../ui/Button.astro';
+import ButtonList from '../ui/ButtonList.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import Stack from '../ui/Stack.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  title: { type: "rich-text", default: "Make this template yours" },
+  text: {
+    type: "rich-text",
+    default: "Replace this content, swap the colors, and publish your site. It only takes a few minutes."
+  },
+  buttonText: { type: "string", default: "Start editing" },
+  buttonLink: { type: "link", default: "#" },
+  secondaryButtonText: { type: "string", default: "Browse templates" },
+  secondaryButtonLink: { type: "link", default: "#" },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const {
+  title,
+  text,
+  buttonText,
+  buttonLink,
+  secondaryButtonText,
+  secondaryButtonLink,
+  theme,
+  class: className,
+} = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <Stack vertical="top" horizontal="center">
+    <Heading text={title} maxWidth="440px" align="center" size="1" tag="2" fade="0" />
+    {text && (
+      <Text text={text} size="large" align="center" maxWidth="450px" isMarginBottom={true} fade="0.2" />
+    )}
+    {buttonText && (
+      <ButtonList justify="center" fade="0.4">
+        <Button text={buttonText} link={buttonLink} variant="primary" />
+        {secondaryButtonText && (
+          <Button text={secondaryButtonText} link={secondaryButtonLink} variant="secondary" />
+        )}
+      </ButtonList>
+    )}
+  </Stack>
+</Section>

@@ -1,0 +1,30 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  src: { type: "file", default: "", accept: "video/*" },
+  poster: { type: "file", default: "", accept: "image/*" },
+  controls: { type: "boolean", default: true },
+  autoPlay: { type: "boolean", default: false },
+  loop: { type: "boolean", default: false },
+  muted: { type: "boolean", default: false },
+  playsInline: { type: "boolean", default: true },
+  fade: { type: "string", default: "" }
+});
+const {
+  src,
+  poster,
+  controls,
+  autoPlay,
+  loop,
+  muted,
+  playsInline,
+  fade,
+  class: className,
+} = __props;
+---
+<video class={style({
+    base: { width: "100%", maxWidth: "100%", height: "auto", display: "block" },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} src={src || undefined} poster={poster || undefined} controls={controls || undefined} autoPlay={autoPlay || undefined} loop={loop || undefined} muted={muted || undefined} playsInline={playsInline || undefined} fade={fade || undefined} />

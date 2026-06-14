@@ -1,0 +1,67 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import Card from '../ui/Card.astro';
+import Grid from '../ui/Grid.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import StatNumber from '../ui/StatNumber.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "How It Works" },
+  title: { type: "rich-text", default: "Simple steps to get started" },
+  text: {
+    type: "rich-text",
+    default: "Follow these easy steps to begin your journey with us."
+  },
+  theme: { type: "select", default: "light", enumName: "theme" },
+  items: {
+    type: "list",
+    itemSchema: {
+      value: { type: "string", default: "1" },
+      title: { type: "string", default: "Step title" },
+      text: { type: "string", default: "Step description" }
+    },
+    default: [
+      {
+        value: "1",
+        title: "Sign Up",
+        text: "Create your free account in seconds. No credit card required to get started."
+      },
+      {
+        value: "2",
+        title: "Configure",
+        text: "Set up your workspace and customize it to match your team's workflow and preferences."
+      },
+      {
+        value: "3",
+        title: "Launch",
+        text: "Go live and start seeing results. Our platform scales with you as your needs grow."
+      }
+    ]
+  }
+});
+const { subtitle, title, text, theme, items, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SectionHeader isCenter={true} maxWidth="600px">
+    {subtitle && (
+      <Subtitle text={subtitle} align="center" fade="0" />
+    )}
+    <Heading text={title} size="2" tag="2" align="center" fade="0.2" />
+    {text && (
+      <Text text={text} size="large" align="center" fade="0.4" />
+    )}
+  </SectionHeader>
+  <Grid columns="3" gap="24" fade="0.4">
+    {list(items).map((item, itemIndex) => (
+      <Card variant="light">
+        <StatNumber text={item.value} />
+        <Heading text={item.title} size="3" tag="3" />
+        <Text text={item.text} />
+      </Card>
+    ))}
+  </Grid>
+</Section>

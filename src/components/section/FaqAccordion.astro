@@ -1,0 +1,64 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import FaqItem from '../block/FaqItem.astro';
+import FaqList from '../block/FaqList.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "FAQ" },
+  title: { type: "rich-text", default: "Frequently asked questions" },
+  text: {
+    type: "rich-text",
+    default: "Common questions about using this template and getting started with Meno."
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" },
+  items: {
+    type: "list",
+    itemSchema: {
+      title: { type: "string", default: "Question?" },
+      text: { type: "rich-text", default: "Answer goes here." },
+      isOpen: { type: "boolean", default: false }
+    },
+    default: [
+      {
+        title: "How do I customize this template?",
+        text: "Open any page in the Meno editor, select elements to change their content, styles, and layout. You can also use AI to generate new sections or modify existing ones.",
+        isOpen: true
+      },
+      {
+        title: "Can I add more pages?",
+        text: "Yes. Create new pages from the editor and compose them using any of the 40+ included section components. Each page gets its own route automatically."
+      },
+      {
+        title: "How do I change colors and fonts?",
+        text: "Open the project settings to update your color palette and typography. Changes apply globally across all components that use design tokens."
+      },
+      {
+        title: "Can I connect a custom domain?",
+        text: "Absolutely. Once your site is ready, publish it and connect your own domain through the hosting settings in your Meno dashboard."
+      }
+    ]
+  }
+});
+const { subtitle, title, text, theme, items, class: className } = __props;
+---
+<Section spaceTop="default" spaceBottom="default" theme={theme} maxWidth="1280" class={style({}, __props, { root: true })}>
+  <SectionHeader isCenter={false} maxWidth="">
+    {subtitle && (
+      <Subtitle text={subtitle} fade="0" align="left" />
+    )}
+    <Heading text={title} size="2" tag="2" fade="0.2" align="left" />
+    {text && (
+      <Text text={text} size="large" fade="0.4" align="left" />
+    )}
+  </SectionHeader>
+  <FaqList>
+    {list(items).map((item, itemIndex) => (
+      <FaqItem question={item.title} answer={item.text} isOpen={item.isOpen} fade={0.4+itemIndex*0.2} />
+    ))}
+  </FaqList>
+</Section>

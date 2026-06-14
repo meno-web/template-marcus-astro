@@ -1,0 +1,99 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import Grid from '../ui/Grid.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "Results" },
+  title: { type: "rich-text", default: "The impact we've made" },
+  text: {
+    type: "rich-text",
+    default: "Real numbers that showcase our commitment to excellence."
+  },
+  isCenter: { type: "boolean", default: false },
+  items: {
+    type: "list",
+    itemSchema: {
+      value: { type: "string", default: "100+" },
+      label: { type: "string", default: "Label" },
+      description: { type: "string", default: "" }
+    },
+    default: [
+      {
+        value: "2.5M+",
+        label: "Users Worldwide",
+        description: "Active users across 120+ countries trust our platform daily"
+      },
+      {
+        value: "99.9%",
+        label: "Uptime Guarantee",
+        description: "Enterprise-grade reliability you can count on"
+      },
+      {
+        value: "< 50ms",
+        label: "Response Time",
+        description: "Lightning-fast performance for seamless experiences"
+      }
+    ]
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const {
+  subtitle,
+  title,
+  text,
+  isCenter,
+  items,
+  theme,
+  class: className,
+} = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SectionHeader isCenter={isCenter} maxWidth="">
+    {subtitle && (
+      <Subtitle text={subtitle} fade="0" align={{
+          _mapping: true,
+          prop: "isCenter",
+          values: { default: "left", true: "center", false: "left" }
+        }} />
+    )}
+    <Heading text={title} maxWidth="640px" fade="0.2" align={{
+        _mapping: true,
+        prop: "isCenter",
+        values: { default: "left", true: "center", false: "left" }
+      }} size="2" tag="2" />
+    {text && (
+      <Text text={text} size="large" fade="0.4" align={{
+          _mapping: true,
+          prop: "isCenter",
+          values: { default: "left", true: "center", false: "left" }
+        }} maxWidth="580px" />
+    )}
+  </SectionHeader>
+  <Grid columns="1" gap="24" fade="0.4">
+    {list(items).map((item, itemIndex) => (
+      <div class={style({
+          base: {
+            display: "flex",
+            alignItems: "center",
+            gap: "32px",
+            padding: "32px 0",
+            borderBottom: "1px solid var(--border)"
+          },
+          mobile: { flexDirection: "column", alignItems: "flex-start", gap: "16px" }
+        }, __props, { label: "Stat Row" })}>
+        <div class={style({ base: { minWidth: "180px" }, mobile: { minWidth: "auto" } }, __props, { label: "Value Wrap" })}><Heading text={item.value} size="2" tag="3" color="primary" isMb0={true} /></div>
+        <div class={style({ base: { display: "flex", flexDirection: "column", gap: "8px" } }, __props, { label: "Content" })}>
+          <Heading text={item.label} size="4" tag="4" />
+          {item.description && (
+            <Text text={item.description} color="secondary" maxWidth="500px" />
+          )}
+        </div>
+      </div>
+    ))}
+  </Grid>
+</Section>

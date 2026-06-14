@@ -1,0 +1,82 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import Card from '../ui/Card.astro';
+import Grid from '../ui/Grid.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Spacer from '../ui/Spacer.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "Features" },
+  title: { type: "rich-text", default: "Learn more about our approach" },
+  text: {
+    type: "rich-text",
+    default: "We believe in transparency and sharing our process with you."
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" },
+  items: {
+    type: "list",
+    itemSchema: {
+      title: { type: "string", default: "Feature Title" },
+      text: { type: "rich-text", default: "Feature description goes here." },
+      features: {
+        type: "rich-text",
+        default: "Feature 1\nFeature 2\nFeature 3\nFeature 4"
+      }
+    },
+    default: [
+      {
+        title: "Team Management",
+        text: "Manage your entire team from a single dashboard with fine-grained controls over who can access what.",
+        features: "Role-based access control\nSSO support for enterprise identity providers\nTeam workspaces with granular permissions\nAudit logs for every action"
+      },
+      {
+        title: "Security & Compliance",
+        text: "Your data is protected with industry-leading security practices and compliance certifications.",
+        features: "AES-256 encryption at rest and in transit\nSOC 2 Type II certified\nRegular third-party security audits\nGDPR and CCPA compliant"
+      },
+      {
+        title: "Priority Support",
+        text: "Your team gets the help they need, when they need it.",
+        features: "Dedicated support channel for your organization\n24-hour response SLA\nHands-on onboarding and training\nDirect access to our engineering team for complex issues"
+      },
+      {
+        title: "Custom Integrations",
+        text: "Make the platform fit your workflow, not the other way around.",
+        features: "Full API access\nWebhooks for automation\nCI/CD pipeline integration\nWhite-label options available"
+      }
+    ]
+  }
+});
+const { subtitle, title, text, theme, items, class: className } = __props;
+---
+<Section spaceTop="default" spaceBottom="default" theme={theme} class={style({}, __props, { root: true })}>
+  <SectionHeader isCenter={true} maxWidth="450px">
+    {subtitle && (
+      <Subtitle text={subtitle} align="center" fade="0" />
+    )}
+    <Heading text={title} maxWidth="" align="center" size="2" tag="2" fade="0.2" />
+    {text && (
+      <Text text={text} size="large" align="center" maxWidth="" isMarginBottom={true} fade="0.4" />
+    )}
+  </SectionHeader>
+  <Grid columns="2" gap="24" fade="0.4">
+    {list(items).map((item, itemIndex) => (
+      <Card item={item}>
+        <Heading text={item.title} size="3" tag="3" />
+        <Text text={item.text} isMarginBottom={true} />
+        <Spacer size="24" />
+        <div class={style({
+            base: {
+              fontSize: "15px",
+              lineHeight: "1.8",
+              color: "var(--text-secondary)"
+            }
+          }, __props)}>{item.features}</div>
+      </Card>
+    ))}
+  </Grid>
+</Section>

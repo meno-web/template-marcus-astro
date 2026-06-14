@@ -1,0 +1,40 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import Section from '../ui/Section.astro';
+import SplitContent from '../ui/SplitContent.astro';
+import Stack from '../ui/Stack.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "Feature" },
+  title: { type: "rich-text", default: "Another great feature for your needs" },
+  text: {
+    type: "rich-text",
+    default: "Discover how this feature can transform the way you work and boost your productivity."
+  },
+  image: {
+    type: "file",
+    accept: "image/*",
+    default: "/images/placeholder-img.webp"
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { subtitle, title, text, image, theme, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SplitContent>
+    <Image image={image} rounded="large" fade="0.4" />
+    <Stack vertical="center" horizontal="left">
+      {subtitle && (
+        <Subtitle text={subtitle} align="left" fade="0" />
+      )}
+      <Heading text={title} maxWidth="100%" align="left" size="2" tag="2" fade="0.2" />
+      {text && (
+        <Text text={text} size="large" align="left" maxWidth="100%" fade="0.4" />
+      )}
+    </Stack>
+  </SplitContent>
+</Section>

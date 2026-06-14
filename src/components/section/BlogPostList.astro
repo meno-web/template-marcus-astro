@@ -1,0 +1,49 @@
+---
+import { getCollection } from 'astro:content';
+import { getCollectionList, i18n, resolveProps, style } from 'meno-astro';
+import { Link } from 'meno-astro/components';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Spacer from '../ui/Spacer.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { theme, class: className } = __props;
+
+const postsList = await getCollectionList("posts", { sort: { field: "publishedAt", direction: "desc" } }, Astro, getCollection);
+---
+<Section theme={theme} class={style({}, __props, { root: true })}>
+  <SectionHeader>
+    <Heading text="Blog" size="1" tag="1" fade="0" />
+    <Text text="Latest articles and insights from our team." fade="0.2" />
+  </SectionHeader>
+  {postsList.map((post, postIndex) => (
+    <Link href={i18n(post._url)} class={style({
+        base: {
+          display: "grid",
+          gridTemplateColumns: "400px 1fr",
+          gap: "32px",
+          alignItems: "start",
+          paddingTop: "32px",
+          paddingBottom: "32px",
+          borderBottom: "1px solid var(--border-100)",
+          textDecoration: "none",
+          color: "inherit"
+        },
+        tablet: { gridTemplateColumns: "200px 1fr", gap: "24px" },
+        mobile: { gridTemplateColumns: "1fr", gap: "16px" }
+      }, __props)}>
+      <Image image={i18n(post.featuredImage)} alt={i18n(post.title)} objectFit="cover" height="100%" border={true} rounded="medium" />
+      <div class={style({ base: { display: "flex", flexDirection: "column" }, tablet: {}, mobile: {} }, __props)}>
+        <Text text={i18n(post.publishedAt)} size="small" variant="light" />
+        <Spacer size="8" />
+        <Heading text={i18n(post.title)} tag="2" size="4" />
+        <Text text={i18n(post.excerpt)} variant="light" size="default" />
+      </div>
+    </Link>
+  ))}
+</Section>

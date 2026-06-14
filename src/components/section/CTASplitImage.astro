@@ -1,0 +1,59 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Button from '../ui/Button.astro';
+import ButtonList from '../ui/ButtonList.astro';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import Section from '../ui/Section.astro';
+import SplitContent from '../ui/SplitContent.astro';
+import Stack from '../ui/Stack.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  title: { type: "rich-text", default: "Take the next step today" },
+  text: {
+    type: "rich-text",
+    default: "Start your free trial and see the difference for yourself. No credit card required."
+  },
+  buttonText: { type: "string", default: "Get started" },
+  buttonLink: { type: "link", default: "#" },
+  secondaryButtonText: { type: "string", default: "Learn more" },
+  secondaryButtonLink: { type: "link", default: "#" },
+  image: {
+    type: "file",
+    accept: "image/*",
+    default: "/images/placeholder-img.webp"
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const {
+  title,
+  text,
+  buttonText,
+  buttonLink,
+  secondaryButtonText,
+  secondaryButtonLink,
+  image,
+  theme,
+  class: className,
+} = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SplitContent>
+    <Stack vertical="center" horizontal="left">
+      <Heading text={title} maxWidth="100%" align="left" size="2" tag="2" fade="0" />
+      {text && (
+        <Text text={text} size="large" align="left" maxWidth="100%" isMarginBottom={true} fade="0.2" />
+      )}
+      {buttonText && (
+        <ButtonList justify="flex-start" fade="0.4">
+          <Button text={buttonText} link={buttonLink} variant="primary" />
+          {secondaryButtonText && (
+            <Button text={secondaryButtonText} link={secondaryButtonLink} variant="secondary" />
+          )}
+        </ButtonList>
+      )}
+    </Stack>
+    <Image image={image} rounded="large" fade="0.4" />
+  </SplitContent>
+</Section>

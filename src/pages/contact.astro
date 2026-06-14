@@ -1,0 +1,40 @@
+---
+import { BaseLayout } from 'meno-astro/components';
+import CTACentered from '../components/section/CTACentered.astro';
+import ContactFormCentered from '../components/section/ContactFormCentered.astro';
+import FaqAccordion from '../components/section/FaqAccordion.astro';
+import Layout from '../components/layout/Layout.astro';
+import PageHeaderCentered from '../components/section/PageHeaderCentered.astro';
+import '../styles/theme.css';
+
+const meta = {
+  title: "Contact — Marcus Cole",
+  description: "Get in touch with Marcus Cole for film, commercial, and branded content projects. Booking for 2026."
+};
+---
+<BaseLayout meta={meta}>
+  <Layout>
+    <PageHeaderCentered theme="dark" title={`Get in <span>touch</span>`} text="Have a project in mind or want to discuss a collaboration? Fill out the form below and I'll get back to you within 48 hours." />
+    <ContactFormCentered theme="light" title="Send a message" text="Tell me about your project — the format, timeline, and vision. The more detail, the better." buttonText="Send message" />
+    <FaqAccordion theme="muted" subtitle="Common Questions" title="Before you reach out" text="Answers to the questions I hear most often about working together." items={[
+        {
+          title: "What's the typical turnaround for a project?",
+          text: "It depends on scope. A music video might take 2–4 weeks from shoot to delivery, while a commercial campaign can be 6–10 weeks. I'll give you a clear timeline during our initial conversation.",
+          isOpen: true
+        },
+        {
+          title: "Do you travel for shoots?",
+          text: "Absolutely. I'm based in Los Angeles but regularly work on location across the US and internationally. Travel logistics are always part of the planning process."
+        },
+        {
+          title: "What's your rate structure?",
+          text: "Rates depend on the project scope, format, and deliverables. I'm happy to provide a detailed quote after we discuss your needs. Reach out with your project details and budget range."
+        },
+        {
+          title: "Can you handle post-production as well?",
+          text: "Yes. I offer end-to-end production services including editing, color grading, and sound design. I can also collaborate with your existing post team if preferred."
+        }
+      ]} />
+    <CTACentered theme="dark" title={`Prefer a direct <span>conversation</span>?`} text="If forms aren't your thing, feel free to reach out via email or social media. I'm always happy to chat about new projects." buttonText="Email me directly" secondaryButtonText="View my work" />
+  </Layout>
+</BaseLayout>

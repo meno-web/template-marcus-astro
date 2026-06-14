@@ -1,0 +1,75 @@
+---
+import { inlineStyle, resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  alt: { type: "string", default: "" },
+  loading: { type: "select", default: "lazy", options: ["lazy", "eager"] },
+  objectFit: {
+    type: "select",
+    default: "cover",
+    options: ["cover", "contain", "fill", "scale-down"]
+  },
+  image: { type: "file", accept: "image/*" },
+  height: { type: "string" },
+  border: { type: "boolean" },
+  rounded: {
+    type: "select",
+    default: "none",
+    options: ["large", "medium", "none"]
+  },
+  fetchpriority: {
+    type: "select",
+    default: "auto",
+    options: ["auto", "high", "low"]
+  },
+  sizes: { type: "string", default: "" },
+  width: { type: "string", default: "100%" },
+  aspectRatio: { type: "string", default: "" },
+  fade: { type: "string", default: "" }
+});
+const {
+  alt,
+  loading,
+  objectFit,
+  image,
+  height,
+  border,
+  rounded,
+  fetchpriority,
+  sizes,
+  width,
+  aspectRatio,
+  fade,
+  class: className,
+} = __props;
+---
+<img class={style({
+    base: {
+      maxWidth: "100%",
+      height: "{{height}}",
+      display: "block",
+      objectFit: "{{objectFit}}",
+      border: {
+        _mapping: true,
+        prop: "border",
+        values: { default: "1px solid", true: "1px solid", false: "none" }
+      },
+      borderColor: "var(--border)",
+      borderRadius: {
+        _mapping: true,
+        prop: "rounded",
+        values: {
+          default: "0",
+          true: "12px",
+          false: "0",
+          large: "12px",
+          none: "0",
+          medium: "8px"
+        }
+      },
+      width: "{{width}}",
+      aspectRatio: "{{aspectRatio}}"
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} style={inlineStyle({ "height": `${height}`, "object-fit": `${objectFit}`, "width": `${width}`, "aspect-ratio": `${aspectRatio}` }, __props)} src={image || undefined} alt={alt || undefined} loading={loading || undefined} fetchpriority={fetchpriority || undefined} sizes={sizes || undefined} fade={fade || undefined} />

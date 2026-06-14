@@ -1,0 +1,36 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  size: {
+    type: "select",
+    options: ["8", "16", "24", "32", "40", "48", "56", "64", "72", "80"],
+    default: "64"
+  },
+  fade: { type: "string", default: "" }
+});
+const { size, fade, class: className } = __props;
+---
+<div class={style({
+    base: {
+      paddingBottom: {
+        _mapping: true,
+        prop: "size",
+        values: {
+          "8": "8px",
+          "16": "16px",
+          "24": "24px",
+          "32": "32px",
+          "40": "40px",
+          "48": "48px",
+          "56": "56px",
+          "64": "64px",
+          "72": "72px",
+          "80": "80px"
+        }
+      },
+      width: "100%"
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} fade={fade || undefined} />

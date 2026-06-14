@@ -1,0 +1,51 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Button from '../ui/Button.astro';
+import ButtonList from '../ui/ButtonList.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import Stack from '../ui/Stack.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  title: {
+    type: "rich-text",
+    default: "Your website, <span>built visually</span>"
+  },
+  text: {
+    type: "rich-text",
+    default: "Design and publish professional websites without writing code. Start with this template and make it yours in minutes."
+  },
+  buttonText: { type: "string", default: "Start building" },
+  buttonLink: { type: "link", default: "#" },
+  secondaryButtonText: { type: "string", default: "View components" },
+  secondaryButtonLink: { type: "link", default: "#" },
+  theme: { type: "select", default: "light", enumName: "theme" }
+});
+const {
+  title,
+  text,
+  buttonText,
+  buttonLink,
+  secondaryButtonText,
+  secondaryButtonLink,
+  theme,
+  class: className,
+} = __props;
+---
+<Section theme={theme} class={style({}, __props, { root: true })}>
+  <Stack horizontal="center">
+    <Heading text={title} tag="1" align="center" size="1" fade="0" />
+    {text && (
+      <Text text={text} size="large" align="center" maxWidth="540px" variant="light" fade="0.2" />
+    )}
+    {buttonText && (
+      <ButtonList fade="0.4">
+        <Button text={buttonText} link={buttonLink} />
+        {secondaryButtonText && (
+          <Button text={secondaryButtonText} link={secondaryButtonLink} variant="secondary" />
+        )}
+      </ButtonList>
+    )}
+  </Stack>
+</Section>

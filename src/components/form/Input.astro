@@ -1,0 +1,31 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  inputType: {
+    type: "select",
+    default: "text",
+    options: ["text", "email", "password", "number", "tel", "url"]
+  },
+  name: { type: "string", default: "field" },
+  placeholder: { type: "string", default: "Enter text..." }
+});
+const { inputType, name, placeholder, class: className } = __props;
+---
+<input class={style({
+    base: {
+      padding: "12px 16px",
+      fontSize: "16px",
+      border: "1px solid",
+      borderRadius: "8px",
+      outline: "none",
+      width: "100%",
+      boxSizing: "border-box",
+      fontFamily: "inherit",
+      backgroundColor: "var(--bg-100)",
+      borderColor: "var(--text)",
+      color: "var(--text)"
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} type={inputType || undefined} name={name || undefined} placeholder={placeholder || undefined} />

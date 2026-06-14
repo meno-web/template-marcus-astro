@@ -1,0 +1,28 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  singleOpen: { type: "boolean", default: false }
+});
+const { singleOpen, class: className } = __props;
+---
+<dl class={style({ base: { display: "flex", flexDirection: "column", gap: "0" } }, __props, { root: true })}><slot /></dl>
+
+
+<script define:vars={{ singleOpen }}>
+(function(el, props){
+if (props.singleOpen) {
+  el.addEventListener('faq-item-open', (e) => {
+    const openedItem = e.target;
+    const allItems = el.querySelectorAll('[data-component="FaqItem"]');
+
+    allItems.forEach((item) => {
+      if (item !== openedItem) {
+        item.classList.remove('is-open');
+      }
+    });
+  });
+}
+
+})((function(){var s=document.currentScript,e=s&&s.previousElementSibling;while(e&&(e.nodeName==='STYLE'||e.nodeName==='SCRIPT'))e=e.previousElementSibling;return e||null;})(), { singleOpen });
+</script>

@@ -1,0 +1,60 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  image: { type: "file", accept: "image/*", default: "" },
+  alt: { type: "string", default: "" },
+  initials: { type: "string", default: "JD" },
+  size: {
+    type: "select",
+    default: "medium",
+    options: ["small", "medium", "large"]
+  },
+  fade: { type: "string", default: "" }
+});
+const { image, alt, initials, size, fade, class: className } = __props;
+---
+<div class={style({
+    base: {
+      position: "relative",
+      display: "inline-flex",
+      alignItems: "center",
+      justifyContent: "center",
+      flexShrink: "0",
+      width: {
+        _mapping: true,
+        prop: "size",
+        values: { small: "32px", medium: "40px", large: "56px" }
+      },
+      height: {
+        _mapping: true,
+        prop: "size",
+        values: { small: "32px", medium: "40px", large: "56px" }
+      },
+      borderRadius: "100px",
+      overflow: "hidden",
+      backgroundColor: "var(--bg-100)",
+      color: "var(--text-100)",
+      fontSize: {
+        _mapping: true,
+        prop: "size",
+        values: { small: "12px", medium: "14px", large: "18px" }
+      },
+      fontWeight: "600",
+      lineHeight: "1"
+    }
+  }, __props, { root: true, label: "avatar" })} fade={fade || undefined}>
+  {image && (
+    <img class={style({
+        base: {
+          width: "100%",
+          height: "100%",
+          objectFit: "cover",
+          display: "block"
+        }
+      }, __props)} src={image || undefined} alt={alt || undefined} loading="lazy" />
+  )}
+  {initials && (
+    <span class={style({}, __props, { label: "fallback initials" })}>{initials}</span>
+  )}
+</div>

@@ -1,0 +1,52 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import Grid from '../ui/Grid.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "By the numbers" },
+  title: { type: "rich-text", default: "Trusted by thousands" },
+  text: {
+    type: "rich-text",
+    default: "Our track record speaks for itself. Here are some key metrics."
+  },
+  items: {
+    type: "list",
+    itemSchema: {
+      value: { type: "string", default: "100+" },
+      label: { type: "string", default: "Label" }
+    },
+    default: [
+      { value: "10K+", label: "Happy customers" },
+      { value: "99%", label: "Satisfaction rate" },
+      { value: "50M+", label: "Tasks completed" },
+      { value: "24/7", label: "Support available" }
+    ]
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { subtitle, title, text, items, theme, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SectionHeader vertical="top" horizontal="center" isCenter={true}>
+    {subtitle && (
+      <Subtitle text={subtitle} align="center" fade="0" />
+    )}
+    <Heading text={title} maxWidth="640px" align="center" size="2" tag="2" fade="0.2" />
+    {text && (
+      <Text text={text} size="large" align="center" maxWidth="580px" isMarginBottom={true} fade="0.4" />
+    )}
+  </SectionHeader>
+  <Grid columns="4" gap="24" fade="0.4">
+    {list(items).map((item, itemIndex) => (
+      <div class={style({ base: { textAlign: "center", padding: "24px" } }, __props, { label: "Stat Card" })}>
+        <Heading text={item.value} tag="3" align="center" size="1" />
+        <Text text={item.label} align="center" color="secondary" />
+      </div>
+    ))}
+  </Grid>
+</Section>

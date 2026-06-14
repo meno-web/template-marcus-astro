@@ -1,0 +1,101 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "How It Works" },
+  title: { type: "rich-text", default: "Simple steps to get started" },
+  text: {
+    type: "rich-text",
+    default: "Follow these easy steps to begin your journey with us."
+  },
+  items: {
+    type: "list",
+    itemSchema: {
+      title: { type: "string", default: "Step title" },
+      text: { type: "string", default: "Step description" }
+    },
+    default: [
+      {
+        title: "Sign up for free",
+        text: "Create your account in seconds. No credit card required to get started."
+      },
+      {
+        title: "Set up your project",
+        text: "Configure your workspace and invite your team members to collaborate."
+      },
+      {
+        title: "Customize your workflow",
+        text: "Tailor the platform to fit your specific needs and preferences."
+      },
+      {
+        title: "Launch and grow",
+        text: "Go live and start achieving your goals with our powerful tools."
+      }
+    ]
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { subtitle, title, text, items, theme, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SectionHeader isCenter={true} maxWidth="600px">
+    {subtitle && (
+      <Subtitle text={subtitle} align="center" fade="0" />
+    )}
+    <Heading text={title} maxWidth="" align="center" size="2" tag="2" fade="0.2" />
+    {text && (
+      <Text text={text} size="large" align="center" maxWidth="" fade="0.4" />
+    )}
+  </SectionHeader>
+  <div class={style({ base: { maxWidth: "700px", margin: "0 auto" } }, __props)}>
+    {list(items).map((item, itemIndex, itemArr) => (
+      <div class={style({ base: { display: "flex", gap: "24px" }, mobile: { gap: "16px" } }, __props)} fade={0.4+0.2*itemIndex || undefined}>
+        <div class={style({
+            base: {
+              display: "flex",
+              flexDirection: "column",
+              alignItems: "center",
+              flexShrink: "0"
+            }
+          }, __props)}>
+          <div class={style({
+              base: {
+                width: "32px",
+                height: "32px",
+                minWidth: "32px",
+                minHeight: "32px",
+                backgroundColor: "var(--text)",
+                borderRadius: "50%",
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                color: "#ffffff",
+                fontWeight: "700",
+                fontSize: "14px"
+              }
+            }, __props)}>{itemIndex}</div>
+          {!(itemIndex === itemArr.length - 1) && (
+            <div class={style({
+                base: {
+                  width: "2px",
+                  flex: "1",
+                  backgroundColor: "var(--border)",
+                  marginTop: "8px",
+                  marginBottom: "-8px"
+                }
+              }, __props)} />
+          )}
+        </div>
+        <div class={style({ base: { paddingBottom: "48px", flex: "1", minWidth: "0" } }, __props)}>
+          <Heading text={item.title} size="5" tag="3" />
+          <Text text={item.text} variant="light" />
+        </div>
+      </div>
+    ))}
+  </div>
+</Section>

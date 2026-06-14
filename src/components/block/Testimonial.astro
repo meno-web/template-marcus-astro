@@ -1,0 +1,43 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  quote: {
+    type: "string",
+    default: "This product has transformed how we work. Highly recommended!"
+  },
+  name: { type: "string", default: "John Doe" },
+  role: { type: "string", default: "Design Engineer" },
+  avatar: { type: "file", default: "/images/placeholder-img.webp" },
+  fade: { type: "string", default: "" }
+});
+const { quote, name, role, avatar, fade, class: className } = __props;
+---
+<blockquote class={style({
+    base: {
+      backgroundColor: "var(--bg-100)",
+      borderRadius: "6px",
+      padding: "32px",
+      margin: "0",
+      display: "flex",
+      flexDirection: "column",
+      gap: "24px",
+      height: "100%",
+      boxSizing: "border-box",
+      justifyContent: "space-between"
+    },
+    tablet: { padding: "24px", gap: "20px" },
+    mobile: { padding: "20px", gap: "16px" }
+  }, __props, { root: true })} fade={fade || undefined}>
+  <Text text={quote} size="large" />
+  <footer class={style({ base: { display: "flex", alignItems: "center", gap: "12px" } }, __props)}>
+    <Image image={avatar} alt={name} objectFit="cover" rounded="large" height="48px" width="48px" />
+    <div class={style({ base: { display: "flex", flexDirection: "column", gap: "0" } }, __props)}>
+      <Heading text={name} size="6" tag="3" />
+      <Text text={role} size="small" variant="light" />
+    </div>
+  </footer>
+</blockquote>

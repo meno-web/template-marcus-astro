@@ -1,0 +1,19 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  text: { type: "string", default: "Label" },
+  htmlFor: { type: "string", default: "" }
+});
+const { text, htmlFor, class: className } = __props;
+---
+<label class={style({
+    base: {
+      fontSize: "14px",
+      fontWeight: "500",
+      color: "var(--text)",
+      display: "block"
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} for={htmlFor || undefined}>{text}</label>
