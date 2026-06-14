@@ -1,0 +1,82 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Spacer from '../ui/Spacer.astro';
+import SplitContent from '../ui/SplitContent.astro';
+import Stack from '../ui/Stack.astro';
+import Tab from '../ui/Tab.astro';
+import TabButton from '../ui/TabButton.astro';
+import TabButtonsList from '../ui/TabButtonsList.astro';
+import TabPanel from '../ui/TabPanel.astro';
+import TabPanelsList from '../ui/TabPanelsList.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  title: { type: "rich-text", default: "Ready to build something great?" },
+  text: {
+    type: "rich-text",
+    default: "Start customizing this template today. It only takes a few minutes to make it yours."
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" },
+  items: {
+    type: "list",
+    itemSchema: {
+      tabTitle: { type: "string", default: "Tab" },
+      title: { type: "string", default: "Tab" },
+      text: { type: "rich-text", default: "Text" },
+      image: {
+        type: "file",
+        accept: "image/*",
+        default: "/images/placeholder-img.webp"
+      }
+    },
+    default: [
+      {
+        tabTitle: "Tab 1",
+        title: "Tab 1",
+        text: "Text",
+        image: "/images/placeholder-img.webp"
+      },
+      {
+        tabTitle: "Tab 2",
+        title: "Tab 2",
+        text: "Text",
+        image: "/images/placeholder-img.webp"
+      }
+    ]
+  }
+});
+const { title, text, theme, items, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SectionHeader vertical="top" horizontal="center" isCenter={true}>
+    <Heading text={title} maxWidth="640px" align="center" size="2" tag="2" fade="0" />
+    {text && (
+      <Text text={text} size="large" align="center" maxWidth="580px" isMarginBottom={true} fade="0.2" />
+    )}
+  </SectionHeader>
+  <Tab fade="0.4">
+    <TabButtonsList>
+      {list(items).map((item, itemIndex) => (
+        <TabButton isActive={(itemIndex === 0)} text={item.tabTitle} />
+      ))}
+    </TabButtonsList>
+    <Spacer size="32" />
+    <TabPanelsList>
+      {list(items).map((item, itemIndex) => (
+        <TabPanel isOpen={(itemIndex === 0)}>
+          <SplitContent vertical="top" horizontal="center">
+            <Stack vertical="center">
+              <Heading text={item.title} size="2" />
+              <Text text={item.text} />
+            </Stack>
+            <Image image={item.image} height="420px" />
+          </SplitContent>
+        </TabPanel>
+      ))}
+    </TabPanelsList>
+  </Tab>
+</Section>

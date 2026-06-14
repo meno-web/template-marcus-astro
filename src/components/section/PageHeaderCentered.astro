@@ -1,0 +1,27 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Button from '../ui/Button.astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import Stack from '../ui/Stack.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  title: { type: "rich-text", default: "Page title" },
+  text: {
+    type: "rich-text",
+    default: "A brief description of this page and what visitors can expect to find here."
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { title, text, theme, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <Stack vertical="top" horizontal="center">
+    <Heading text={title} maxWidth="480px" align="center" size="1" tag="1" variant="default" fade="0" />
+    {text && (
+      <Text text={text} size="large" align="center" maxWidth="580px" isMarginBottom={true} fade="0.2" />
+    )}
+    <Button isMarginTop={true} text="Click me" />
+  </Stack>
+</Section>

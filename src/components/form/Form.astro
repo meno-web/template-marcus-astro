@@ -1,0 +1,46 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  action: { type: "string", default: "" },
+  method: { type: "select", default: "post", options: ["get", "post"] },
+  submitHandler: {
+    type: "select",
+    default: "native",
+    options: ["native", "fetch"]
+  },
+  successMessage: { type: "string", default: "Form submitted successfully!" },
+  errorMessage: {
+    type: "string",
+    default: "Something went wrong. Please try again."
+  }
+});
+const {
+  action,
+  method,
+  submitHandler,
+  successMessage,
+  errorMessage,
+  class: className,
+} = __props;
+
+const __meno = { category: "forms" };
+---
+<form class={style({
+    base: { display: "flex", flexDirection: "column", gap: "16px" },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} action={action || undefined} method={method || undefined} data-submit-handler={submitHandler || undefined} data-success-message={successMessage || undefined} data-error-message={errorMessage || undefined}>
+  <slot />
+  <div class={style({
+      base: {
+        display: "none",
+        padding: "12px 16px",
+        borderRadius: "6px",
+        marginTop: "8px",
+        fontSize: "14px"
+      },
+      tablet: {},
+      mobile: {}
+    }, __props)} data-form-message="true" />
+</form>

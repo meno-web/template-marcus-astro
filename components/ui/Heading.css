@@ -1,9 +1,0 @@
-h1 .custom-span,
-h2 .custom-span,
-h3 .custom-span,
-h4 .custom-span,
-h5 .custom-span { color: var(--h-span); }
-
-[is-mb0], [isMb0] {
-  margin-bottom: 0 !important;
-}

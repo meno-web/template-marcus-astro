@@ -1,0 +1,63 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import BulletItem from '../ui/BulletItem.astro';
+import BulletList from '../ui/BulletList.astro';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import Section from '../ui/Section.astro';
+import Spacer from '../ui/Spacer.astro';
+import SplitContent from '../ui/SplitContent.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  title: {
+    type: "rich-text",
+    default: "A powerful tool designed for your workflow"
+  },
+  text: {
+    type: "rich-text",
+    default: "Streamline your process with an intuitive interface that puts you in control. Focus on what matters while we handle the complexity."
+  },
+  image: { type: "file", default: "/images/placeholder-img.webp" },
+  items: {
+    type: "list",
+    itemSchema: { text: { type: "string", default: "List item" } },
+    default: [
+      {
+        text: "Intuitive interface — Get started quickly without a steep learning curve"
+      },
+      {
+        text: "Real-time collaboration — Work together with your team seamlessly"
+      },
+      {
+        text: "Flexible and extensible — Adapt the platform to fit your specific needs"
+      }
+    ]
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { title, text, image, items, theme, class: className } = __props;
+---
+<Section text="Key benefit — A short description of what makes this feature stand out" theme={theme} class={style({}, __props, { root: true })}>
+  <SplitContent>
+    <div class={style({ display: "flex", flexDirection: "column", justifyContent: "center" }, __props)}>
+      <Heading text={title} size="2" tag="2" align="left" fade="0" />
+      {text && (
+        <Text text={text} fade="0.2" />
+      )}
+      <Spacer size="24" />
+      {items.length && (
+        <BulletList>
+          {list(items).map((item, itemIndex) => (
+            <BulletItem text={item.text} fade={0.4+itemIndex*0.2} />
+          ))}
+        </BulletList>
+      )}
+    </div>
+    <div class={style({
+        base: { display: "flex", alignItems: "flex-start" },
+        tablet: {},
+        mobile: {}
+      }, __props)}><Image image={image} objectFit="contain" height="auto" border={true} rounded="large" fade="0.4" /></div>
+  </SplitContent>
+</Section>

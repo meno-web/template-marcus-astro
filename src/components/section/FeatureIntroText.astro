@@ -1,0 +1,30 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Heading from '../ui/Heading.astro';
+import Section from '../ui/Section.astro';
+import Stack from '../ui/Stack.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "Features" },
+  title: { type: "rich-text", default: "Everything you need to succeed" },
+  text: {
+    type: "rich-text",
+    default: "Our platform provides all the tools and features you need to build amazing products."
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { subtitle, title, text, theme, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <Stack vertical="top" horizontal="center">
+    {subtitle && (
+      <Subtitle text={subtitle} align="center" fade="0" />
+    )}
+    <Heading text={title} maxWidth="640px" align="center" size="2" tag="2" fade="0.2" />
+    {text && (
+      <Text text={text} size="large" align="center" maxWidth="580px" fade="0.4" />
+    )}
+  </Stack>
+</Section>

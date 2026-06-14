@@ -1,0 +1,115 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import Grid from '../ui/Grid.astro';
+import Heading from '../ui/Heading.astro';
+import Icon from '../ui/Icon.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "Features" },
+  title: { type: "rich-text", default: "Everything you need to launch" },
+  text: {
+    type: "rich-text",
+    default: "This template comes packed with ready-to-use sections. Customize them to match your brand."
+  },
+  columns: { type: "select", default: "3", options: ["2", "3", "4", "6"] },
+  theme: { type: "select", default: "light", enumName: "theme" },
+  items: {
+    type: "list",
+    itemSchema: {
+      icon: { type: "select", default: "zap", enumName: "icons" },
+      title: { type: "string", default: "Feature" },
+      text: { type: "rich-text" }
+    },
+    default: [
+      {
+        icon: "zap",
+        title: "Responsive Design",
+        text: "Every section adapts beautifully to desktop, tablet, and mobile screens."
+      },
+      {
+        icon: "settings",
+        title: "Easy to Customize",
+        text: "Change colors, fonts, spacing, and content directly in the visual editor."
+      },
+      {
+        icon: "shield",
+        title: "Production Ready",
+        text: "Clean markup, fast load times, and SEO-friendly structure out of the box."
+      },
+      {
+        icon: "headphones",
+        title: "40+ Components",
+        text: "Hero sections, feature grids, testimonials, pricing cards, and more included."
+      },
+      {
+        icon: "trending-up",
+        title: "Scalable Structure",
+        text: "Add pages, sections, and components as your site grows."
+      },
+      {
+        icon: "bar-chart-3",
+        title: "CMS Built In",
+        text: "Manage blog posts, team members, and dynamic content with collections."
+      }
+    ]
+  }
+});
+const {
+  subtitle,
+  title,
+  text,
+  columns,
+  theme,
+  items,
+  class: className,
+} = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SectionHeader isCenter={true} maxWidth="640px">
+    {subtitle && (
+      <Subtitle text={subtitle} align="center" fade="0" />
+    )}
+    <Heading text={title} align="center" size="2" tag="2" fade="0.2" />
+    {text && (
+      <Text text={text} size="large" align="center" maxWidth="460px" variant="default" fade="0.4" />
+    )}
+  </SectionHeader>
+  <Grid columns={columns} fade="0.4">
+    {list(items).map((item, itemIndex) => (
+      <div class={style({
+          base: {
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            textAlign: "center",
+            padding: "32px 24px",
+            background: "var(--bg-100)",
+            borderRadius: "0px"
+          },
+          tablet: {},
+          mobile: {}
+        }, __props, { label: "Card" })}>
+        <div class={style({
+            base: {
+              width: "64px",
+              height: "64px",
+              backgroundColor: "var(--accent)",
+              borderRadius: "2px",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              marginBottom: "20px"
+            },
+            tablet: {},
+            mobile: {}
+          }, __props, { label: "Icon Wrap" })}><Icon size={24} icon={item.icon} /></div>
+        <Heading text={item.title} size="5" tag="3" align="center" />
+        <Text text={item.text} size="small" variant="light" align="center" />
+      </div>
+    ))}
+  </Grid>
+</Section>

@@ -1,0 +1,164 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import { Embed } from 'meno-astro/components';
+
+const __props = resolveProps(Astro, {
+  modalId: { type: "string", default: "modal" },
+  isOpen: { type: "boolean", default: false },
+  fade: { type: "string", default: "" }
+});
+const { modalId, isOpen, fade, class: className } = __props;
+---
+<div class={style({
+    base: {
+      position: "fixed",
+      top: "0",
+      left: "0",
+      width: "100%",
+      height: "100%",
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "center",
+      zIndex: "1000",
+      opacity: "0",
+      visibility: "hidden",
+      transition: "opacity 0.3s ease, visibility 0.3s ease"
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, {
+    root: true,
+    interactive: [
+      {
+        name: "is open",
+        postfix: ".is-open",
+        style: { base: { visibility: "visible", opacity: "1" } },
+        previewProp: "isOpen"
+      }
+    ],
+    label: "Modal"
+  })} data-modal-id={modalId || undefined} fade={fade || undefined}>
+  <div class={style({
+      base: {
+        position: "absolute",
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0,0,0,0.2)"
+      },
+      tablet: {},
+      mobile: {}
+    }, __props, { label: "Backdrop" })} data-el="backdrop" />
+  <Embed html={`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`} class={style({
+      base: {
+        position: "absolute",
+        top: "16px",
+        right: "16px",
+        zIndex: "1001",
+        color: "var(--text)",
+        width: "40px",
+        height: "40px",
+        cursor: "pointer",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "0",
+        backgroundColor: "var(--bg)",
+        borderRadius: " 4px",
+        transition: "background-color .2s"
+      },
+      tablet: {},
+      mobile: {}
+    }, __props, {
+      interactive: [
+        {
+          name: "on hover",
+          postfix: ":hover",
+          style: { base: { backgroundColor: "var(--bg-100)" } }
+        }
+      ],
+      label: "Close Button"
+    })} data-el="close-btn" />
+  <slot />
+</div>
+
+
+<script define:vars={{ modalId, isOpen, fade }}>
+(function(el, props){
+// Modal.js - Generic modal component with defineVars: true
+// el and props are automatically available
+
+const closeBtn = el.querySelector('[data-el="close-btn"]');
+const backdrop = el.querySelector('[data-el="backdrop"]');
+const mId = props.modalId || 'modal';
+
+// Lazy video loading - only load iframe when modal opens (prevents third-party cookies on page load)
+const loadVideo = () => {
+  const videoContainer = el.querySelector('[data-video-src]');
+  if (videoContainer && !videoContainer.querySelector('iframe')) {
+    const src = videoContainer.getAttribute('data-video-src');
+    const iframe = document.createElement('iframe');
+    iframe.src = src;
+    iframe.frameBorder = '0';
+    iframe.allow = 'autoplay; fullscreen; picture-in-picture';
+    iframe.allowFullscreen = true;
+    iframe.style.cssText = 'width: 100%; height: 100%; display: block; border: none;';
+    videoContainer.appendChild(iframe);
+  }
+};
+
+const unloadVideo = () => {
+  const videoContainer = el.querySelector('[data-video-src]');
+  if (videoContainer) {
+    const iframe = videoContainer.querySelector('iframe');
+    if (iframe) {
+      iframe.remove();
+    }
+  }
+};
+
+// Create a handler function for opening the modal
+const openModalHandler = (eventName) => {
+  return (event) => {
+    el.classList.add('is-open');
+    loadVideo();
+  };
+};
+
+// Listen for ID-specific open-modal custom event
+const idSpecificEventName = `open-modal-${mId}`;
+el.addEventListener(idSpecificEventName, openModalHandler(idSpecificEventName));
+
+// Also listen for generic open-modal event as fallback
+el.addEventListener('open-modal', openModalHandler('open-modal'));
+
+// Handle close button click
+closeBtn?.addEventListener('click', (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  el.classList.remove('is-open');
+  unloadVideo();
+});
+
+// Close modal when clicking on backdrop (Filter)
+backdrop?.addEventListener('click', (event) => {
+  event.preventDefault();
+  event.stopPropagation();
+  el.classList.remove('is-open');
+  unloadVideo();
+});
+
+// ======================================
+// Attribute-based trigger system (uses document-level delegation for timing safety)
+// ======================================
+document.addEventListener('click', (event) => {
+  const trigger = event.target.closest(`[open-modal="${mId}"]`);
+  if (trigger) {
+    event.preventDefault();
+    event.stopPropagation();
+    el.classList.add('is-open');
+    loadVideo();
+  }
+});
+
+})((function(){var s=document.currentScript,e=s&&s.previousElementSibling;while(e&&(e.nodeName==='STYLE'||e.nodeName==='SCRIPT'))e=e.previousElementSibling;return e||null;})(), { modalId, isOpen, fade });
+</script>

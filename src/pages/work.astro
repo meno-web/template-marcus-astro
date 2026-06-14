@@ -1,0 +1,40 @@
+---
+import { BaseLayout } from 'meno-astro/components';
+import Button from '../components/ui/Button.astro';
+import ButtonList from '../components/ui/ButtonList.astro';
+import CaseStudiesList from '../components/block/CaseStudiesList.astro';
+import Heading from '../components/ui/Heading.astro';
+import Layout from '../components/layout/Layout.astro';
+import PageHeaderCentered from '../components/section/PageHeaderCentered.astro';
+import Section from '../components/ui/Section.astro';
+import Stack from '../components/ui/Stack.astro';
+import Text from '../components/ui/Text.astro';
+import '../styles/theme.css';
+
+const meta = {
+  title: "Work — Marcus Cole",
+  description: "Selected films, commercials, music videos, and branded content by Marcus Cole."
+};
+---
+<BaseLayout meta={meta}>
+  <Layout>
+    <PageHeaderCentered theme="dark" subtitle="Portfolio" title={`Selected <span>work</span>`} text="A curated collection of films, commercials, music videos, and branded content — each project shaped by intentional storytelling and cinematic craft." />
+    <Section theme="muted" spaceTop="default"><CaseStudiesList /></Section>
+    <Section theme="dark" spaceTop="default">
+      <Stack vertical="top" horizontal="center">
+        <Heading text={`Let's create something <span>together</span>`} maxWidth="540px" align="center" size="1" tag="2" fade="0" />
+        {"Currently booking projects for 2026. Reach out to discuss your next film, commercial, or campaign." && (
+          <Text text="Currently booking projects for 2026. Reach out to discuss your next film, commercial, or campaign." size="large" align="center" maxWidth="450px" isMarginBottom={true} fade="0.2" />
+        )}
+        {"Start a conversation" && (
+          <ButtonList justify="center" fade="0.4">
+            <Button text="Start a conversation" link="#" variant="primary" />
+            {false && (
+              <Button text="" link="#" variant="secondary" />
+            )}
+          </ButtonList>
+        )}
+      </Stack>
+    </Section>
+  </Layout>
+</BaseLayout>

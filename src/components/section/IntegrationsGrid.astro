@@ -1,0 +1,113 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import Grid from '../ui/Grid.astro';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "Integrations" },
+  title: { type: "rich-text", default: "Works with your favorite tools" },
+  text: {
+    type: "rich-text",
+    default: "Connect with the apps you already use and love."
+  },
+  items: {
+    type: "list",
+    itemSchema: {
+      icon: { type: "file", default: "/images/placeholder-img.webp" },
+      title: { type: "string", default: "Integration" },
+      text: { type: "string", default: "Description" }
+    },
+    default: [
+      {
+        icon: "/images/placeholder-img.webp",
+        title: "Slack",
+        text: "Team communication"
+      },
+      {
+        icon: "/images/placeholder-img.webp",
+        title: "Notion",
+        text: "Documentation"
+      },
+      {
+        icon: "/images/placeholder-img.webp",
+        title: "Figma",
+        text: "Design collaboration"
+      },
+      {
+        icon: "/images/placeholder-img.webp",
+        title: "GitHub",
+        text: "Code management"
+      },
+      {
+        icon: "/images/placeholder-img.webp",
+        title: "Jira",
+        text: "Project tracking"
+      },
+      {
+        icon: "/images/placeholder-img.webp",
+        title: "Zapier",
+        text: "Automation"
+      },
+      {
+        icon: "/images/placeholder-img.webp",
+        title: "Stripe",
+        text: "Payment processing"
+      },
+      {
+        icon: "/images/placeholder-img.webp",
+        title: "Google Analytics",
+        text: "Website analytics"
+      }
+    ]
+  },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { subtitle, title, text, items, theme, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SectionHeader isCenter={true} maxWidth="600px">
+    {subtitle && (
+      <Subtitle text={subtitle} align="center" fade="0" />
+    )}
+    <Heading text={title} maxWidth="" align="center" size="2" tag="2" fade="0.2" />
+    {text && (
+      <Text text={text} size="large" align="center" maxWidth="" fade="0.4" />
+    )}
+  </SectionHeader>
+  <Grid columns="4" gap="24" fade="0.4">
+    {list(items).map((item, itemIndex) => (
+      <div class={style({
+          base: {
+            backgroundColor: "var(--surface)",
+            borderRadius: "12px",
+            padding: "24px",
+            border: "1px solid var(--border-100)",
+            textAlign: "center",
+            transition: "transform 0.2s ease, box-shadow 0.2s ease"
+          }
+        }, __props, {
+          interactive: [
+            {
+              prefix: "",
+              postfix: ":hover",
+              style: {
+                base: {
+                  transform: "translateY(-4px)",
+                  boxShadow: "0 8px 24px rgba(0, 0, 0, 0.08)"
+                }
+              }
+            }
+          ]
+        })}>
+        <div class={style({ base: { marginBottom: "16px", display: "inline-block" } }, __props)}><Image image={item.icon} alt={item.title} objectFit="contain" width="48px" height="48px" /></div>
+        <Heading text={item.title} size="6" tag="3" align="center" />
+        <Text text={item.text} size="small" variant="light" align="center" />
+      </div>
+    ))}
+  </Grid>
+</Section>

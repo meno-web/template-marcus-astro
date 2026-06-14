@@ -1,0 +1,18 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, { fade: { type: "string", default: "" } });
+const { fade, class: className } = __props;
+
+const __meno = { category: "ui" };
+---
+<div class={style({
+    base: {
+      display: "grid",
+      gap: "60px",
+      gridTemplateColumns: "1fr 1fr",
+      position: "static"
+    },
+    tablet: { gridTemplateColumns: "1fr" },
+    mobile: {}
+  }, __props, { root: true })} fade={fade || undefined}><slot /></div>

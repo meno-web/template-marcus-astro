@@ -1,0 +1,264 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import Icon from '../ui/Icon.astro';
+import QuoteText from '../ui/QuoteText.astro';
+import Section from '../ui/Section.astro';
+import Spacer from '../ui/Spacer.astro';
+
+const __props = resolveProps(Astro, {
+  items: {
+    type: "list",
+    itemSchema: {
+      quote: {
+        type: "rich-text",
+        default: "\"This product has completely transformed how we work.\""
+      },
+      avatar: {
+        type: "file",
+        default: "/images/placeholder-img.webp",
+        accept: "image/*"
+      },
+      name: { type: "string", default: "Jane Smith" },
+      role: { type: "string", default: "CEO at Company" },
+      isVisible: { type: "boolean", default: true }
+    },
+    default: [
+      {
+        quote: "\"This product has completely transformed how we work. I can't imagine going back to the old way of doing things.\"",
+        avatar: "/images/placeholder-img.webp",
+        name: "Jane Smith",
+        role: "CEO at Company",
+        isVisible: true
+      },
+      {
+        quote: "\"The best investment we've made this year. Our team productivity has increased dramatically.\"",
+        avatar: "/images/placeholder-img.webp",
+        name: "John Doe",
+        role: "CTO at Startup",
+        isVisible: false
+      },
+      {
+        quote: "\"Outstanding support and a product that truly delivers on its promises. Highly recommended.\"",
+        avatar: "/images/placeholder-img.webp",
+        name: "Sarah Johnson",
+        role: "Director at Agency",
+        isVisible: false
+      }
+    ]
+  },
+  autoplay: { type: "boolean", default: false },
+  loop: { type: "boolean", default: true },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { items, autoplay, loop, theme, class: className } = __props;
+---
+<Section theme={theme} spaceTop="default" maxWidth="900" class={style({}, __props, { root: true })}>
+  <div class={style({ base: { position: "relative" } }, __props, { label: "Testimonial Slider" })} data-el="slider">
+    <div class={style({ base: { position: "relative" } }, __props, { label: "Slides" })} data-el="slides">
+      {list(items).map((item, itemIndex) => (
+        {item.isVisible || !isEditorMode && (
+          <div class={style({ base: { display: "flex", flexDirection: "column", alignItems: "center" } }, __props, { label: "Slide" })} data-el="slide">
+            <blockquote class={style({ base: { margin: "0", padding: "0" } }, __props)}><QuoteText text={item.quote} maxWidth="100%" align="center" size="2" tag="3" fade="0" /></blockquote>
+            <Spacer size="32" />
+            <div class={style({ base: { display: "flex", alignItems: "center", gap: "16px" } }, __props)}>
+              <img class={style({
+                  base: {
+                    width: "56px",
+                    height: "56px",
+                    borderRadius: "50%",
+                    objectFit: "cover"
+                  }
+                }, __props)} src={item.avatar || undefined} alt={item.name || undefined} />
+              <div>
+                <div class={style({ base: { fontWeight: "600", color: "var(--text)" } }, __props)}>{item.name}</div>
+                <div class={style({ base: { color: "var(--text-100)", fontSize: "14px" } }, __props)}>{item.role}</div>
+              </div>
+            </div>
+          </div>
+        )}
+      ))}
+    </div>
+    <div class={style({
+        base: {
+          display: "flex",
+          gap: "8px",
+          justifyContent: "center",
+          marginTop: "24px"
+        }
+      }, __props, { label: "Navigation" })} data-el="nav">
+      <button class={style({
+          base: {
+            width: "44px",
+            height: "44px",
+            borderRadius: "50%",
+            backgroundColor: "var(--bg)",
+            border: "1px solid var(--border)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            transition: "background-color 0.2s ease, border-color 0.2s ease",
+            padding: "0",
+            color: "var(--text)",
+            paddingRight: "2px"
+          }
+        }, __props, {
+          interactive: [
+            {
+              postfix: ":hover",
+              style: {
+                base: { backgroundColor: "var(--bg-100)", borderColor: "var(--text)" }
+              }
+            }
+          ],
+          label: "Prev button"
+        })} data-el="prev" aria-label="Previous testimonial"><Icon icon="chevron-left" size={20} /></button>
+      <button class={style({
+          base: {
+            width: "44px",
+            height: "44px",
+            borderRadius: "50%",
+            backgroundColor: "var(--bg)",
+            border: "1px solid var(--border)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            cursor: "pointer",
+            transition: "background-color 0.2s ease, border-color 0.2s ease",
+            padding: "0",
+            color: "var(--text)",
+            paddingLeft: "2px"
+          }
+        }, __props, {
+          interactive: [
+            {
+              postfix: ":hover",
+              style: {
+                base: { backgroundColor: "var(--bg-100)", borderColor: "var(--text)" }
+              }
+            }
+          ],
+          label: "Next button"
+        })} data-el="next" aria-label="Next testimonial"><Icon icon="chevron-right" size={20} /></button>
+    </div>
+    <div class={style({
+        base: {
+          display: "flex",
+          justifyContent: "center",
+          gap: "8px",
+          marginTop: "24px"
+        }
+      }, __props, { label: "Pagination" })} data-el="pagination" />
+  </div>
+</Section>
+
+
+<style is:global>
+.ts-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.ts-dot.is-active {
+  background: var(--text);
+}
+.is-initialized [data-el="slide"] {
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  transform: translateY(16px);
+  transition: opacity 0.5s ease, transform 0.5s ease;
+}
+.is-initialized [data-el="slide"].is-active {
+  opacity: 1;
+  position: relative;
+  transform: translateY(0);
+}
+
+</style>
+
+<script define:vars={{ items, autoplay, loop, theme }}>
+(function(el, props){
+var slides = el.querySelectorAll('[data-el="slide"]');
+var prevBtn = el.querySelector('[data-el="prev"]');
+var nextBtn = el.querySelector('[data-el="next"]');
+var pagination = el.querySelector('[data-el="pagination"]');
+
+if (!slides.length) return;
+
+var current = 0;
+var total = slides.length;
+var loop = props.loop !== false;
+var autoplay = props.autoplay === true;
+var autoplayTimer;
+
+function goTo(index) {
+  if (index === current) return;
+  slides[current].classList.remove('is-active');
+  current = index;
+  slides[current].classList.add('is-active');
+  updateDots();
+}
+
+function next() {
+  var idx = current + 1;
+  if (idx >= total) idx = loop ? 0 : total - 1;
+  goTo(idx);
+}
+
+function prev() {
+  var idx = current - 1;
+  if (idx < 0) idx = loop ? total - 1 : 0;
+  goTo(idx);
+}
+
+function buildDots() {
+  if (!pagination) return;
+  pagination.innerHTML = '';
+  for (var i = 0; i < total; i++) {
+    var dot = document.createElement('button');
+    dot.className = 'ts-dot';
+    dot.setAttribute('aria-label', 'Go to testimonial ' + (i + 1));
+    (function(idx) {
+      dot.addEventListener('click', function() { goTo(idx); resetAutoplay(); });
+    })(i);
+    pagination.appendChild(dot);
+  }
+}
+
+function updateDots() {
+  if (!pagination) return;
+  var dots = pagination.querySelectorAll('.ts-dot');
+  dots.forEach(function(dot, i) {
+    dot.classList.toggle('is-active', i === current);
+  });
+}
+
+function resetAutoplay() {
+  if (!autoplay) return;
+  clearInterval(autoplayTimer);
+  autoplayTimer = setInterval(next, 4000);
+}
+
+// Init
+el.classList.add('is-initialized');
+slides[0].classList.add('is-active');
+buildDots();
+updateDots();
+
+if (prevBtn) prevBtn.addEventListener('click', function() { prev(); resetAutoplay(); });
+if (nextBtn) nextBtn.addEventListener('click', function() { next(); resetAutoplay(); });
+
+if (autoplay) {
+  autoplayTimer = setInterval(next, 4000);
+}
+
+})((function(){var s=document.currentScript,e=s&&s.previousElementSibling;while(e&&(e.nodeName==='STYLE'||e.nodeName==='SCRIPT'))e=e.previousElementSibling;return e||null;})(), { items, autoplay, loop, theme });
+</script>

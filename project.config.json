@@ -88,5 +88,5 @@
       }
     ]
   },
-  "name": "template-marcus-astro"
+  "format": "astro"
 }

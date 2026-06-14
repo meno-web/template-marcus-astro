@@ -1,3 +1,7 @@
 dist/
 rendered-websites/
 .meno/selection.json
+# meno-astro build + deploy artifacts
+node_modules/
+.astro/
+.wrangler/

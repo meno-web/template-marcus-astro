@@ -1,0 +1,56 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Button from './Button.astro';
+
+const __props = resolveProps(Astro, {
+  justify: {
+    type: "select",
+    default: "center",
+    options: ["center", "flex-start", "flex-end", "space-between"]
+  },
+  marginTop: {
+    type: "select",
+    default: "default",
+    options: ["default", "large", "none"]
+  },
+  fade: { type: "string", default: "" }
+});
+const { justify, marginTop, fade, class: className } = __props;
+---
+<div class={style({
+    base: {
+      display: "flex",
+      flexDirection: "row",
+      gap: "16px",
+      justifyContent: {
+        _mapping: true,
+        prop: "justify",
+        values: {
+          center: "center",
+          "flex-start": "flex-start",
+          "flex-end": "flex-end",
+          "space-between": "space-between"
+        }
+      },
+      marginTop: {
+        _mapping: true,
+        prop: "marginTop",
+        values: {
+          center: "32px",
+          "flex-start": "",
+          "flex-end": "",
+          "space-between": "",
+          default: "28px",
+          large: "64px",
+          none: "0"
+        }
+      }
+    },
+    tablet: {},
+    mobile: { flexDirection: "column", alignItems: "center" }
+  }, __props, { root: true })} fade={fade || undefined}>
+  <slot>
+    <Button text="Get started" link="" variant="primary" />
+    <Button text="Learn more" link="" variant="secondary" isMarginTop={false} />
+  </slot>
+</div>

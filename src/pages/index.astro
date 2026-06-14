@@ -1,0 +1,132 @@
+---
+import { BaseLayout } from 'meno-astro/components';
+import Button from '../components/ui/Button.astro';
+import ButtonList from '../components/ui/ButtonList.astro';
+import CTACentered from '../components/section/CTACentered.astro';
+import CaseStudiesList from '../components/block/CaseStudiesList.astro';
+import FaqAccordion from '../components/section/FaqAccordion.astro';
+import FeatureIconGrid from '../components/section/FeatureIconGrid.astro';
+import Heading from '../components/ui/Heading.astro';
+import Image from '../components/ui/Image.astro';
+import Layout from '../components/layout/Layout.astro';
+import RotateAnimation from '../components/ui/RotateAnimation.astro';
+import Section from '../components/ui/Section.astro';
+import SectionHeader from '../components/ui/SectionHeader.astro';
+import SplitContent from '../components/ui/SplitContent.astro';
+import Stack from '../components/ui/Stack.astro';
+import Subtitle from '../components/ui/Subtitle.astro';
+import TestimonialSlider from '../components/section/TestimonialSlider.astro';
+import Text from '../components/ui/Text.astro';
+import '../styles/theme.css';
+
+const meta = {
+  title: "Marcus Cole — Filmmaker & Cinematographer",
+  description: "Cinematography, directing, and visual storytelling. Filmography and selected works by Marcus Cole."
+};
+---
+<BaseLayout meta={meta}>
+  <Layout>
+    <Section theme="dark" spaceTop="small" cropped={true}>
+      <RotateAnimation />
+      <SplitContent>
+        <Stack vertical="center" horizontal="left">
+          <Subtitle text="Filmmaker & Cinematographer" align="left" fade="0" />
+          <Heading text={`<span>Telling stories through light and motion</span>`} maxWidth="100%" align="left" size="1" tag="2" fade="0.2" />
+          {"Cinematography, directing, and visual storytelling for films, commercials, and brands that demand authenticity." && (
+            <Text text="Cinematography, directing, and visual storytelling for films, commercials, and brands that demand authenticity" size="large" align="left" maxWidth="100%" fade="0.4" />
+          )}
+          <ButtonList fade="0.6">
+            <div open-modal="reel"><Button text="Watch the reel" link="" variant="primary" /></div>
+            <Button text="Get in touch" link={{ href: "/contact" }} variant="secondary" isMarginTop={false} />
+          </ButtonList>
+        </Stack>
+        <Image image="/images/pasted-image-1773394322253.webp" rounded="large" fade="0.4" />
+      </SplitContent>
+    </Section>
+    <Section theme="muted" spaceTop="default">
+      <SectionHeader isCenter={true} maxWidth="600px">
+        {"Selected Work" && (
+          <Subtitle text="Selected Work" align="center" fade="0" />
+        )}
+        <Heading text={`Recent <span>projects</span>`} maxWidth="" align="center" size="2" tag="2" fade="0.2" />
+        {"A selection of films, commercials, and music videos from recent collaborations." && (
+          <Text text="A selection of films, commercials, and music videos from recent collaborations." size="large" align="center" maxWidth="" fade="0.4" />
+        )}
+      </SectionHeader>
+      <CaseStudiesList />
+    </Section>
+    <FeatureIconGrid theme="dark" subtitle="Expertise" title="Craft at every frame" text="From pre-production to final grade, every project is shaped by intentional storytelling and cinematic precision." items={[
+        {
+          icon: "video",
+          title: "Cinematography",
+          text: "Capturing emotion and atmosphere through intentional camera work, lighting, and composition."
+        },
+        {
+          icon: "clapperboard",
+          title: "Directing",
+          text: "Guiding performances and shaping the visual narrative from concept through final cut."
+        },
+        {
+          icon: "palette",
+          title: "Color Grading",
+          text: "Setting the mood and visual tone with precise color work tailored to each project's story."
+        },
+        {
+          icon: "film",
+          title: "Commercial Work",
+          text: "Brand films, product spots, and campaign content built to connect with audiences."
+        },
+        {
+          icon: "music",
+          title: "Music Videos",
+          text: "Visual storytelling that amplifies the artist's vision and brings tracks to life on screen."
+        },
+        {
+          icon: "monitor",
+          title: "Post-Production",
+          text: "Editing, sound design, and finishing that bring raw footage into a polished final piece."
+        }
+      ]} />
+    <TestimonialSlider theme="muted" items={[
+        {
+          quote: "Working with Marcus was a turning point for our brand. He doesn't just shoot — he listens, understands, and translates your vision into something cinematic.",
+          avatar: "/images/pasted-image-1773395950332.webp",
+          name: "Elena Ruiz",
+          role: "Brand Manager, Patagonia",
+          isVisible: true
+        },
+        {
+          quote: "Marcus has an incredible ability to find beauty in the raw and unscripted. Our documentary wouldn't be what it is without his eye and patience.",
+          avatar: "/images/pasted-image-1773403817119.webp",
+          name: "David Okafor",
+          role: "Producer, A24"
+        },
+        {
+          quote: "From pre-production to final color, Marcus was hands-on and deeply invested. He treats every project like it's his own, and it shows in the work.",
+          avatar: "/images/pasted-image-1773403864245.webp",
+          name: "Mia Torres",
+          role: "Director, Pulse Films"
+        }
+      ]} />
+    <FaqAccordion theme="light" subtitle="Process" title="How we work together" text="Common questions about collaboration, timelines, and what to expect when working with Marcus." items={[
+        {
+          title: "What types of projects do you take on?",
+          text: "Narrative films, documentaries, commercials, music videos, and branded content. If it involves a camera and a story, let's talk.",
+          isOpen: true
+        },
+        {
+          title: "What does your process look like?",
+          text: "It starts with a conversation about your vision. From there we move into pre-production planning, production, and post — I'm involved at every stage to ensure a cohesive result."
+        },
+        {
+          title: "How far in advance should I book?",
+          text: "Ideally 4–8 weeks for larger productions. Smaller projects can sometimes come together faster depending on availability."
+        },
+        {
+          title: "Do you work with brands and agencies?",
+          text: "Yes. I regularly collaborate with creative agencies and brands on campaign films, product launches, and social content."
+        }
+      ]} />
+    <CTACentered theme="muted" title={`Let's bring your story <span>to life</span>`} text="Currently booking projects for 2026. Reach out to discuss your next film, commercial, or campaign." buttonText="Start a conversation" secondaryButtonText="View filmography" buttonLink={{ href: "/contact" }} secondaryButtonLink={{ href: "/work" }} />
+  </Layout>
+</BaseLayout>

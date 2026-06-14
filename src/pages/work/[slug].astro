@@ -1,0 +1,41 @@
+---
+import { getCollection } from 'astro:content';
+import { BaseLayout } from 'meno-astro/components';
+import CaseStudyBody from '../../components/section/CaseStudyBody.astro';
+import Layout from '../../components/layout/Layout.astro';
+import '../../styles/theme.css';
+
+export async function getStaticPaths() {
+  const entries = await getCollection("case-studies");
+  return entries.map((entry) => ({
+    params: { slug: entry.data.slug ?? entry.id },
+    props: { cms: entry.data },
+  }));
+}
+
+const { cms } = Astro.props;
+
+const meta = {
+  title: "{{cms.title}}",
+  description: "{{cms.description}}",
+  source: "cms",
+  cms: {
+    id: "case-studies",
+    name: "Case Studies",
+    slugField: "slug",
+    urlPattern: "/work/{{slug}}",
+    fields: {
+      title: { type: "string", required: true, label: "Title" },
+      slug: { type: "string", required: true, label: "URL Slug" },
+      description: { type: "text", label: "Description" },
+      image: { type: "image", label: "Cover Image" },
+      content: { type: "rich-text", label: "Content" },
+      category: { type: "string", label: "Category" },
+      publishedAt: { type: "date", label: "Publish Date" }
+    }
+  }
+};
+---
+<BaseLayout meta={meta}>
+  <Layout cms={cms}><CaseStudyBody cms={cms} /></Layout>
+</BaseLayout>

@@ -1,0 +1,27 @@
+---
+import { i18n, resolveProps, style } from 'meno-astro';
+import Heading from '../ui/Heading.astro';
+import Image from '../ui/Image.astro';
+import RichText from '../ui/RichText.astro';
+import Section from '../ui/Section.astro';
+import Spacer from '../ui/Spacer.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const { theme, class: className } = __props;
+const { cms } = Astro.props;
+---
+<Section theme={theme} cropped={false} cms={cms} class={style({}, __props, { root: true })}>
+  <article class={style({ base: { maxWidth: "720px", margin: "0 auto" } }, __props)}>
+    <header class={style({ base: { marginBottom: "32px" } }, __props)}>
+      <Image aspectRatio="16/6" image={i18n(cms.featuredImage)} rounded="medium" fade="0" cms={cms} />
+      <Spacer size="32" cms={cms} />
+      <Heading text={i18n(cms.title)} size="2" tag="1" fade="0.2" cms={cms} />
+      <Text text={i18n(cms.publishedAt)} size="small" variant="lighter" fade="0.4" cms={cms} />
+    </header>
+    <Spacer size="32" cms={cms} />
+    <RichText cms={cms} />
+  </article>
+</Section>

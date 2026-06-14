@@ -1,0 +1,59 @@
+---
+import { list, resolveProps, style } from 'meno-astro';
+import { Link } from 'meno-astro/components';
+
+const __props = resolveProps(Astro, {
+  items: {
+    type: "list",
+    itemSchema: {
+      label: { type: "string", default: "Page" },
+      href: { type: "link", default: { href: "#" } }
+    },
+    default: [
+      { label: "Home", href: { href: "/" } },
+      { label: "Features", href: { href: "#features" } },
+      { label: "Detail", href: { href: "#" } }
+    ]
+  },
+  fade: { type: "string", default: "" }
+});
+const { items, fade, class: className } = __props;
+---
+<nav class={style({}, __props, { root: true, label: "breadcrumbs" })} aria-label="Breadcrumbs" fade={fade || undefined}>
+  <ol class={style({
+      base: {
+        display: "flex",
+        flexWrap: "wrap",
+        alignItems: "center",
+        gap: "12px",
+        listStyle: "none",
+        padding: "0",
+        margin: "0"
+      },
+      tablet: {},
+      mobile: {}
+    }, __props)}>
+    {list(items).map((item, itemIndex, itemArr) => (
+      <li class={style({ base: { display: "flex", alignItems: "center", gap: "4px" } }, __props)}>
+        <Link href={item.href} class={style({
+            base: {
+              color: "var(--text-100)",
+              fontSize: "var(--ts-fs)",
+              textDecoration: "none"
+            }
+          }, __props, {
+            interactive: [
+              {
+                name: "on hover",
+                postfix: ":hover",
+                style: { base: { color: "var(--text)" } }
+              }
+            ]
+          })}>{item.label}</Link>
+        {(itemIndex === itemArr.length - 1) && (
+          <span class={style({ base: { color: "var(--text-100)", fontSize: "var(--ts-fs)" } }, __props)}>{" / "}</span>
+        )}
+      </li>
+    ))}
+  </ol>
+</nav>

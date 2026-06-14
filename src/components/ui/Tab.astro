@@ -1,0 +1,117 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Heading from './Heading.astro';
+import Stack from './Stack.astro';
+import TabButton from './TabButton.astro';
+import TabButtonsList from './TabButtonsList.astro';
+import TabPanel from './TabPanel.astro';
+import TabPanelsList from './TabPanelsList.astro';
+import Text from './Text.astro';
+
+const __props = resolveProps(Astro, {
+  activeTab: { type: "number", default: "0" },
+  fade: { type: "string", default: "" }
+});
+const { activeTab, fade, class: className } = __props;
+---
+<div class={style({ base: { width: "100%" } }, __props, { root: true })} data-active-tab={activeTab || undefined} fade={fade || undefined}>
+  <slot>
+    <TabButtonsList>
+      <TabButton isActive={true} text="Tab 1" />
+      <TabButton text="Tab 2" />
+    </TabButtonsList>
+    <TabPanelsList>
+      <TabPanel isOpen={true}>
+        <Stack vertical="top" horizontal="center">
+          <Heading text="Tab 1" size="2" />
+          <Text />
+        </Stack>
+      </TabPanel>
+      <TabPanel isOpen={false}>
+        <Stack vertical="top" horizontal="center">
+          <Heading text="Tab 2" size="2" />
+          <Text />
+        </Stack>
+      </TabPanel>
+    </TabPanelsList>
+  </slot>
+</div>
+
+
+<script define:vars={{ activeTab, fade }}>
+(function(el, props){
+// Tab.js - Main tab container managing state and interactions
+
+function initTabs() {
+  const { activeTab } = props;
+  
+  // Find all tab buttons and panels within this component
+  const tabButtons = el.querySelectorAll('[data-tab-button]');
+  const tabPanels = el.querySelectorAll('[data-tab-panel]');
+  
+  if (tabButtons.length === 0 || tabPanels.length === 0) return;
+  
+  // Set initial active tab from prop
+  const activeIndex = parseInt(activeTab) || 0;
+  
+  // Update data attribute for CSS targeting
+  el.setAttribute('data-active-tab', activeIndex);
+  
+  // Activate the correct tab
+  activateTab(activeIndex, tabButtons, tabPanels);
+  
+  // Add click handlers
+  tabButtons.forEach((button, index) => {
+    button.addEventListener('click', () => {
+      activateTab(index, tabButtons, tabPanels);
+      el.setAttribute('data-active-tab', index);
+      el.dispatchEvent(new CustomEvent('tab-changed', {
+        detail: { tabIndex: index },
+        bubbles: true
+      }));
+    });
+  });
+  
+  // Add keyboard navigation
+  tabButtons.forEach((button, index) => {
+    button.addEventListener('keydown', (e) => {
+      let targetIndex = index;
+      
+      if (e.key === 'ArrowLeft') {
+        e.preventDefault();
+        targetIndex = index === 0 ? tabButtons.length - 1 : index - 1;
+      } else if (e.key === 'ArrowRight') {
+        e.preventDefault();
+        targetIndex = index === tabButtons.length - 1 ? 0 : index + 1;
+      } else if (e.key === 'Home') {
+        e.preventDefault();
+        targetIndex = 0;
+      } else if (e.key === 'End') {
+        e.preventDefault();
+        targetIndex = tabButtons.length - 1;
+      }
+      
+      if (targetIndex !== index) {
+        activateTab(targetIndex, tabButtons, tabPanels);
+        el.setAttribute('data-active-tab', targetIndex);
+        tabButtons[targetIndex].focus();
+      }
+    });
+  });
+}
+
+function activateTab(index, buttons, panels) {
+  // Deactivate all
+  buttons.forEach(btn => btn.classList.remove('is-active'));
+  panels.forEach(panel => panel.classList.remove('is-active'));
+  
+  // Activate selected
+  if (buttons[index]) buttons[index].classList.add('is-active');
+  if (panels[index]) panels[index].classList.add('is-active');
+}
+
+// Initialize immediately for editor and build
+initTabs();
+
+})((function(){var s=document.currentScript,e=s&&s.previousElementSibling;while(e&&(e.nodeName==='STYLE'||e.nodeName==='SCRIPT'))e=e.previousElementSibling;return e||null;})(), { activeTab, fade });
+</script>

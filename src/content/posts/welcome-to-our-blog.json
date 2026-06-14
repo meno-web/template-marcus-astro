@@ -1,0 +1,116 @@
+{
+  "_id": "welcome-to-our-blog",
+  "_filename": "welcome-to-our-blog",
+  "_createdAt": "2026-01-15T10:00:00.000Z",
+  "_updatedAt": "2026-03-13T10:00:00.000Z",
+  "title": "Why Every Frame Is a Decision",
+  "slug": "welcome-to-our-blog",
+  "excerpt": "A look at the intentional choices behind cinematography — from lens selection to lighting setups — and why each frame matters more than you think.",
+  "content": {
+    "type": "doc",
+    "content": [
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "People often talk about filmmaking as storytelling, and that's true — but the story isn't just in the script. It's in the way light falls across a face, the focal length that separates a subject from their surroundings, and the color temperature that tells you whether a moment feels warm or clinical. Every frame is a stack of deliberate decisions."
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": null,
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "The Lens Shapes the Story"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "A wide-angle lens doesn't just show more of the room — it stretches perspective, creates tension, makes spaces feel larger or more distorted. A long lens compresses depth, isolates your subject, and draws the viewer into an intimate moment. These aren't technical choices. They're emotional ones. Before I pick up a camera, I ask myself: what should the audience feel right now?"
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": null,
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Lighting as Language"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "I've spent entire prep days working through lighting setups for a single scene. Hard light for confrontation, soft diffusion for vulnerability, practical sources for authenticity. The best lighting is the kind audiences never consciously notice — it just makes them lean in. On a recent documentary shoot, we worked almost entirely with available light, shaping it with negative fill and bounce. The result felt raw and honest, which was exactly what the story needed."
+          }
+        ]
+      },
+      {
+        "type": "heading",
+        "attrs": {
+          "textAlign": null,
+          "level": 2
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Color Tells You Where You Are"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "Color grading is where everything comes together. It's not about slapping a preset on footage — it's about creating a visual world that supports the narrative. Desaturated tones for a gritty short film, warm golden hues for nostalgia, cool blues for isolation. I approach the grade the same way I approach a shoot: what does this moment need to communicate?"
+          }
+        ]
+      },
+      {
+        "type": "paragraph",
+        "attrs": {
+          "textAlign": null
+        },
+        "content": [
+          {
+            "type": "text",
+            "text": "This is what I'll be writing about here — the craft behind the camera, the choices that shape what you see on screen, and the process of turning a vision into something real."
+          }
+        ]
+      }
+    ]
+  },
+  "featuredImage": "/images/pasted-image-1773415908791.webp",
+  "publishedAt": "2026-01-15",
+  "_url": "/blog/welcome-to-our-blog"
+}

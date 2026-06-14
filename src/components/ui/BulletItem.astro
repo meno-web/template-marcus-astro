@@ -1,0 +1,46 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import { Embed } from 'meno-astro/components';
+import Text from './Text.astro';
+
+const __props = resolveProps(Astro, {
+  text: { type: "rich-text", default: "List item" },
+  fade: { type: "string", default: "" }
+});
+const { text, fade, class: className } = __props;
+---
+<li class={style({
+    base: {
+      color: "var(--text)",
+      lineHeight: "1.6",
+      listStyle: "none",
+      display: "flex",
+      alignItems: "flex-start",
+      gap: "12px",
+      margin: "0"
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} fade={fade || undefined}>
+  <span class={style({
+      base: {
+        width: "28px",
+        height: "28px",
+        borderRadius: "50%",
+        backgroundColor: "var(--text)",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        minWidth: "28px"
+      },
+      tablet: {},
+      mobile: {}
+    }, __props)}>
+    <Embed html={`<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg>`} class={style({
+        base: { color: "var(--bg)", display: "flex", height: "12px" },
+        tablet: {},
+        mobile: {}
+      }, __props)} />
+  </span>
+  <Text text={text} isMarginBottom={false} />
+</li>

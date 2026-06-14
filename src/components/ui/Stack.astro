@@ -1,0 +1,48 @@
+---
+import { resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  vertical: {
+    type: "select",
+    default: "left",
+    options: ["top", "center", "bottom", "spaceBetween"]
+  },
+  horizontal: {
+    type: "select",
+    default: "left",
+    options: ["left", "center", "right", "spaceBetween"]
+  },
+  fade: { type: "string", default: "" }
+});
+const { vertical, horizontal, fade, class: className } = __props;
+
+const __meno = { category: "ui" };
+---
+<div class={style({
+    base: {
+      display: "flex",
+      flexDirection: "column",
+      justifyContent: {
+        _mapping: true,
+        prop: "vertical",
+        values: {
+          center: "center",
+          spaceBetween: "spaceBetween",
+          top: "flex-start",
+          bottom: "flex-end"
+        }
+      },
+      alignItems: {
+        _mapping: true,
+        prop: "horizontal",
+        values: {
+          left: "flex-start",
+          center: "center",
+          right: "flex-end",
+          spaceBetween: "space-between"
+        }
+      }
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} fade={fade || undefined}><slot /></div>

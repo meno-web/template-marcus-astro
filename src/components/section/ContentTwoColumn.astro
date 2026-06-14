@@ -1,0 +1,66 @@
+---
+import { resolveProps, style } from 'meno-astro';
+import Card from '../ui/Card.astro';
+import Grid from '../ui/Grid.astro';
+import Heading from '../ui/Heading.astro';
+import Icon from '../ui/Icon.astro';
+import Section from '../ui/Section.astro';
+import SectionHeader from '../ui/SectionHeader.astro';
+import Spacer from '../ui/Spacer.astro';
+import Subtitle from '../ui/Subtitle.astro';
+import Text from '../ui/Text.astro';
+
+const __props = resolveProps(Astro, {
+  subtitle: { type: "string", default: "Features" },
+  title: { type: "rich-text", default: "Learn more about our approach" },
+  text: {
+    type: "rich-text",
+    default: "We believe in transparency and sharing our process with you."
+  },
+  leftText: {
+    type: "rich-text",
+    default: "Our approach is built on years of experience and a deep understanding of what our customers need. We focus on delivering solutions that are both powerful and easy to use, ensuring that you can get started quickly without sacrificing functionality."
+  },
+  rightText: {
+    type: "rich-text",
+    default: "We're committed to continuous improvement and innovation. Our team works tirelessly to bring you new features and enhancements that help you stay ahead of the competition. Your success is our priority, and we're here to support you every step of the way."
+  },
+  leftIcon: { type: "select", default: "users", enumName: "icons" },
+  rightIcon: { type: "select", default: "eye", enumName: "icons" },
+  theme: { type: "select", default: "primary", enumName: "theme" }
+});
+const {
+  subtitle,
+  title,
+  text,
+  leftText,
+  rightText,
+  leftIcon,
+  rightIcon,
+  theme,
+  class: className,
+} = __props;
+---
+<Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
+  <SectionHeader isCenter={true} maxWidth="500px">
+    {subtitle && (
+      <Subtitle text={subtitle} fade="0" align="center" />
+    )}
+    <Heading text={title} maxWidth="400px" fade="0.2" align="center" size="2" tag="2" />
+    {text && (
+      <Text text={text} size="large" fade="0.4" align="center" maxWidth="" isMarginBottom={true} />
+    )}
+  </SectionHeader>
+  <Grid columns="2" gap="24">
+    <Card variant="default" fade="0.4">
+      <div class={style({ base: { color: "var(--text)" }, tablet: {}, mobile: {} }, __props)}><Icon icon={leftIcon} size="28" /></div>
+      <Spacer size="3" />
+      <Text text={leftText} fade="" size="default" align="left" maxWidth="100%" />
+    </Card>
+    <Card variant="default" fade="0.6">
+      <div class={style({ base: { color: "var(--text)" }, tablet: {}, mobile: {} }, __props)}><Icon icon={rightIcon} size="28" /></div>
+      <Spacer size="3" />
+      <Text text={rightText} fade="" size="default" align="left" maxWidth="100%" />
+    </Card>
+  </Grid>
+</Section>

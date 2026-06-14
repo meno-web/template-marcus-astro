@@ -1,0 +1,40 @@
+---
+import { getCollection } from 'astro:content';
+import { BaseLayout } from 'meno-astro/components';
+import BlogPostBody from '../../components/section/BlogPostBody.astro';
+import Layout from '../../components/layout/Layout.astro';
+import '../../styles/theme.css';
+
+export async function getStaticPaths() {
+  const entries = await getCollection("posts");
+  return entries.map((entry) => ({
+    params: { slug: entry.data.slug ?? entry.id },
+    props: { cms: entry.data },
+  }));
+}
+
+const { cms } = Astro.props;
+
+const meta = {
+  title: "{{cms.title}}",
+  description: "{{cms.excerpt}}",
+  source: "cms",
+  cms: {
+    id: "posts",
+    name: "Blog Posts",
+    slugField: "slug",
+    urlPattern: "/blog/{{slug}}",
+    fields: {
+      title: { type: "string", required: true, label: "Title" },
+      slug: { type: "string", required: true, label: "URL Slug" },
+      excerpt: { type: "text", label: "Excerpt" },
+      content: { type: "rich-text", label: "Content" },
+      featuredImage: { type: "image", label: "Featured Image" },
+      publishedAt: { type: "date", label: "Publish Date" }
+    }
+  }
+};
+---
+<BaseLayout meta={meta}>
+  <Layout cms={cms}><BlogPostBody cms={cms} /></Layout>
+</BaseLayout>

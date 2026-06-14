@@ -1,0 +1,71 @@
+---
+import { inlineStyle, resolveProps, style } from 'meno-astro';
+
+const __props = resolveProps(Astro, {
+  variant: {
+    type: "select",
+    default: "default",
+    options: ["default", "light", "lighter"]
+  },
+  size: {
+    type: "select",
+    default: "default",
+    options: ["default", "large", "small"]
+  },
+  text: { type: "rich-text", default: "Text" },
+  maxWidth: { type: "string", default: "100%" },
+  align: {
+    type: "select",
+    default: "left",
+    options: ["left", "center", "right", "inherit"]
+  },
+  fade: { type: "string", default: "" }
+});
+const {
+  variant,
+  size,
+  text,
+  maxWidth,
+  align,
+  fade,
+  class: className,
+} = __props;
+---
+<p class={style({
+    base: {
+      fontSize: {
+        _mapping: true,
+        prop: "size",
+        values: {
+          default: "var(--t-fs)",
+          large: "var(--tl-fs)",
+          small: "var(--ts-fs)"
+        }
+      },
+      lineHeight: "150%",
+      fontWeight: "var(--t-fw)",
+      color: {
+        _mapping: true,
+        prop: "variant",
+        values: {
+          default: "var(--text)",
+          light: "var(--text-100)",
+          lighter: "var(--text-200)"
+        }
+      },
+      maxWidth: "{{maxWidth}}",
+      textAlign: {
+        _mapping: true,
+        prop: "align",
+        values: {
+          default: "left",
+          left: "left",
+          center: "center",
+          right: "right",
+          inherit: "inherit"
+        }
+      }
+    },
+    tablet: {},
+    mobile: {}
+  }, __props, { root: true })} style={inlineStyle({ "max-width": `${maxWidth}` }, __props)} fade={fade || undefined}><Fragment set:html={text} /></p>
