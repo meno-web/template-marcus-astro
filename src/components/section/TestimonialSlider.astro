@@ -51,31 +51,35 @@ const __props = resolveProps(Astro, {
   theme: { type: "select", default: "primary", enumName: "theme" }
 });
 const { items, autoplay, loop, theme, class: className } = __props;
+
+const isEditorMode = false;
 ---
 <Section theme={theme} spaceTop="default" maxWidth="900" class={style({}, __props, { root: true })}>
   <div class={style({ base: { position: "relative" } }, __props, { label: "Testimonial Slider" })} data-el="slider">
     <div class={style({ base: { position: "relative" } }, __props, { label: "Slides" })} data-el="slides">
       {list(items).map((item, itemIndex) => (
-        {item.isVisible || !isEditorMode && (
-          <div class={style({ base: { display: "flex", flexDirection: "column", alignItems: "center" } }, __props, { label: "Slide" })} data-el="slide">
-            <blockquote class={style({ base: { margin: "0", padding: "0" } }, __props)}><QuoteText text={item.quote} maxWidth="100%" align="center" size="2" tag="3" fade="0" /></blockquote>
-            <Spacer size="32" />
-            <div class={style({ base: { display: "flex", alignItems: "center", gap: "16px" } }, __props)}>
-              <img class={style({
-                  base: {
-                    width: "56px",
-                    height: "56px",
-                    borderRadius: "50%",
-                    objectFit: "cover"
-                  }
-                }, __props)} src={item.avatar || undefined} alt={item.name || undefined} />
-              <div>
-                <div class={style({ base: { fontWeight: "600", color: "var(--text)" } }, __props)}>{item.name}</div>
-                <div class={style({ base: { color: "var(--text-100)", fontSize: "14px" } }, __props)}>{item.role}</div>
+        <Fragment>
+          {(item.isVisible || !isEditorMode) && (
+            <div class={style({ base: { display: "flex", flexDirection: "column", alignItems: "center" } }, __props, { label: "Slide" })} data-el="slide">
+              <blockquote class={style({ base: { margin: "0", padding: "0" } }, __props)}><QuoteText text={item.quote} maxWidth="100%" align="center" size="2" tag="3" fade="0" /></blockquote>
+              <Spacer size="32" />
+              <div class={style({ base: { display: "flex", alignItems: "center", gap: "16px" } }, __props)}>
+                <img class={style({
+                    base: {
+                      width: "56px",
+                      height: "56px",
+                      borderRadius: "50%",
+                      objectFit: "cover"
+                    }
+                  }, __props)} src={item.avatar || undefined} alt={item.name || undefined} />
+                <div>
+                  <div class={style({ base: { fontWeight: "600", color: "var(--text)" } }, __props)}>{item.name}</div>
+                  <div class={style({ base: { color: "var(--text-100)", fontSize: "14px" } }, __props)}>{item.role}</div>
+                </div>
               </div>
             </div>
-          </div>
-        )}
+          )}
+        </Fragment>
       ))}
     </div>
     <div class={style({
