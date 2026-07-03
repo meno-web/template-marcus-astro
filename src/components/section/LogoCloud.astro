@@ -1,5 +1,6 @@
 ---
 import { list, resolveProps, style } from 'meno-astro';
+import { MenoImage } from 'meno-astro/components';
 import Section from '../ui/Section.astro';
 import Spacer from '../ui/Spacer.astro';
 import Stack from '../ui/Stack.astro';
@@ -32,29 +33,9 @@ const { text, items, theme, class: className } = __props;
     )}
   </Stack>
   <Spacer size="32" />
-  <div class={style({
-      base: {
-        display: "flex",
-        gap: "40px",
-        alignItems: "center",
-        justifyContent: "center"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props)} fade={0.2}>
+  <div fade={0.2} class="flex justify-center items-center gap-10">
     {list(items).map((item, itemIndex) => (
-      <img class={style({
-          base: {
-            height: "32px",
-            width: "auto",
-            opacity: "0.6",
-            transition: "opacity 0.2s ease"
-          }
-        }, __props, {
-          interactive: [
-            { prefix: "", postfix: ":hover", style: { base: { opacity: "1" } } }
-          ]
-        })} src={item.image || undefined} alt={item.title || undefined} />
+      <MenoImage src={item.image || undefined} alt={item.title || undefined} class="w-auto h-8 opacity-60 transition-[opacity_0.2s_ease] hover:opacity-100" />
     ))}
   </div>
 </Section>

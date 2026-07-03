@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style } from 'meno-astro';
 import Banner from './Banner.astro';
 import FooterMultiColumn from './FooterMultiColumn.astro';
 import Modal from '../ui/Modal.astro';
@@ -8,11 +8,7 @@ import Navigation from './Navigation.astro';
 const __props = resolveProps(Astro, {});
 const { class: className } = __props;
 ---
-<div class={style({
-    base: { backgroundColor: "var(--bg)", fontFamily: "var(--l-ff)" },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })} theme="dark" data-theme-root="true">
+<div class={cx("bg-bg font-(--l-ff)", className)} theme="dark" data-theme-root="true">
   <Banner text="Currently booking for 2026 — Get in touch to discuss your project" variant="default" isDismissible={true} />
   <Navigation isOpen={false} />
   <main class={style({}, __props, { label: "main" })}><slot /></main>
@@ -29,17 +25,5 @@ const { class: className } = __props;
       { text: "Instagram", href: "/" },
       { text: "Vimeo", href: "/" }
     ]} copyright="© 2026 Marcus Cole. All rights reserved." theme="dark" />
-  <Modal modalId="reel" isOpen={false}>
-    <div class={style({
-        base: {
-          position: "relative",
-          width: "90vw",
-          maxWidth: "960px",
-          aspectRatio: "16/9",
-          backgroundColor: "#000",
-          borderRadius: "8px",
-          overflow: "hidden"
-        }
-      }, __props)} data-video-src="https://www.youtube.com/embed/-3upUXFbB6c?autoplay=1" />
-  </Modal>
+  <Modal modalId="reel" isOpen={false}><div data-video-src="https://www.youtube.com/embed/-3upUXFbB6c?autoplay=1" class="w-[90vw] max-w-[960px] aspect-[16/9] bg-[#000] rounded-[8px] relative overflow-hidden" /></Modal>
 </div>

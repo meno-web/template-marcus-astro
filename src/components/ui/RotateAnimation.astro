@@ -1,49 +1,12 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 
 const __props = resolveProps(Astro, {});
 const { class: className } = __props;
 ---
-<div class={style({
-    base: {
-      position: "absolute",
-      zIndex: "-1",
-      top: "40%",
-      display: "flex",
-      justifyContent: "center",
-      alignItems: "center",
-      animationName: "spin",
-      animationDuration: "100s",
-      animationTimingFunction: "linear",
-      animationIterationCount: "infinite",
-      left: "75%"
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })} fade={0.4}>
-  <div class={style({
-      base: {
-        width: "200px",
-        height: "1400px",
-        background: "linear-gradient(90deg, #eaf527 0%, #32a160 49%, #82be42 100%)",
-        filter: "blur(30px)",
-        borderRadius: "50%"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props)} />
-  <div class={style({
-      base: {
-        width: "600px",
-        height: "600px",
-        background: "#1c1c1c",
-        filter: "blur(30px)",
-        borderRadius: "50%",
-        position: "absolute"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props)} />
+<div class={cx("flex justify-center items-center absolute top-[40%] left-[75%] z--1 [animation-name:spin] [animation-duration:100s] [animation-timing-function:linear] [animation-iteration-count:infinite]", className)} fade={0.4}>
+  <div class="w-[200px] h-[1400px] [background:linear-gradient(90deg,_#eaf527_0%,_#32a160_49%,_#82be42_100%)] rounded-[50%] filter-[blur(30px)]" />
+  <div class="w-[600px] h-[600px] [background:#1c1c1c] rounded-[50%] filter-[blur(30px)] absolute" />
 </div>
 
 

@@ -15,25 +15,14 @@ const { theme, class: className } = __props;
 const { cms } = Astro.props;
 ---
 <Section theme={theme} cropped={false} cms={cms} class={style({}, __props, { root: true })}>
-  <article class={style({ base: { maxWidth: "900px", margin: "0 auto" } }, __props)}>
-    <header class={style({ base: { marginBottom: "40px" } }, __props)}>
-      <Link href="/work" class={style({
-          base: {
-            display: "inline-flex",
-            alignItems: "center",
-            gap: "6px",
-            color: "var(--text-200)",
-            textDecoration: "none",
-            fontSize: "14px",
-            marginBottom: "24px",
-            transition: "color 0.2s ease"
-          }
-        }, __props, {
+  <article class="m-[0_auto] max-w-[900px]">
+    <header class="mb-10">
+      <Link href="/work" class={style({}, __props, {
           interactive: [
             { postfix: ":hover", style: { base: { color: "var(--text)" } } }
           ]
-        })}>
-        <Embed html={`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>`} class={style({ base: { height: "16px" } }, __props)} />
+        }) + " mb-6 inline-flex items-center gap-1.5 text-[var(--text-200)] text-[14px] no-underline transition-[color_0.2s_ease]"}>
+        <Embed html={`<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>`} class="h-4" />
         <span>Back to Work</span>
       </Link>
       <Text text={i18n(cms.category)} size="small" variant="lighter" fade="0" cms={cms} />

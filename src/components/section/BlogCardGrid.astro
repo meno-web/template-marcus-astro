@@ -71,38 +71,13 @@ const { subtitle, title, text, items, theme, class: className } = __props;
   </SectionHeader>
   <Grid columns="3" gap="16" fade="0.4">
     {list(items).map((item, itemIndex) => (
-      <Link href={item.link} class={style({
-          base: {
-            display: "flex",
-            textDecoration: "none",
-            borderRadius: "16px",
-            overflow: "hidden",
-            backgroundColor: "var(--surface)",
-            border: "1px solid var(--border-100)",
-            transition: "transform 0.2s ease, box-shadow 0.2s ease",
-            flexDirection: "column"
-          },
-          tablet: {},
-          mobile: {}
-        }, __props, {
-          interactive: [
-            {
-              prefix: "",
-              postfix: ":hover",
-              style: { base: { transform: "translateY(-4px)" } }
-            }
-          ]
-        })}>
-        <div class={style({ base: { height: "200px", overflow: "hidden" } }, __props)}><Image image={item.image} alt={item.title} objectFit="cover" width="100%" height="200px" /></div>
-        <div class={style({
-            base: { padding: "24px", flexGrow: "1", backgroundColor: "var(--bg)" },
-            tablet: {},
-            mobile: {}
-          }, __props)}>
+      <Link href={item.link} class="flex flex-col bg-surface border-[1px_solid_var(--border-100)] rounded-[16px] no-underline overflow-hidden transition-[transform_0.2s_ease,_box-shadow_0.2s_ease] hover:transform-[translateY(-4px)]">
+        <div class="h-[200px] overflow-hidden"><Image image={item.image} alt={item.title} objectFit="cover" width="100%" height="200px" /></div>
+        <div class="p-6 bg-bg grow">
           <Badge text={` ${item.label}`} />
           <Spacer size="16" />
           <Heading text={item.title} size="5" tag="3" />
-          <span class={style({ base: { fontSize: "13px", color: "var(--text-100)" } }, __props)}>{item.date}</span>
+          <span class="text-[var(--text-100)] text-[13px]">{item.date}</span>
           <Spacer size="16" />
           <Text text={item.text} size="small" variant="light" />
         </div>

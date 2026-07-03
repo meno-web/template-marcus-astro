@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style, variants } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   columns: {
@@ -12,37 +12,24 @@ const __props = resolveProps(Astro, {
 });
 const { columns, gap, fade, class: className } = __props;
 ---
-<div class={style({
-    base: {
-      display: "grid",
-      gridTemplateColumns: {
-        _mapping: true,
-        prop: "columns",
-        values: {
-          "1": "1fr",
-          "2": "repeat(2, 1fr)",
-          "3": "repeat(3, 1fr)",
-          "4": "repeat(4, 1fr)",
-          "5": "repeat(5, 1fr)",
-          "6": "repeat(6, 1fr)"
-        }
-      },
-      gap: {
-        _mapping: true,
-        prop: "gap",
-        values: {
-          "2": "24px",
-          "3": "",
-          "4": "",
-          "5": "",
-          "6": "",
-          "16": "16px",
-          "24": "24px",
-          "32": "32px",
-          "40": "40px"
-        }
-      }
+<div class={cx(style({ base: {} }, __props, { label: "grid" }), variants(__props, {
+    columns: {
+      "1": "grid-cols-[1fr]",
+      "2": "grid-cols-[repeat(2,_1fr)]",
+      "3": "grid-cols-[repeat(3,_1fr)]",
+      "4": "grid-cols-[repeat(4,_1fr)]",
+      "5": "grid-cols-[repeat(5,_1fr)]",
+      "6": "grid-cols-[repeat(6,_1fr)]"
     },
-    tablet: { gridTemplateColumns: "repeat(2, 1fr)" },
-    mobile: { gridTemplateColumns: "1fr" }
-  }, __props, { root: true, label: "grid" })} fade={fade || undefined}><slot /></div>
+    gap: {
+      "2": "gap-6",
+      "3": "",
+      "4": "",
+      "5": "",
+      "6": "",
+      "16": "gap-4",
+      "24": "gap-6",
+      "32": "gap-8",
+      "40": "gap-10"
+    }
+  }), "grid max-lg:grid-cols-[repeat(2,_1fr)] max-sm:grid-cols-[1fr]", className)} fade={fade || undefined}><slot /></div>

@@ -80,33 +80,8 @@ const {
   </SectionHeader>
   <Grid columns={columns} fade="0.4">
     {list(items).map((item, itemIndex) => (
-      <div class={style({
-          base: {
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            textAlign: "center",
-            padding: "32px 24px",
-            background: "var(--bg-100)",
-            borderRadius: "0px"
-          },
-          tablet: {},
-          mobile: {}
-        }, __props, { label: "Card" })}>
-        <div class={style({
-            base: {
-              width: "64px",
-              height: "64px",
-              backgroundColor: "var(--accent)",
-              borderRadius: "2px",
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              marginBottom: "20px"
-            },
-            tablet: {},
-            mobile: {}
-          }, __props, { label: "Icon Wrap" })}><Icon size={24} icon={item.icon} /></div>
+      <div class={style({}, __props, { label: "Card" }) + " p-[32px_24px] flex flex-col items-center [background:var(--bg-100)] rounded-[0px] text-center"}>
+        <div class={style({}, __props, { label: "Icon Wrap" }) + " mb-5 flex justify-center items-center w-16 h-16 bg-accent rounded-[2px]"}><Icon size={24} icon={item.icon} /></div>
         <Heading text={item.title} size="5" tag="3" align="center" />
         <Text text={item.text} size="small" variant="light" align="center" />
       </div>

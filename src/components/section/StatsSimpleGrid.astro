@@ -43,7 +43,7 @@ const { subtitle, title, text, items, theme, class: className } = __props;
   </SectionHeader>
   <Grid columns="4" gap="24" fade="0.4">
     {list(items).map((item, itemIndex) => (
-      <div class={style({ base: { textAlign: "center", padding: "24px" } }, __props, { label: "Stat Card" })}>
+      <div class={style({}, __props, { label: "Stat Card" }) + " p-6 text-center"}>
         <Heading text={item.value} tag="3" align="center" size="1" />
         <Text text={item.label} align="center" color="secondary" />
       </div>

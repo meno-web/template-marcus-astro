@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   name: { type: "string", default: "select" }
@@ -8,21 +8,4 @@ const { name, class: className } = __props;
 
 const __meno = { category: "forms" };
 ---
-<select class={style({
-    base: {
-      padding: "12px 16px",
-      fontSize: "16px",
-      border: "1px solid",
-      borderRadius: "8px",
-      outline: "none",
-      width: "100%",
-      boxSizing: "border-box",
-      fontFamily: "inherit",
-      backgroundColor: "var(--background)",
-      borderColor: "var(--border)",
-      color: "var(--text)",
-      cursor: "pointer"
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })} name={name || undefined}><slot /></select>
+<select class={cx("p-[12px_16px] w-full bg-background text-text border-[1px_solid] rounded-[8px] border-border text-[16px] font-[inherit] outline-none cursor-pointer box-border", className)} name={name || undefined}><slot /></select>

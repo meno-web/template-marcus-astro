@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, variants } from 'meno-astro';
 import Button from './Button.astro';
 
 const __props = resolveProps(Astro, {
@@ -17,38 +17,23 @@ const __props = resolveProps(Astro, {
 });
 const { justify, marginTop, fade, class: className } = __props;
 ---
-<div class={style({
-    base: {
-      display: "flex",
-      flexDirection: "row",
-      gap: "16px",
-      justifyContent: {
-        _mapping: true,
-        prop: "justify",
-        values: {
-          center: "center",
-          "flex-start": "flex-start",
-          "flex-end": "flex-end",
-          "space-between": "space-between"
-        }
-      },
-      marginTop: {
-        _mapping: true,
-        prop: "marginTop",
-        values: {
-          center: "32px",
-          "flex-start": "",
-          "flex-end": "",
-          "space-between": "",
-          default: "28px",
-          large: "64px",
-          none: "0"
-        }
-      }
+<div class={cx(variants(__props, {
+    justify: {
+      center: "justify-center",
+      "flex-start": "justify-start",
+      "flex-end": "justify-end",
+      "space-between": "justify-between"
     },
-    tablet: {},
-    mobile: { flexDirection: "column", alignItems: "center" }
-  }, __props, { root: true })} fade={fade || undefined}>
+    marginTop: {
+      center: "mt-8",
+      default: "mt-7",
+      large: "mt-16",
+      none: "mt-[0]",
+      "flex-start": "",
+      "flex-end": "",
+      "space-between": ""
+    }
+  }), "flex flex-row gap-4 max-sm:flex-col max-sm:items-center", className)} fade={fade || undefined}>
   <slot>
     <Button text="Get started" link="" variant="primary" />
     <Button text="Learn more" link="" variant="secondary" isMarginTop={false} />

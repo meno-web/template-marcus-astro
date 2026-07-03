@@ -14,8 +14,8 @@ const { theme, class: className } = __props;
 const { cms } = Astro.props;
 ---
 <Section theme={theme} cropped={false} cms={cms} class={style({}, __props, { root: true })}>
-  <article class={style({ base: { maxWidth: "720px", margin: "0 auto" } }, __props)}>
-    <header class={style({ base: { marginBottom: "32px" } }, __props)}>
+  <article class="m-[0_auto] max-w-[720px]">
+    <header class="mb-8">
       <Image aspectRatio="16/6" image={i18n(cms.featuredImage)} rounded="medium" fade="0" cms={cms} />
       <Spacer size="32" cms={cms} />
       <Heading text={i18n(cms.title)} size="2" tag="1" fade="0.2" cms={cms} />

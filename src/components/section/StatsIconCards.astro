@@ -1,5 +1,5 @@
 ---
-import { list, resolveProps, style } from 'meno-astro';
+import { cx, list, resolveProps, style, variants } from 'meno-astro';
 import { Embed } from 'meno-astro/components';
 import Grid from '../ui/Grid.astro';
 import Heading from '../ui/Heading.astro';
@@ -85,27 +85,15 @@ const {
   </SectionHeader>
   <Grid columns={columns} gap="24" fade="0.4">
     {list(items).map((item, itemIndex) => (
-      <div class={style({
-          base: {
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "flex-start",
-            padding: "32px",
-            backgroundColor: "var(--bg-100)",
-            borderRadius: "12px",
-            borderLeft: {
-              _mapping: true,
-              prop: "showAccent",
-              values: {
-                default: "4px solid var(--primary)",
-                true: "4px solid var(--primary)",
-                false: "none"
-              }
-            }
+      <div class={cx(style({ base: {} }, __props, { label: "Stat Card" }), variants(__props, {
+          showAccent: {
+            default: "border-l-[4px_solid_var(--primary)]",
+            true: "border-l-[4px_solid_var(--primary)]",
+            false: "border-l-[none]"
           }
-        }, __props, { label: "Stat Card" })}>
+        })) + " p-8 flex flex-col items-start bg-[var(--bg-100)] rounded-[12px]"}>
         {item.icon && (
-          <div class={style({ base: { width: "48px", height: "48px", marginBottom: "16px" } }, __props, { label: "Icon Wrap" })}><Embed html={item.icon} class={style({ base: { height: "48px", color: "var(--primary)" } }, __props, { label: "Icon" })} /></div>
+          <div class={style({}, __props, { label: "Icon Wrap" }) + " mb-4 w-12 h-12"}><Embed html={item.icon} class={style({}, __props, { label: "Icon" }) + " h-12 text-primary"} /></div>
         )}
         <Heading text={item.value} size="2" tag="3" />
         <Text text={item.label} weight="semibold" />

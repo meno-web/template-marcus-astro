@@ -1,5 +1,5 @@
 ---
-import { href, resolveProps, style } from 'meno-astro';
+import { cx, href, resolveProps, style, variants } from 'meno-astro';
 import { Embed, Link } from 'meno-astro/components';
 
 const __props = resolveProps(Astro, {
@@ -15,45 +15,7 @@ const __props = resolveProps(Astro, {
 });
 const { text, variant, isMarginTop, link, fade, class: className } = __props;
 ---
-<Link href={href({ _mapping: true, prop: "link" }, __props)} class={style({
-    base: {
-      fontSize: "var(--b-fs)",
-      cursor: "pointer",
-      transition: "all 0.2s",
-      display: "flex",
-      gap: "var(--b-g)",
-      alignItems: "center",
-      padding: "var(--b-p)",
-      border: "1px solid",
-      borderColor: {
-        _mapping: true,
-        prop: "variant",
-        values: { primary: "var(--accent)", secondary: "var(--bg-200)" }
-      },
-      backgroundColor: {
-        _mapping: true,
-        prop: "variant",
-        values: { primary: "var(--accent)", secondary: "var(--bg-200)" }
-      },
-      color: {
-        _mapping: true,
-        prop: "variant",
-        values: { primary: "var(--black)", secondary: "var(--text)" }
-      },
-      textDecoration: "none",
-      marginTop: {
-        _mapping: true,
-        prop: "isMarginTop",
-        values: { primary: "30px", secondary: "", true: "30px", false: "0" }
-      },
-      borderRadius: "var(--b-br)",
-      fontWeight: "var(--b-fw)",
-      flexDirection: "row"
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, {
-    root: true,
+<Link href={href({ _mapping: true, prop: "link" }, __props)} class={cx(style({ base: {} }, __props, {
     interactive: [
       {
         name: "on hover",
@@ -82,7 +44,18 @@ const { text, variant, isMarginTop, link, fade, class: className } = __props;
       }
     ],
     label: "button"
-  })}>
+  }), variants(__props, {
+    variant: {
+      primary: "border-(--accent) bg-(--accent) text-[var(--black)]",
+      secondary: "border-[var(--bg-200)] bg-[var(--bg-200)] text-(--text)"
+    },
+    isMarginTop: {
+      primary: "mt-[30px]",
+      true: "mt-[30px]",
+      false: "mt-[0]",
+      secondary: ""
+    }
+  }), "p-(--b-p) flex flex-row items-center gap-(--b-g) border-[1px_solid] rounded-(--b-br) text-(length:--b-fs) font-(number:--b-fw) no-underline cursor-pointer transition-[all_0.2s]", className)}>
   <span class={style({}, __props, { label: "text" })}>{text}</span>
-  <Embed html={`<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>`} class={style({ base: { height: "18px" }, tablet: {}, mobile: {} }, __props, { label: "arrow" })} />
+  <Embed html={`<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18l6-6-6-6"/></svg>`} class={style({}, __props, { label: "arrow" }) + " h-[18px]"} />
 </Link>

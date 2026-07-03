@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style, variants } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   text: { type: "string", default: "1" },
@@ -13,22 +13,8 @@ const __props = resolveProps(Astro, {
 });
 const { text, size, color, fade, class: className } = __props;
 ---
-<div class={style({
-    base: {
-      fontWeight: "700",
-      lineHeight: "1",
-      fontSize: {
-        _mapping: true,
-        prop: "size",
-        values: { small: "32px", medium: "40px", large: "48px" }
-      },
-      color: {
-        _mapping: true,
-        prop: "color",
-        values: { primary: "var(--primary)", text: "var(--text)" }
-      }
-    },
-    tablet: {},
+<div class={cx(style({
+    base: {},
     mobile: {
       fontSize: {
         _mapping: true,
@@ -36,4 +22,7 @@ const { text, size, color, fade, class: className } = __props;
         values: { small: "24px", medium: "32px", large: "40px" }
       }
     }
-  }, __props, { root: true })} fade={fade || undefined}>{text}</div>
+  }, __props), variants(__props, {
+    size: { small: "text-[32px]", medium: "text-[40px]", large: "text-[48px]" },
+    color: { primary: "text-(--primary)", text: "text-(--text)" }
+  }), "font-[700] leading-[1]", className)} fade={fade || undefined}>{text}</div>

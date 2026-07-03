@@ -1,21 +1,11 @@
 ---
-import { resolveProps, richTextWithComponents, style } from 'meno-astro';
-import { cmsComponents } from '../../cmsComponents';
+import { cx, i18n, resolveProps } from 'meno-astro';
 
 const __props = resolveProps(Astro, { fade: { type: "string", default: "" } });
 const { fade, class: className } = __props;
 const { cms } = Astro.props;
 ---
-<div class={style({
-    base: {
-      lineHeight: "1.7",
-      fontSize: "18px",
-      color: "var(--text)",
-      letterSpacing: "-0.01em"
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })} cmsrt={true} fade={fade || undefined}><Fragment set:html={richTextWithComponents(cms.content, cmsComponents)} /></div>
+<div class={cx("text-text text-[18px] leading-[1.7] tracking-[-0.01em]", className)} cmsrt={true} fade={fade || undefined}>{i18n(cms.content)}</div>
 
 
 <style is:global>

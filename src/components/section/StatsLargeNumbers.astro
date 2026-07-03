@@ -76,18 +76,9 @@ const {
   </SectionHeader>
   <Grid columns="1" gap="24" fade="0.4">
     {list(items).map((item, itemIndex) => (
-      <div class={style({
-          base: {
-            display: "flex",
-            alignItems: "center",
-            gap: "32px",
-            padding: "32px 0",
-            borderBottom: "1px solid var(--border)"
-          },
-          mobile: { flexDirection: "column", alignItems: "flex-start", gap: "16px" }
-        }, __props, { label: "Stat Row" })}>
-        <div class={style({ base: { minWidth: "180px" }, mobile: { minWidth: "auto" } }, __props, { label: "Value Wrap" })}><Heading text={item.value} size="2" tag="3" color="primary" isMb0={true} /></div>
-        <div class={style({ base: { display: "flex", flexDirection: "column", gap: "8px" } }, __props, { label: "Content" })}>
+      <div class={style({}, __props, { label: "Stat Row" }) + " p-[32px_0] flex items-center gap-8 border-b-[1px_solid_var(--border)] max-sm:flex-col max-sm:items-start max-sm:gap-4"}>
+        <div class={style({}, __props, { label: "Value Wrap" }) + " min-w-[180px] max-sm:min-w-auto"}><Heading text={item.value} size="2" tag="3" color="primary" isMb0={true} /></div>
+        <div class={style({}, __props, { label: "Content" }) + " flex flex-col gap-2"}>
           <Heading text={item.label} size="4" tag="4" />
           {item.description && (
             <Text text={item.description} color="secondary" maxWidth="500px" />

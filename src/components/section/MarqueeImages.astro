@@ -1,5 +1,6 @@
 ---
-import { list, resolveProps, style } from 'meno-astro';
+import { cx, list, resolveProps, style, variants } from 'meno-astro';
+import { MenoImage } from 'meno-astro/components';
 import Section from '../ui/Section.astro';
 
 const __props = resolveProps(Astro, {
@@ -53,80 +54,22 @@ const {
 } = __props;
 ---
 <Section theme={theme} spaceTop={spaceTop} spaceBottom={spaceBottom} class={style({}, __props, { root: true })}>
-  <div class={style({ base: { overflow: "hidden" } }, __props, { label: "Marquee container" })} fade={0}>
-    <div class={style({
-        base: {
-          display: "flex",
-          width: "max-content",
-          animationName: "marquee-scroll",
-          animationTimingFunction: "linear",
-          animationIterationCount: "infinite",
-          animationDuration: {
-            _mapping: true,
-            prop: "speed",
-            values: { slow: "60s", normal: "30s", fast: "15s" }
-          }
-        },
-        tablet: {},
-        mobile: {}
-      }, __props, {
-        interactive: [
-          {
-            prefix: "",
-            postfix: ":hover",
-            style: { base: { animationPlayState: "paused" } }
-          }
-        ],
-        label: "Marquee track"
-      })} data-el="track">
-      <div class={style({
-          base: {
-            display: "flex",
-            alignItems: "center",
-            gap: "{{gap}}",
-            flexShrink: "0",
-            paddingRight: "{{gap}}"
-          }
-        }, __props, { label: "List 1" })} style={`--m-base-gap: ${gap}; --m-base-padding-right: ${gap}`}>
+  <div class={style({}, __props, { label: "Marquee container" }) + " overflow-hidden"} fade={0}>
+    <div class={cx(style({ base: {} }, __props, { label: "Marquee track" }), variants(__props, {
+        speed: {
+          slow: "[animation-duration:60s]",
+          normal: "[animation-duration:30s]",
+          fast: "[animation-duration:15s]"
+        }
+      })) + " flex w-max [animation-name:marquee-scroll] [animation-timing-function:linear] [animation-iteration-count:infinite] hover:[animation-play-state:paused]"} data-el="track">
+      <div class={style({ base: { gap: "{{gap}}", paddingRight: "{{gap}}" } }, __props, { label: "List 1" }) + " flex items-center shrink-0"} style={`--m-base-gap: ${gap}; --m-base-padding-right: ${gap}`}>
         {list(items).map((item, itemIndex) => (
-          <img class={style({
-              base: {
-                height: "{{imageHeight}}",
-                width: "auto",
-                opacity: "0.6",
-                transition: "opacity 0.2s ease",
-                flexShrink: "0"
-              }
-            }, __props, {
-              interactive: [
-                { prefix: "", postfix: ":hover", style: { base: { opacity: "1" } } }
-              ]
-            })} style={`--m-base-height: ${imageHeight}`} src={item.image || undefined} alt={item.alt || undefined} />
+          <MenoImage class={style({ base: { height: "{{imageHeight}}" } }, __props) + " w-auto opacity-60 shrink-0 transition-[opacity_0.2s_ease] hover:opacity-100"} style={`--m-base-height: ${imageHeight}`} src={item.image || undefined} alt={item.alt || undefined} />
         ))}
       </div>
-      <div class={style({
-          base: {
-            display: "flex",
-            alignItems: "center",
-            gap: "{{gap}}",
-            flexShrink: "0",
-            paddingRight: "{{gap}}"
-          }
-        }, __props, { label: "List 2" })} style={`--m-base-gap: ${gap}; --m-base-padding-right: ${gap}`}>
+      <div class={style({ base: { gap: "{{gap}}", paddingRight: "{{gap}}" } }, __props, { label: "List 2" }) + " flex items-center shrink-0"} style={`--m-base-gap: ${gap}; --m-base-padding-right: ${gap}`}>
         {list(items).map((item, itemIndex) => (
-          <img class={style({
-              base: {
-                height: "{{imageHeight}}",
-                width: "auto",
-                opacity: "0.6",
-                transition: "opacity 0.2s ease",
-                flexShrink: "0"
-              }
-            }, __props, {
-              interactive: [
-                { prefix: "", postfix: ":hover", style: { base: { opacity: "1" } } }
-              ]
-            })} style={`--m-base-height: ${imageHeight}`} src={item.image || undefined} alt={item.alt || undefined} />
+          <MenoImage class={style({ base: { height: "{{imageHeight}}" } }, __props) + " w-auto opacity-60 shrink-0 transition-[opacity_0.2s_ease] hover:opacity-100"} style={`--m-base-height: ${imageHeight}`} src={item.image || undefined} alt={item.alt || undefined} />
         ))}
       </div>
     </div>

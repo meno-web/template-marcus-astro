@@ -76,45 +76,12 @@ const {
   </SectionHeader>
   <Grid columns="1" gap="24" fade="0.4">
     {list(items).map((item, itemIndex) => (
-      <div class={style({
-          base: {
-            display: "flex",
-            flexDirection: "column",
-            gap: "8px",
-            marginBottom: "24px"
-          }
-        }, __props, { label: "Stat Item" })}>
-        <div class={style({
-            base: {
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "center"
-            }
-          }, __props, { label: "Label Row" })}>
+      <div class={style({}, __props, { label: "Stat Item" }) + " mb-6 flex flex-col gap-2"}>
+        <div class={style({}, __props, { label: "Label Row" }) + " flex justify-between items-center"}>
           <Text text={item.label} weight="semibold" />
           <Heading text={item.value} size="5" tag="3" color="primary" />
         </div>
-        <div class={style({
-            base: {
-              width: "100%",
-              height: "8px",
-              backgroundColor: "var(--bg-100)",
-              borderRadius: "4px",
-              overflow: "hidden"
-            }
-          }, __props, { label: "Progress Bar Background" })}>
-          <div class={style({
-              base: {
-                width: "{{item.value}}%",
-                height: "100%",
-                backgroundColor: "var(--text)",
-                borderRadius: "4px",
-                transition: "width 0.3s ease"
-              },
-              tablet: {},
-              mobile: {}
-            }, __props, { label: "Progress Bar Fill" })} style={`--m-base-width: ${item.value}%`} />
-        </div>
+        <div class={style({}, __props, { label: "Progress Bar Background" }) + " w-full h-2 bg-[var(--bg-100)] rounded-[4px] overflow-hidden"}><div class={style({ base: { width: "{{item.value}}%" } }, __props, { label: "Progress Bar Fill" }) + " h-full bg-text rounded-[4px] transition-[width_0.3s_ease]"} style={`--m-base-width: ${item.value}%`} /></div>
         {item.description && (
           <Text text={item.description} size="small" color="light" />
         )}

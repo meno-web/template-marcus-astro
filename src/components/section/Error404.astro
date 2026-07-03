@@ -13,16 +13,7 @@ const { theme, class: className } = __props;
 ---
 <Section theme={theme} spaceTop="large" class={style({}, __props, { root: true })}>
   <Stack vertical="center" horizontal="center">
-    <span class={style({
-        base: {
-          fontSize: "120px",
-          fontWeight: "700",
-          lineHeight: "1",
-          color: "var(--primary)",
-          marginBottom: "24px"
-        },
-        mobile: { fontSize: "80px" }
-      }, __props)} fade={0}>404</span>
+    <span fade={0} class="mb-6 text-primary text-[120px] font-[700] leading-[1] max-sm:text-[80px]">404</span>
     <Heading text="Page not found" size="2" tag="1" align="center" fade="0.2" />
     <Text text="The page you're looking for doesn't exist or has been moved." align="center" maxWidth="320px" isMarginBottom={true} fade="0.4" />
     <Button text="Back to Home" variant="primary" isMarginTop={true} link={{ href: "/" }} fade="0.6" />

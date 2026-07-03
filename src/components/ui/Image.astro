@@ -1,5 +1,6 @@
 ---
-import { inlineStyle, resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style, variants } from 'meno-astro';
+import { MenoImage } from 'meno-astro/components';
 
 const __props = resolveProps(Astro, {
   alt: { type: "string", default: "" },
@@ -43,33 +44,25 @@ const {
   class: className,
 } = __props;
 ---
-<img class={style({
+<MenoImage class={cx(style({
     base: {
-      maxWidth: "100%",
       height: "{{height}}",
-      display: "block",
       objectFit: "{{objectFit}}",
-      border: {
-        _mapping: true,
-        prop: "border",
-        values: { default: "1px solid", true: "1px solid", false: "none" }
-      },
-      borderColor: "var(--border)",
-      borderRadius: {
-        _mapping: true,
-        prop: "rounded",
-        values: {
-          default: "0",
-          true: "12px",
-          false: "0",
-          large: "12px",
-          none: "0",
-          medium: "8px"
-        }
-      },
       width: "{{width}}",
       aspectRatio: "{{aspectRatio}}"
+    }
+  }, __props), variants(__props, {
+    border: {
+      default: "border-[1px_solid]",
+      true: "border-[1px_solid]",
+      false: "border-[none]"
     },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })} style={inlineStyle({ "height": `${height}`, "object-fit": `${objectFit}`, "width": `${width}`, "aspect-ratio": `${aspectRatio}` }, __props)} src={image || undefined} alt={alt || undefined} loading={loading || undefined} fetchpriority={fetchpriority || undefined} sizes={sizes || undefined} fade={fade || undefined} />
+    rounded: {
+      default: "rounded-none",
+      true: "rounded-[12px]",
+      false: "rounded-none",
+      large: "rounded-[12px]",
+      none: "rounded-none",
+      medium: "rounded-[8px]"
+    }
+  })) + " block max-w-full border-border"} style={`--m-base-height: ${height}; --m-base-object-fit: ${objectFit}; --m-base-width: ${width}; --m-base-aspect-ratio: ${aspectRatio}`} src={image || undefined} alt={alt || undefined} loading={loading || undefined} fetchpriority={fetchpriority || undefined} sizes={sizes || undefined} fade={fade || undefined} />

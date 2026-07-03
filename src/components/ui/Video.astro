@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   src: { type: "file", default: "", accept: "video/*" },
@@ -23,8 +23,4 @@ const {
   class: className,
 } = __props;
 ---
-<video class={style({
-    base: { width: "100%", maxWidth: "100%", height: "auto", display: "block" },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })} src={src || undefined} poster={poster || undefined} controls={controls || undefined} autoPlay={autoPlay || undefined} loop={loop || undefined} muted={muted || undefined} playsInline={playsInline || undefined} fade={fade || undefined} />
+<video class={cx("block w-full h-auto max-w-full", className)} src={src || undefined} poster={poster || undefined} controls={controls || undefined} autoPlay={autoPlay || undefined} loop={loop || undefined} muted={muted || undefined} playsInline={playsInline || undefined} fade={fade || undefined} />

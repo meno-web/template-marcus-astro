@@ -1,5 +1,6 @@
 ---
-import { inlineStyle, resolveProps, style } from 'meno-astro';
+import { cx, inlineStyle, resolveProps, richTextWithComponents, style, variants } from 'meno-astro';
+import { cmsComponents } from '../../cmsComponents';
 
 const __props = resolveProps(Astro, {
   text: { type: "rich-text", default: "Heading" },
@@ -37,59 +38,25 @@ const {
 
 const Tag_0 = `h${tag === "size" ? size : tag}`;
 ---
-<Tag_0 class={style({
-    base: {
-      fontSize: {
-        _mapping: true,
-        prop: "size",
-        values: {
-          "1": "var(--h-fs)",
-          "2": "var(--h2-fs)",
-          "3": "var(--h3-fs)",
-          "4": "var(--h4-fs)",
-          "5": "var(--h5-fs)",
-          "6": "var(--h6-fs)",
-          default: "95px"
-        }
-      },
-      fontWeight: "var(--h-fw)",
-      marginBottom: {
-        _mapping: true,
-        prop: "size",
-        values: {
-          "1": "var(--h-s)",
-          "2": "var(--h2-s)",
-          "3": "var(--h3-s)",
-          "4": "var(--h4-s)",
-          "5": "var(--h5-s)",
-          "6": "var(--h6-s)",
-          default: "20px"
-        }
-      },
-      letterSpacing: "var(--h-ls)",
-      lineHeight: "var(--h-lh)",
-      maxWidth: "{{maxWidth}}",
-      color: {
-        _mapping: true,
-        prop: "variant",
-        values: { default: "var(--text)", light: "var(--text-100)" }
-      },
-      textAlign: {
-        _mapping: true,
-        prop: "align",
-        values: {
-          default: "left",
-          light: "",
-          left: "left",
-          center: "center",
-          right: "right"
-        }
-      },
-      fontFamily: "Instrument Serif"
+<Tag_0 class={cx(style({ base: { maxWidth: "{{maxWidth}}" } }, __props, { label: "Text" }), variants(__props, {
+    size: {
+      "1": "text-(length:--h-fs) mb-(--h-s)",
+      "2": "text-(length:--h2-fs) mb-(--h2-s)",
+      "3": "text-(length:--h3-fs) mb-(--h3-s)",
+      "4": "text-(length:--h4-fs) mb-(--h4-s)",
+      "5": "text-(length:--h5-fs) mb-(--h5-s)",
+      "6": "text-(length:--h6-fs) mb-(--h6-s)",
+      default: "text-[95px] mb-5"
     },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true, label: "Text" })} style={inlineStyle({ "max-width": `${maxWidth}` }, __props)} fade={fade || undefined} isMb0={isMb0 || undefined}><Fragment set:html={text} /></Tag_0>
+    variant: { default: "text-(--text)", light: "text-[var(--text-100)]" },
+    align: {
+      default: "text-left",
+      left: "text-left",
+      center: "text-center",
+      right: "text-right",
+      light: ""
+    }
+  }), "font-(number:--h-fw) font-[Instrument_Serif] leading-(--h-lh) tracking-(--h-ls)", className)} style={inlineStyle({ "max-width": `${maxWidth}` }, __props)} fade={fade || undefined} isMb0={isMb0 || undefined}><Fragment set:html={richTextWithComponents(text, cmsComponents)} /></Tag_0>
 
 
 <style is:global>

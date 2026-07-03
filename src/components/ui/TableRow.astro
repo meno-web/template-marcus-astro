@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   label: { type: "string", default: "Label" },
@@ -8,22 +8,7 @@ const __props = resolveProps(Astro, {
 });
 const { label, value, fade, class: className } = __props;
 ---
-<div class={style({
-    base: {
-      display: "grid",
-      gridTemplateColumns: "220px 1fr",
-      borderBottom: "1px solid",
-      borderColor: "var(--border)"
-    },
-    mobile: { gridTemplateColumns: "1fr" }
-  }, __props, { root: true })} fade={fade || undefined}>
-  <div class={style({
-      base: {
-        padding: "16px 20px",
-        fontWeight: "600",
-        backgroundColor: "var(--bg-100)",
-        color: "var(--text)"
-      }
-    }, __props)}>{label}</div>
-  <div class={style({ base: { padding: "16px 20px", color: "var(--text)" } }, __props)}>{value}</div>
+<div class={cx("grid border-b-[1px_solid] border-border grid-cols-[220px_1fr] max-sm:grid-cols-[1fr]", className)} fade={fade || undefined}>
+  <div class="p-[16px_20px] bg-[var(--bg-100)] text-text font-[600]">{label}</div>
+  <div class="p-[16px_20px] text-text">{value}</div>
 </div>

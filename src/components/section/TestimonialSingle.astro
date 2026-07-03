@@ -1,5 +1,6 @@
 ---
 import { resolveProps, style } from 'meno-astro';
+import { MenoImage } from 'meno-astro/components';
 import QuoteText from '../ui/QuoteText.astro';
 import Section from '../ui/Section.astro';
 import Spacer from '../ui/Spacer.astro';
@@ -23,24 +24,13 @@ const { quote, avatar, name, role, theme, class: className } = __props;
 ---
 <Section theme={theme} spaceTop="default" maxWidth="900" class={style({}, __props, { root: true })}>
   <Stack vertical="top" horizontal="center">
-    <blockquote class={style({ base: { margin: "0", padding: "0" } }, __props)}><QuoteText text={quote} maxWidth="100%" align="center" size="2" tag="3" fade="0" /></blockquote>
+    <blockquote class="p-[0] m-[0]"><QuoteText text={quote} maxWidth="100%" align="center" size="2" tag="3" fade="0" /></blockquote>
     <Spacer size="32" />
-    <div class={style({ base: { display: "flex", alignItems: "center", gap: "16px" } }, __props)} fade={0.2}>
-      <img class={style({
-          base: {
-            width: "56px",
-            height: "56px",
-            borderRadius: "50%",
-            objectFit: "cover"
-          }
-        }, __props)} src={avatar || undefined} alt={name || undefined} />
+    <div fade={0.2} class="flex items-center gap-4">
+      <MenoImage src={avatar || undefined} alt={name || undefined} class="w-14 h-14 rounded-[50%] object-cover" />
       <div>
-        <div class={style({ base: { fontWeight: "600", color: "var(--text)" } }, __props)}>{name}</div>
-        <div class={style({
-            base: { color: "var(--text-100)", fontSize: "14px" },
-            tablet: {},
-            mobile: {}
-          }, __props)}>{role}</div>
+        <div class="text-text font-[600]">{name}</div>
+        <div class="text-[var(--text-100)] text-[14px]">{role}</div>
       </div>
     </div>
   </Stack>

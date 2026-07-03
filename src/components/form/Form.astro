@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   action: { type: "string", default: "" },
@@ -26,21 +26,7 @@ const {
 
 const __meno = { category: "forms" };
 ---
-<form class={style({
-    base: { display: "flex", flexDirection: "column", gap: "16px" },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })} action={action || undefined} method={method || undefined} data-submit-handler={submitHandler || undefined} data-success-message={successMessage || undefined} data-error-message={errorMessage || undefined}>
+<form class={cx("flex flex-col gap-4", className)} action={action || undefined} method={method || undefined} data-submit-handler={submitHandler || undefined} data-success-message={successMessage || undefined} data-error-message={errorMessage || undefined}>
   <slot />
-  <div class={style({
-      base: {
-        display: "none",
-        padding: "12px 16px",
-        borderRadius: "6px",
-        marginTop: "8px",
-        fontSize: "14px"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props)} data-form-message="true" />
+  <div data-form-message="true" class="p-[12px_16px] mt-2 hidden rounded-[6px] text-[14px]" />
 </form>

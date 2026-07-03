@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 import Heading from './Heading.astro';
 import Stack from './Stack.astro';
 import TabButton from './TabButton.astro';
@@ -14,7 +14,7 @@ const __props = resolveProps(Astro, {
 });
 const { activeTab, fade, class: className } = __props;
 ---
-<div class={style({ base: { width: "100%" } }, __props, { root: true })} data-active-tab={activeTab || undefined} fade={fade || undefined}>
+<div class={cx("w-full", className)} data-active-tab={activeTab || undefined} fade={fade || undefined}>
   <slot>
     <TabButtonsList>
       <TabButton isActive={true} text="Tab 1" />

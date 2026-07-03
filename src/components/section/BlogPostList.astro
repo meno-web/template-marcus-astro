@@ -22,23 +22,9 @@ const postsList = await getCollectionList("posts", { sort: { field: "publishedAt
     <Text text="Latest articles and insights from our team." fade="0.2" />
   </SectionHeader>
   {postsList.map((post, postIndex) => (
-    <Link href={i18n(post._url)} class={style({
-        base: {
-          display: "grid",
-          gridTemplateColumns: "400px 1fr",
-          gap: "32px",
-          alignItems: "start",
-          paddingTop: "32px",
-          paddingBottom: "32px",
-          borderBottom: "1px solid var(--border-100)",
-          textDecoration: "none",
-          color: "inherit"
-        },
-        tablet: { gridTemplateColumns: "200px 1fr", gap: "24px" },
-        mobile: { gridTemplateColumns: "1fr", gap: "16px" }
-      }, __props)}>
+    <Link href={i18n(post._url)} class="pt-8 pb-8 grid items-start gap-8 text-inherit border-b-[1px_solid_var(--border-100)] no-underline grid-cols-[400px_1fr] max-lg:gap-6 max-lg:grid-cols-[200px_1fr] max-sm:gap-4 max-sm:grid-cols-[1fr]">
       <Image image={i18n(post.featuredImage)} alt={i18n(post.title)} objectFit="cover" height="100%" border={true} rounded="medium" />
-      <div class={style({ base: { display: "flex", flexDirection: "column" }, tablet: {}, mobile: {} }, __props)}>
+      <div class="flex flex-col">
         <Text text={i18n(post.publishedAt)} size="small" variant="light" />
         <Spacer size="8" />
         <Heading text={i18n(post.title)} tag="2" size="4" />

@@ -1,5 +1,5 @@
 ---
-import { href, resolveProps, style } from 'meno-astro';
+import { cx, href, resolveProps, style } from 'meno-astro';
 import { Link } from 'meno-astro/components';
 
 const __props = resolveProps(Astro, {
@@ -8,20 +8,8 @@ const __props = resolveProps(Astro, {
 });
 const { text, link, class: className } = __props;
 ---
-<li class={style({ base: { listStyle: "none" } }, __props, { root: true })}>
-  <Link href={href({ _mapping: true, prop: "link", values: {} }, __props)} class={style({
-      base: {
-        color: "var(--text)",
-        textDecoration: "none",
-        display: "block",
-        padding: "10px 16px",
-        borderRadius: "4px",
-        transition: "background 0.2s",
-        cursor: "pointer"
-      },
-      tablet: { padding: "10px 16px" },
-      mobile: {}
-    }, __props, {
+<li class={cx("[list-style:none]", className)}>
+  <Link href={href({ _mapping: true, prop: "link", values: {} }, __props)} class={style({}, __props, {
       interactive: [
         {
           name: "hover",
@@ -30,5 +18,5 @@ const { text, link, class: className } = __props;
           style: { base: { backgroundColor: "var(--bg-100)" } }
         }
       ]
-    })}>{text}</Link>
+    }) + " p-[10px_16px] block text-text rounded-[4px] no-underline cursor-pointer transition-[background_0.2s] max-lg:p-[10px_16px]"}>{text}</Link>
 </li>

@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style, variants } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   text: { type: "string", default: "Badge" },
@@ -12,36 +12,11 @@ const __props = resolveProps(Astro, {
 });
 const { text, variant, fade, class: className } = __props;
 ---
-<span class={style({
-    base: {
-      display: "inline-flex",
-      alignItems: "center",
-      fontSize: "13px",
-      fontWeight: "500",
-      lineHeight: "1",
-      padding: "4px 10px",
-      borderRadius: "100px",
-      backgroundColor: {
-        _mapping: true,
-        prop: "variant",
-        values: {
-          default: "var(--bg-100)",
-          primary: "var(--primary)",
-          success: "#16a34a",
-          warning: "#f59e0b"
-        }
-      },
-      color: {
-        _mapping: true,
-        prop: "variant",
-        values: {
-          default: "var(--text)",
-          primary: "#fff",
-          success: "#fff",
-          warning: "#fff"
-        }
-      }
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true, label: "badge" })} fade={fade || undefined}>{text}</span>
+<span class={cx(style({ base: {} }, __props, { label: "badge" }), variants(__props, {
+    variant: {
+      default: "bg-[var(--bg-100)] text-(--text)",
+      primary: "bg-(--primary) text-[#fff]",
+      success: "bg-[#16a34a] text-[#fff]",
+      warning: "bg-[#f59e0b] text-[#fff]"
+    }
+  }), "p-[4px_10px] inline-flex items-center rounded-[100px] text-[13px] font-[500] leading-[1]", className)} fade={fade || undefined}>{text}</span>

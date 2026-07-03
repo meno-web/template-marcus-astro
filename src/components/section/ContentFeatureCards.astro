@@ -1,5 +1,5 @@
 ---
-import { list, resolveProps, style } from 'meno-astro';
+import { list, resolveProps, richTextWithComponents, style } from 'meno-astro';
 import Card from '../ui/Card.astro';
 import Grid from '../ui/Grid.astro';
 import Heading from '../ui/Heading.astro';
@@ -8,6 +8,7 @@ import SectionHeader from '../ui/SectionHeader.astro';
 import Spacer from '../ui/Spacer.astro';
 import Subtitle from '../ui/Subtitle.astro';
 import Text from '../ui/Text.astro';
+import { cmsComponents } from '../../cmsComponents';
 
 const __props = resolveProps(Astro, {
   subtitle: { type: "string", default: "Features" },
@@ -69,13 +70,7 @@ const { subtitle, title, text, theme, items, class: className } = __props;
         <Heading text={item.title} size="3" tag="3" />
         <Text text={item.text} isMarginBottom={true} />
         <Spacer size="24" />
-        <div class={style({
-            base: {
-              fontSize: "15px",
-              lineHeight: "1.8",
-              color: "var(--text-secondary)"
-            }
-          }, __props)}>{item.features}</div>
+        <div class="text-text-secondary text-[15px] leading-[1.8]"><Fragment set:html={richTextWithComponents(item.features, cmsComponents)} /></div>
       </Card>
     ))}
   </Grid>

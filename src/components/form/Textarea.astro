@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   name: { type: "string", default: "message" },
@@ -8,22 +8,4 @@ const __props = resolveProps(Astro, {
 });
 const { name, placeholder, rows, class: className } = __props;
 ---
-<textarea class={style({
-    base: {
-      padding: "12px 16px",
-      fontSize: "16px",
-      border: "1px solid",
-      borderRadius: "8px",
-      outline: "none",
-      width: "100%",
-      boxSizing: "border-box",
-      fontFamily: "inherit",
-      backgroundColor: "var(--bg-100)",
-      borderColor: "var(--text)",
-      color: "var(--text)",
-      resize: "vertical",
-      minHeight: "100px"
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })} name={name || undefined} placeholder={placeholder || undefined} rows={rows || undefined} />
+<textarea class={cx("p-[12px_16px] w-full min-h-[100px] bg-[var(--bg-100)] text-text border-[1px_solid] rounded-[8px] border-text text-[16px] font-[inherit] outline-none box-border resize-y", className)} name={name || undefined} placeholder={placeholder || undefined} rows={rows || undefined} />
