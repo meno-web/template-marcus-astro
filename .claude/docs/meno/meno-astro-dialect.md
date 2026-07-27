@@ -126,7 +126,8 @@ From `example/templates/blog-post.json` (a `blog` collection):
 ```astro
 ---
 import { getCollection } from 'astro:content';
-import { richTextWithComponents, style } from 'meno-astro';
+// richText (Basic) / richTextWithComponents (Extended) — import whichever the field's `editor` needs.
+import { richText, richTextWithComponents, style } from 'meno-astro';
 import { BaseLayout } from 'meno-astro/components';
 import Heading from '../../components/Heading.astro';
 import { cmsComponents } from '../../cmsComponents';
@@ -150,11 +151,12 @@ const meta = {
 ---
 <BaseLayout meta={meta}>
   <!-- body: plain fields {{cms.field}} → {i18n(cms.field)} (§6.4 — raw entry.data
-       needs the resolver). A RICH-TEXT field bound as a text child renders through
-       `<Fragment set:html={richTextWithComponents(cms.field, cmsComponents)} />`,
-       NOT a text interpolation — a rich-text value is a structured object, so
-       {i18n(cms.richField)} would print [object Object] — and embedded components
-       (TipTap `menoComponent` nodes) render against the generated registry. See §6.4. -->
+       needs the resolver). A RICH-TEXT field bound as a text child renders as HTML via
+       set:html, NOT a text interpolation ({i18n(cms.richField)} would print [object Object]).
+       The helper is tiered by the field's `editor` meta: Basic (default) →
+       `<Fragment set:html={richText(cms.field)} />` (lean, no registry); Extended
+       (`editor:"extended"`) → `<Fragment set:html={richTextWithComponents(cms.field, cmsComponents)} />`
+       (renders embedded `menoComponent` nodes against the generated registry). See §6.4. -->
 </BaseLayout>
 ```
 
@@ -163,8 +165,9 @@ const meta = {
   `root`. The model round-trips exactly: `parse(emit(normalizeModel(t))) === normalizeModel(t)`.
 - **Derived / boilerplate (emit-only)**: the `import { getCollection }`, the
   `getStaticPaths()` function, `const { cms } = Astro.props;`, and the
-  `import { cmsComponents } from '<rel>/cmsComponents'` registry import (added whenever the
-  body binds a rich-text field, [§6.4](#64-cms-data-bindings-wrap-in-i18n)) are regenerated
+  `import { cmsComponents } from '<rel>/cmsComponents'` registry import (added whenever an
+  **Extended** (`editor:"extended"`) rich-text binding is emitted — a Basic binding renders via
+  the lean `richText()` and imports no registry, [§6.4](#64-cms-data-bindings-wrap-in-i18n)) are regenerated
   deterministically from `meta.cms` on emit. The parser **recognizes and skips** them —
   exactly like it skips `interface Props` / the `resolveProps` destructuring for
   components — so they carry no model state. (Helpers: `packages/astro/lib/dialect/cmsRoute.ts`.)
@@ -236,6 +239,38 @@ options / `string` fallback). The `children` prop is skipped in the destructure.
   drops a `defineVars` that has no script to carry it. (`defineVars` is **not** in `__meno`.)
 - A component with no `structure` emits `<slot />` as its body.
 
+#### Prop types
+
+Every prop definition's `type` is one of — and nothing else:
+
+| `type` | Extra fields | Notes |
+|---|---|---|
+| `string` | — | Text of **any** length. There is no `"text"` prop type. |
+| `number` | — | |
+| `boolean` | — | |
+| `select` | `options` **or** `enumName` | |
+| `link` | — | `default: { href, target? }` |
+| `file` | `accept` | Images/uploads. There is no `"image"` prop type. |
+| `rich-text` | `editor: "basic" \| "extended"` | Picks the render helper — see [§6.4](#64-cms-data-bindings-wrap-in-i18n) |
+| `embed` | — | Raw HTML / third-party markup |
+| `list` | `itemSchema` (**required**), object-array `default` | See [§5.1](#51-prop-list) |
+| `reference` | `collection` (**required**), `multiple` | Hand-picked CMS items; the value is an item id, or an ordered id array when `multiple` |
+
+> ⚠ **CMS field types are not prop types.** A CMS collection field may be `text`, `image` or
+> `date` (see `CMSFieldTypeSchema`); a component prop may **not** (`PropTypeSchema`). The two
+> vocabularies overlap on most names, which is exactly what makes the wrong one look right:
+>
+> | You mean | In a CMS schema | In `resolveProps(Astro, {…})` / a list's `itemSchema` |
+> |---|---|---|
+> | text (any length) | `{ type: "text" }` | `{ type: "string" }` |
+> | an image | `{ type: "image" }` | `{ type: "file", accept: "image/*" }` |
+> | a date | `{ type: "date" }` | `{ type: "string" }` |
+>
+> Like the list-prop mistake in [§5.1](#51-prop-list), this is **silent**: the codec round-trips
+> it and `astro build` renders the component fine. It only surfaces when the component **fails to
+> open in the editor**, whose load path validates the prop and rejects it with
+> `interface.<prop>.type — "text" is a CMS field type, not a component prop type — use "string"`.
+
 ---
 
 ## 4. Node-type → markup mapping
@@ -248,7 +283,7 @@ types plus a fallback.
 |---|---|---|
 | `node` | `<tag …>children</tag>` | Standard HTML element. Void tags self-close. A local `<img>` emits `<MenoImage>` by default — opt out with `data-meno-optimize="false"` (§4.1). |
 | `component` | `<Name prop=… />` | Capitalized tag; props as JSX attributes. |
-| `slot` | `<slot>fallback</slot>` or `<slot />` | `default` children become slot fallback. |
+| `slot` | `<slot>fallback</slot>`, `<slot />`, or `<slot name="x" />` | `default` children → slot fallback; `name` → a named slot. |
 | `link` | `<Link href=…>children</Link>` | Runtime `Link` component. |
 | `embed` | `<Embed html={…} />` | Raw HTML/SVG passthrough. |
 | `list` | `{ list(src,{…}).map((item, itemIndex) => ( … )) }` (prop) or a frontmatter `getCollectionList` const + `{ X.map(…) }` (collection) | See §5. |
@@ -272,6 +307,26 @@ unmodeled foreign/library tokens (`swiper`, `prose`) are preserved verbatim alon
 ```astro
 <span class="text-primary p-6 tablet:p-4">{text}</span>
 ```
+
+**Named VALUE scales resolve to a variable, not a baked default.** Tailwind's *named* value scales —
+`text-lg`, `font-semibold`, `rounded-md`, `shadow-lg`, `max-w-md`, `leading-tight`, `tracking-wide`,
+`font-sans` — emit a plain `var(--<token>)` reference (`text-lg` → `font-size: var(--text-lg)`). They
+render the project's variable when it's defined in `src/styles/theme.css`, and are **inert when it isn't** —
+Meno is token-based and deliberately does **not** fall back to Tailwind's px/rem defaults. Use an
+arbitrary bracket (`text-[18px]`) for a one-off value, or define the token. *Computed* Tailwind forms
+(definitions, not opinionated values) work standalone: fractions (`w-1/2` → 50%), negatives (`-mt-4`),
+grid (`grid-cols-3`, `col-span-2`), individual transforms (`scale-105`, `rotate-45`, `translate-x-2`)
+and transition longhands (`duration-300`, `ease-in-out`). **Borders** behave exactly as in Tailwind — Meno ships
+Preflight's border reset (`*, ::before, ::after, ::backdrop, ::file-selector-button { border: 0 solid }`,
+in `@layer base`), so every element starts armed with a solid style at ZERO width. A width utility
+therefore paints only the edges it names: `border`, `border-b`, `border-2`, `border-t-4`, `border-x`,
+`border-l-[3px]`. The color is left off, so it inherits the current text color — set it with
+`border-<token>` / `border-[#hex]`. `border-solid` / `border-dashed` / `border-dotted` set the **style
+only**: on their own they paint nothing (every width is still `0`), so pair them with a width — again,
+exactly as in Tailwind, where `border-solid` exists to switch back from `border-dashed`. Like Preflight,
+the reset drops UA default borders on inputs, buttons, fieldsets and tables — re-add them explicitly. `meno-core`'s
+`defaultTailwindThemeVariables()` returns the Tailwind scale as a ready-to-create starter variable set
+(opt-in — never auto-applied).
 
 Styling that **can't be a static class** — a value bound to a prop, a `{{template}}` value, or a prop
 `_mapping` — is emitted instead via the `class={style(STYLE_OBJECT[, META])}` / `cx(…)` / `variants(…)`
@@ -351,17 +406,47 @@ From `example-astro/src/components/Heading.astro` (a dynamic-tag heading, see §
   })}>{text}</Tag_0>
 ```
 
+##### Label-only nodes: the `data-meno-label` attribute
+
+A node whose **only** class-relevant metadata is its `label` — no style content, no
+interactive rules, no `generateElementClass` (the common case for class-string-styled
+nodes) — does **not** emit an otherwise-empty `style()` call. The label rides a plain
+**`data-meno-label`** attribute instead:
+
+```astro
+<div data-meno-label="gradient" class="w-[560px] rounded-full blur-[36px]" />
+```
+
+The attribute is a reserved editor-metadata carrier (like `data-meno-optimize`): parse
+consumes it back into `node.label`, so it never lands in `attributes`, and on a
+`component` instance it is read off the instance tag, never treated as a prop (the child's
+`resolveProps` drops it regardless). The legacy spelling
+`class={style({}, undefined, { label: "…" })}` still parses and converges to the attribute
+form on the next emit. A node that emits `style()` anyway keeps its label in the `meta`
+argument — one carrier per node — because for interactive rules the label also prefixes the
+generated state-class name (`computeClassName`; the readable `.gradient-x1f2a:hover`
+selectors). A label the plain form can't carry (quotes, newlines, `{{…}}`) emits as the
+verbatim JSON-string expression form `data-meno-label={"…"}` — labels are display names and
+are never template-resolved.
+
 > **Note (instance styles — how a parent override reaches a component root):** when a
 > `component` instance carries a wrapper `style`, the emitter adds an `instance: true`
 > marker to that meta object **and** forwards the same style as an emit-only
-> `__menoStyle={…}` object prop (see below). The COMPONENT STRUCTURE ROOT's class attr
-> always carries a `root: true` marker (a style-less root still emits
-> `class={style({}, __props, { root: true })}`): the runtime `style()` then merges the
-> instance class the parent passed (`__props.class`) over the root's own classes —
-> instance wins per (breakpoint, CSS property), mirroring meno-core's instance-over-root
-> style merge. On parse, the markers `instance`, `kind`, `root`, and the `__menoStyle`
-> prop are intentionally dropped (`interpretStyleCall` / `otherAttrs`) — they're emit-only
-> and re-derived every emit — so they do not pollute the model.
+> `__menoStyle={…}` object prop (see below). The COMPONENT STRUCTURE ROOT's class attr is
+> emitted as the conflict-aware `cx(…, className)` instance-merge form — its own styling
+> (`style(…)` / a static class string / nothing), then the destructured `className`
+> (`const { …, class: className } = __props`, always bound). A style-less, class-less root
+> still emits `class={cx(className)}`; a class-only root (the common case) emits the clean
+> `class={cx("p-[24px] …", className)}` (no `style({})` wrapper). The runtime `cx` merges the
+> instance class the parent passed over the root's own classes — instance wins per (breakpoint,
+> CSS property), mirroring meno-core's instance-over-root style merge. On parse, the `className`
+> seam (along with `instance`, `kind`, and the `__menoStyle` prop) is intentionally dropped
+> (`interpretClassExpr` / `otherAttrs`) — emit-only, re-derived every emit (root-ness comes from
+> the component's structure root) — so it does not pollute the model.
+>
+> *(A component-INSTANCE that is itself a structure root — a component whose root is another
+> component — is the one exception: it keeps the legacy `style(…, { root: true })` merge, since
+> the `cx` collapse applies only to element-like roots.)*
 
 #### Prop-bound style values → an inline `style=…` (and why instance styles need `inlineStyle`)
 
@@ -374,8 +459,9 @@ it in the `style({...})` literal (so it round-trips) but ALSO renders it as a li
 <!-- on a plain node: a bare inline template literal -->
 <div class={style({ base: { gap: "{{gap}}px" } })} style={`gap: ${gap}px`}>
 
-<!-- on a COMPONENT STRUCTURE ROOT: wrapped in inlineStyle(…, __props) -->
-<Tag_0 class={style({ base: { maxWidth: "{{maxWidth}}" } }, __props, { root: true })}
+<!-- on a COMPONENT STRUCTURE ROOT: style() wrapped in the cx instance-merge form,
+     inline style wrapped in inlineStyle(…, __props) -->
+<Tag_0 class={cx(style({ base: { maxWidth: "{{maxWidth}}" } }, __props), className)}
        style={inlineStyle({ "max-width": `${maxWidth}` }, __props)}>
 ```
 
@@ -489,7 +575,14 @@ If `html` is *not* a string (a structured value), it is wrapped in `embedHtml({�
 ```astro
 <slot />                              <!-- no default -->
 <slot><p>fallback</p></slot>          <!-- with default children -->
+<slot name="header" />                <!-- named slot (node.name) -->
+<slot name="footer"><p>fb</p></slot>  <!-- named + fallback -->
 ```
+
+A `name` attribute → `node.name` (a named slot; nameless = the default slot). Assign instance
+content to a named slot with a plain `slot=` attribute on the child element
+(`<h2 slot="header">…</h2>`) — that rides the node's `attributes` and round-trips with no
+special consumer-side field.
 
 ### 4.6 `locale-list`
 
@@ -686,7 +779,9 @@ off-list value falls back to the text input so it is never stranded.
 **Runtime/provisioning:** none — a custom component is a plain native Astro
 import, so `astro build`/`dev` render it with no extra dependency (no `@astrojs/<fw>` renderer, no
 provisioning step), and the codec change ships in the app with no `meno-astro` publish. A real
-`astro build` is exercised end-to-end by `packages/astro/scripts/custom-e2e.mjs`.
+`astro build` is exercised end-to-end by `packages/astro/scripts/custom-e2e.mjs`. (Emit:
+`renderCustomAstro` / `customAstroIdentFor` in `emitNode.ts`; parse: `customAstroImports` in
+`parseBody.ts`; node schema: `CustomNodeType.ts`.)
 
 > **meno-core canvas:** meno-core can't execute a foreign `.astro` file, so the design canvas
 > renders a quiet placeholder for a custom node (its slotted children, or an inline marker with the
@@ -737,6 +832,9 @@ const { items, class: className } = resolveProps(Astro, {
   editor** — its load path validates the prop and rejects it with
   `interface.<prop> — list prop requires itemSchema and an object-array default`. Give every list
   prop an `itemSchema` + object-array default.
+- **`itemSchema` field types are PROP types, not CMS field types** — the same closed list as a
+  component's own props (see [§3.2 Prop types](#prop-types)). `{ address: { type: "text" } }` is a
+  CMS field type and fails the same way: it round-trips, it builds, it won't open.
 
 ### 5.2 Collection list
 
@@ -849,6 +947,40 @@ same text. From `index.astro`:
 > template-to-JS conversion; only attribute/child/href positions get converted. (See
 > [§10.1](#101-known-gaps) — this is a latent runtime concern, not a round-trip one.)
 
+#### Template scope — what an expression may reference
+
+The conversion is purely syntactic: `parse` turns **any** `{expr}` into `{{expr}}` without
+checking that `expr` resolves. That matters because the two render paths have different
+scopes:
+
+| | scope of an expression |
+|---|---|
+| real `astro build` / play mode | the whole frontmatter — every `const`, `await`, import |
+| Studio's **Fast Design Mode** canvas | props, the loop var, `cms`, globals — nothing else |
+
+So a binding to a **frontmatter-computed local** —
+
+```astro
+const __first = list(items, {}).find((i) => i.open) || {};
+<img src={__first.image} />
+```
+
+— round-trips cleanly (no `unsupported` flag; the `const` is preserved verbatim in
+`_frontmatter`) and builds correctly, but is **invisible to the fast canvas**, which
+executes no JS. The template string is then returned unchanged:
+
+- **value position** → the DOM literally gets `src="{{__first.image}}"` — broken image,
+  visible braces in text, dead `href`.
+- **`if` position** → an unresolved `{{…}}` is deliberately treated as **false**, so the
+  entire subtree is dropped with no diagnostic anywhere.
+
+Bind something in scope instead: `items[0]?.image` (computed member access + optional
+chaining both round-trip and both evaluate), `{{cms.title}}`, or a loop var. Where the value
+genuinely can't be modelled — an array built with `.map()`, a `tel:`/`mailto:` href derived
+from a CMS field, a `getCollectionList` result used outside its own list — the frontmatter
+local is the right tool, but the node it feeds is then **Astro-mode-only**; don't put
+page-critical content behind it.
+
 ### 6.2 Conditionals (`if`)
 
 A node with an `if` is wrapped by `applyIf`:
@@ -860,6 +992,7 @@ A node with an `if` is wrapped by `applyIf`:
 | `"{{visible}}"` (string template) | `{visible && ( … )}` |
 | other string | used verbatim as the condition |
 | `BooleanMapping` `{ _mapping, prop, values }` | `{when({…}) && ( … )}` |
+| `I18nValue` `{ _i18n: true, en: true, pl: false }` | `{i18n({…}) && ( … )}` |
 
 ```astro
 {visible && (
@@ -869,6 +1002,20 @@ A node with an `if` is wrapped by `applyIf`:
 
 For an element the wrapper is `cond && ( <markup> )`; for an expression node (a nested
 list/conditional) it is `cond && (expr)`.
+
+**Localized visibility.** The i18n form is per-locale visibility: the slots hold booleans
+and the same runtime `i18n()` resolver ([§6.4](#64-cms-data-bindings-wrap-in-i18n)) picks
+the active locale's, so the node renders only where it is `true` (a locale with no slot
+falls back to the default locale's, like every other i18n value). The studio's **Visibility**
+section exposes it through the same Globe button used for localized text — one toggle per
+locale. `reverseCondition` reads the object-literal call back to the `I18nValue`, so it
+round-trips.
+
+```astro
+{i18n({ _i18n: true, en: true, pl: false }) && (
+  <div>Shown on /about, dropped on /pl/o-nas</div>
+)}
+```
 
 ### 6.3 Dynamic tags (`h{{size}}`)
 
@@ -930,31 +1077,48 @@ passes it through.
 > Astro string-coerces an object child), and text interpolation HTML-escapes anyway. A
 > `{{cms.body}}` **text child** whose field is declared `type:"rich-text"` (the page's own
 > `meta.cms.fields`; for shared components, the project-wide union the converter threads —
-> `EmitOptions.cmsRichTextFields`) emits as
-> `<Fragment set:html={richTextWithComponents(cms.body, cmsComponents)} />` plus an
-> `import { cmsComponents } from '<rel>/cmsComponents'` — the converter-generated registry
-> module (`src/cmsComponents.ts`, an eager `import.meta.glob` over `src/components/`).
-> `richTextWithComponents()` resolves the per-locale value, converts TipTap → HTML, and
-> renders embedded components (TipTap `menoComponent` nodes) for real: URL-bearing embeds
-> (Youtube/Vimeo) become their responsive iframe; any other component is rendered to HTML
-> via Astro's Container API against the registry. The **same registry-backed render** also
-> covers the two other ways a rich-text value reaches the page, so embedded components render
-> everywhere a rich-text field can be shown — not just as a text child:
+> `EmitOptions.cmsRichTextFields`) therefore emits as REAL HTML via `set:html={…}`. **Which
+> helper is chosen is tiered by the field's `editor` meta:**
+>
+> - **Basic** (`editor` absent or `"basic"` — the common case) emits
+>   `<Fragment set:html={richText(cms.body)} />`. `richText()` resolves the per-locale value,
+>   converts TipTap → HTML, runs the URL-embed fast path + internal-link localization, and
+>   imports **no** registry. It does NOT expand embedded `menoComponent` markers.
+> - **Extended** (`editor:"extended"`) emits
+>   `<Fragment set:html={richTextWithComponents(cms.body, cmsComponents)} />` plus an
+>   `import { cmsComponents } from '<rel>/cmsComponents'` — the converter-generated registry
+>   module (`src/cmsComponents.ts`, an eager `import.meta.glob` over `src/components/`).
+>   `richTextWithComponents()` does everything `richText` does **and** renders embedded
+>   components (TipTap `menoComponent` nodes) for real: URL-bearing embeds (Youtube/Vimeo)
+>   become their responsive iframe; any other component is rendered to HTML via Astro's
+>   Container API against the registry.
+>
+> The **same `editor`-tiered split** also covers the two other ways a rich-text value reaches the
+> page, so the render form is consistent everywhere a rich-text field can be shown — not just as a
+> text child:
 >
 > - A **rich-text prop** (`{{body}}` where `body` is a `type:"rich-text"` prop, e.g. a CMS field
->   forwarded `<RichBlock body={cms.body} />`) emits
->   `<Fragment set:html={richTextWithComponents(body, cmsComponents)} />` (+ the registry import).
-> - An **embed node** binding a rich-text field (`type:"embed"` with `html: "{{cms.body}}"`)
->   emits `<Embed html={i18n(cms.body)} components={cmsComponents} />` — the emitter passes the
->   registry so `Embed` renders embedded components via `richTextWithComponents`; a verbatim /
->   URL / non-rich-text embed keeps the lighter `toHtmlString` path (`components` omitted). The
->   `components` attr is emit-only plumbing, dropped on parse.
+>   forwarded `<RichBlock body={cms.body} />`) emits `<Fragment set:html={richText(body)} />` (Basic)
+>   or `<Fragment set:html={richTextWithComponents(body, cmsComponents)} />` (Extended, + the registry
+>   import). The prop's own `editor` meta decides.
+> - An **embed node** binding a rich-text field (`type:"embed"` with `html: "{{cms.body}}"`) emits
+>   `<Embed html={i18n(cms.body)} components={cmsComponents} />` for an **Extended** field — the
+>   emitter passes the registry so `Embed` renders embedded components via `richTextWithComponents`.
+>   A **Basic** field (or a verbatim / URL / non-rich-text embed) omits `components`, and `Embed`
+>   normalizes the value via `richText`. The `components` attr is emit-only plumbing, dropped on parse.
 >
-> **Parse rule:** `richTextWithComponents(<chain>, cmsComponents)` reverses to the
-> `{{<chain>}}` text child (the registry arg is emit-only plumbing); the legacy single-arg
-> `richText(<chain>)` form still reverses too, so files emitted before the registry
-> existed keep parsing. Like the `i18n()` wrap, the spelling is reserved — emit is the
-> sole authority on where it appears.
+> **Union rule (shared components only):** a shared component carries no CMS schema, so the converter
+> threads the project-wide unions by name — `cmsRichTextFields` (any rich-text field) and
+> `cmsRichTextExtendedFields` (Extended in **at least one** collection). A field name Extended in any
+> collection is treated Extended in a shared component (safe — keeps embedded components rendering).
+> A CMS template page reads its **own** schema, so its split is exact.
+>
+> **Parse rule:** BOTH `richTextWithComponents(<chain>, cmsComponents)` and the single-arg
+> `richText(<chain>)` reverse to the `{{<chain>}}` text child (the registry arg is emit-only
+> plumbing; the field's `editor` meta — carried in `meta.cms.fields` / the prop interface — is what
+> re-selects the form on the next emit). `richText(<chain>)` is the **active Basic target**, not a
+> legacy form. Like the `i18n()` wrap, the spelling is reserved — emit is the sole authority on
+> where it appears.
 
 **Parse rule** (`reverseI18nWrap` in `parseLiteral.ts`). In every expression position
 (whole expression, `${…}` interpolation, structured-literal value, the `|| undefined`
@@ -1053,13 +1217,14 @@ The emitted `.astro` imports a small set of helpers from `meno-astro` and
 | Import | From | Purpose |
 |---|---|---|
 | `style(styleObj, props?, meta?)` | `meno-astro` | Resolve a Meno `StyleObject` (responsive + prop mappings) to a class string; the matching CSS is generated at build time by the `meno()` integration (`virtual:meno-utilities.css`). |
-| `i18n(value)` | `meno-astro` | Resolve an `{ _i18n: true, … }` value for the active locale; **identity for non-i18n values**. Carries both i18n value literals (`i18n({…})`) and wrapped CMS-data bindings (`i18n(cms.title)`, [§6.4](#64-cms-data-bindings-wrap-in-i18n)). The locale context is opened per render by the injected locale middleware (`runWithLocale` over AsyncLocalStorage). |
+| `i18n(value)` | `meno-astro` | Resolve an `{ _i18n: true, … }` value for the active locale; **identity for non-i18n values**. Carries i18n value literals (`i18n({…})`), wrapped CMS-data bindings (`i18n(cms.title)`, [§6.4](#64-cms-data-bindings-wrap-in-i18n)), and — with boolean slots — localized visibility in `if` position (`i18n({…}) && ( … )`, [§6.2](#62-conditionals-if)). The locale context is opened per render by the injected locale middleware (`runWithLocale` over AsyncLocalStorage). |
 | `href(linkValue, props?)` | `meno-astro` | Resolve a `LinkMapping` / structured href. |
 | `when(mapping, props?)` | `meno-astro` | Resolve a `BooleanMapping` to a boolean (for `if`). |
 | `list(src, opts?)` | `meno-astro` | Tolerant prop-list slicing (offset/limit). |
 | `getCollectionList(src, query?, Astro, getCollection)` | `meno-astro` | Resolve a CMS collection list at build time. |
 | `embedHtml(value, props?)` | `meno-astro` | Resolve a structured embed payload to an HTML string. |
-| `richTextWithComponents(value, cmsComponents)` | `meno-astro` | Render a CMS rich-text value (TipTap doc) to HTML **including embedded components**: locale resolve → TipTap → HTML → URL-embed fast path → link localization, then each remaining `menoComponent` marker is rendered via Astro's Container API against the project registry (`src/cmsComponents.ts`, generated by the converter). Returns a promise; `set:html` awaits it natively. ([§6.4](#64-cms-data-bindings-wrap-in-i18n)) |
+| `richText(value)` | `meno-astro` | The **Basic** rich-text render (a rich-text field/prop with `editor` absent or `"basic"`): locale resolve → TipTap doc/marker → HTML → URL-embed fast path → internal-link localization. Handles a TipTap object or a plain HTML string; imports **no** component registry. Does NOT expand embedded `menoComponent` markers (use the Extended helper for that). ([§6.4](#64-cms-data-bindings-wrap-in-i18n)) |
+| `richTextWithComponents(value, cmsComponents)` | `meno-astro` | The **Extended** rich-text render (`editor:"extended"`): everything `richText` does **plus** rendering embedded components — each remaining `menoComponent` marker is rendered via Astro's Container API against the project registry (`src/cmsComponents.ts`, generated by the converter). Returns a promise; `set:html` awaits it natively. ([§6.4](#64-cms-data-bindings-wrap-in-i18n)) |
 | `BaseLayout`, `Link`, `Embed`, `LocaleList` | `meno-astro/components` | Runtime Astro components. `Link`/`Embed` localize internal hrefs to the active locale; `BaseLayout` emits hreflang alternates; `LocaleList` renders slug-translated switcher links. |
 
 > **Status: implemented and published** (`meno-astro` on npm; all helpers live in
@@ -1120,9 +1285,18 @@ logic) should survive a round-trip untouched.
 > the browser keeps only the first, so in a real Astro render the foreign class silently
 > drops while the meno-core canvas (which merges) looks fine. Parse accepts both the concat
 > form and the legacy duplicate-attribute form. No `rawClass` regions are reported yet.
-> Still **not** preserved (the next piece of work): arbitrary frontmatter
-> (`const`/`import`/functions) — do not hand-author frontmatter logic expecting it to
-> survive.
+> **Arbitrary frontmatter IS now preserved** as a verbatim passthrough block. Hand-authored
+> frontmatter the codec doesn't model — foreign `import`s, helper `const`/`let`/`function`s,
+> `import.meta.env` access, `try`/`fetch` SSR logic — is captured byte-for-byte on parse into
+> a `_frontmatter` string on the page/component model, re-emitted unchanged after the
+> generated frontmatter, and reported as `kind: 'verbatim'` region(s). It round-trips
+> (`extractFrontmatterPassthrough` + the shared `computeCover` recognizer in
+> `parse/frontmatterScan.ts`), so such a page is editable rather than read-only — only a
+> frontmatter that can't be scanned at all (an unterminated string/template) still degrades to
+> `_unsupported`. Caveat: the captured block is relocated as one contiguous group AFTER the
+> generated frontmatter (imports are hoisted by Astro, so execution is unaffected), and a
+> custom bare side-effect import that collides with a generated one (`../styles/theme.css`,
+> `/libraries/…`) is treated as generated, not foreign.
 
 ### 10.1 Known gaps
 
@@ -1152,7 +1326,10 @@ If you are writing or editing meno-astro dialect by hand (or as an AI), the rule
    the named form), and the build generates the CSS; foreign/library classes are preserved verbatim. Only **prop-bound / `{{template}}` / `_mapping`** styling uses the
    `style({...})` / `cx(…)` / `variants(…)` helpers (`style()`'s arg is a Meno `StyleObject` —
    `{ base, tablet, mobile }`, prop bindings as `{ _mapping, prop, values }`); a component root merges
-   instance overrides via `cx(<own classes>, className)`.
+   instance overrides via `cx(<own classes>, className)`. A node's editor layer name rides a
+   **`data-meno-label="…"`** attribute (reserved: it parses to `node.label`, never to
+   `attributes` — keep it, don't repurpose it); only a node that emits `style()` anyway keeps
+   its label in the `style()` meta argument.
 2. **i18n values go inside `i18n({...})`** with the `{ _i18n: true, en, pl, … }` shape.
 3. **Templates use `{{…}}` in the model**, which the emitter renders as `{expr}` or
    `` `…${expr}…` ``. To re-introduce a Meno template by hand in markup, write a JSX
@@ -1166,12 +1343,14 @@ If you are writing or editing meno-astro dialect by hand (or as an AI), the rule
       the wrap resolves i18n fields; identity otherwise). `{i18n(<chain>)}` always parses
       back to `{{<chain>}}`; don't hand-write the wrap outside those scopes (it normalizes
       away on the next save).
-   2. **Rich-text CMS fields bound as a text child render through
-      `<Fragment set:html={richTextWithComponents(cms.field, cmsComponents)} />`**
-      ([§6.4](#64-cms-data-bindings-wrap-in-i18n)) — never a text interpolation (an object
-      child prints `[object Object]`). The `cmsComponents` registry import
-      (`import { cmsComponents } from '<rel>/cmsComponents'`) is emit-only boilerplate;
-      the whole form parses back to the `{{cms.field}}` text child.
+   2. **Rich-text CMS fields bound as a text child render as HTML via `set:html={…}`, tiered by
+      the field's `editor` meta** ([§6.4](#64-cms-data-bindings-wrap-in-i18n)) — never a text
+      interpolation (an object child prints `[object Object]`). **Basic** (default) →
+      `<Fragment set:html={richText(cms.field)} />` (lean, no registry); **Extended**
+      (`editor:"extended"`) → `<Fragment set:html={richTextWithComponents(cms.field, cmsComponents)} />`
+      (+ the emit-only `import { cmsComponents } from '<rel>/cmsComponents'` boilerplate — renders
+      embedded components). Both forms parse back to the `{{cms.field}}` text child; `editor` decides
+      the re-emitted form.
 4. **Component props are JSX attributes.** Numbers/booleans use `{…}`; objects use literal
    `{{ … }}`; i18n strings use `i18n({…})`.
 5. **The `resolveProps(Astro, {…})` argument is authoritative** — there is no separate
@@ -1179,12 +1358,11 @@ If you are writing or editing meno-astro dialect by hand (or as an AI), the rule
    (the destructured names + their inferred TS types are regenerated on save).
 6. **Conditionals are `{cond && ( … )}`**; lists are `{ list(src,{…}).map((item, i) => ( … )) }`
    (prop) or a frontmatter `getCollectionList` const + `{ X.map(…) }` (collection).
-7. **Verbatim JS *expressions*, foreign frontmatter, and `class` strings all survive.** An
-   un-evaluatable `{expr}` value/attribute/condition is preserved as `{ _code, expr }` and
-   reported as a `verbatim` region. Hand-authored frontmatter (a stray `const`, a foreign
-   `import`, a helper `function`) is captured as a verbatim `_frontmatter` passthrough block and
-   round-trips (§4.9 covers the whole-component escape hatch; page-level passthrough keeps a
-   mostly-dialect page editable). A static `class="p-[24px] flex"` (utility + foreign tokens)
+7. **Verbatim JS *expressions*, arbitrary frontmatter, and `class` strings all survive.** An
+   un-evaluatable `{expr}` value/attribute/condition is preserved as `{ _code, expr }`, and
+   hand-authored frontmatter (foreign `import`s, helper `const`/`function`s, `import.meta.env`,
+   SSR `fetch` logic) is preserved verbatim as the model's `_frontmatter` block — both round-trip
+   and report as `verbatim` regions. A static `class="p-[24px] flex"` (utility + foreign tokens)
    parses to `attributes.class` and round-trips — it's the canonical styling form (rule 1).
 8. **Islands, custom components, markdown, optimized images:**
    - **Islands** are framework components under `src/islands/` ([§4.7](#47-island--byo-framework-component-astro-islands)):

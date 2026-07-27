@@ -1,0 +1,4 @@
+interface:
+  display_name: "Page From Figma"
+  short_description: "Build a Meno page from a Figma frame"
+  default_prompt: "Use $page-from-figma to turn a Figma frame into a layered, tokenized Meno page."
