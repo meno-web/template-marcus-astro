@@ -1,5 +1,5 @@
 ---
-import { list, resolveProps, style } from 'meno-astro';
+import { cx, list, resolveProps, style } from 'meno-astro';
 import { Link } from 'meno-astro/components';
 
 const __props = resolveProps(Astro, {
@@ -19,29 +19,11 @@ const __props = resolveProps(Astro, {
 });
 const { items, fade, class: className } = __props;
 ---
-<nav class={style({}, __props, { root: true, label: "breadcrumbs" })} aria-label="Breadcrumbs" fade={fade || undefined}>
-  <ol class={style({
-      base: {
-        display: "flex",
-        flexWrap: "wrap",
-        alignItems: "center",
-        gap: "12px",
-        listStyle: "none",
-        padding: "0",
-        margin: "0"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props)}>
+<nav class={cx(style({}, __props, { label: "breadcrumbs" }), className)} aria-label="Breadcrumbs" fade={fade || undefined}>
+  <ol class="p-[0] m-[0] flex items-center flex-wrap gap-3 [list-style:none]">
     {list(items).map((item, itemIndex, itemArr) => (
-      <li class={style({ base: { display: "flex", alignItems: "center", gap: "4px" } }, __props)}>
-        <Link href={item.href} class={style({
-            base: {
-              color: "var(--text-100)",
-              fontSize: "var(--ts-fs)",
-              textDecoration: "none"
-            }
-          }, __props, {
+      <li class="flex items-center gap-1">
+        <Link href={item.href} class={style({}, __props, {
             interactive: [
               {
                 name: "on hover",
@@ -49,9 +31,9 @@ const { items, fade, class: className } = __props;
                 style: { base: { color: "var(--text)" } }
               }
             ]
-          })}>{item.label}</Link>
-        {(itemIndex === itemArr.length - 1) && (
-          <span class={style({ base: { color: "var(--text-100)", fontSize: "var(--ts-fs)" } }, __props)}>{" / "}</span>
+          }) + " text-[var(--text-100)] text-(length:--ts-fs) no-underline"}>{item.label}</Link>
+        {itemIndex === itemArr.length - 1 && (
+          <span class="text-[var(--text-100)] text-(length:--ts-fs)">{" / "}</span>
         )}
       </li>
     ))}

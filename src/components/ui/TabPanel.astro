@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   isOpen: { type: "boolean", default: false },
@@ -7,12 +7,11 @@ const __props = resolveProps(Astro, {
 });
 const { isOpen, fade, class: className } = __props;
 ---
-<div class={style({ base: { padding: "24px 0", width: "100%" } }, __props, {
-    root: true,
+<div class={cx(style({}, __props, {
     interactive: [
       { postfix: ":nth-of-type(1)", style: { base: { display: "block" } } },
       { postfix: ".is-active", style: { base: { display: "block" } } },
       { postfix: ":not(.is-active)", style: { base: { display: "none" } } }
     ],
     label: "Panel"
-  })} data-tab-panel="true" class={isOpen ? "is-active" : "" || undefined} fade={fade || undefined}><slot /></div>
+  }), className)} data-tab-panel="true" class={`p-[24px_0] w-full ${isOpen ? "is-active" : ""}`} fade={fade || undefined}><slot /></div>

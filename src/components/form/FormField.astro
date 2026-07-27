@@ -1,16 +1,7 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 
 const __props = resolveProps(Astro, {});
 const { class: className } = __props;
 ---
-<div class={style({
-    base: {
-      display: "flex",
-      flexDirection: "column",
-      marginBottom: "12px",
-      gap: "8px"
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })}><slot /></div>
+<div class={cx("mb-3 flex flex-col gap-2", className)}><slot /></div>

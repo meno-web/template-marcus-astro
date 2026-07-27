@@ -1,5 +1,5 @@
 ---
-import { inlineStyle, resolveProps, style } from 'meno-astro';
+import { cx, inlineStyle, resolveProps, style } from 'meno-astro';
 import Icon from '../ui/Icon.astro';
 
 const __props = resolveProps(Astro, {
@@ -11,9 +11,8 @@ const __props = resolveProps(Astro, {
 });
 const { autoplay, loop, columns, gap, cropped, class: className } = __props;
 ---
-<div class={style({
+<div class={cx(style({
     base: {
-      position: "relative",
       "--columns": {
         _mapping: true,
         prop: "columns",
@@ -26,79 +25,23 @@ const { autoplay, loop, columns, gap, cropped, class: className } = __props;
         values: { true: "0", false: "0.2" }
       }
     }
-  }, __props, { root: true, label: "Slider" })} style={inlineStyle({ "--gap": `${gap}` }, __props)}>
-  <div class={style({}, __props, { label: "Viewport" })} data-el="viewport"><div class={style({ base: { display: "flex", gap: "{{gap}}px" } }, __props, { label: "Container" })} style={`--m-base-gap: ${gap}px`} data-el="container"><slot /></div></div>
-  <div class={style({
-      base: {
-        display: "flex",
-        gap: "8px",
-        justifyContent: "center",
-        marginTop: "24px"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props, { label: "Navigation" })}>
-    <button class={style({
-        base: {
-          width: "44px",
-          height: "44px",
-          borderRadius: "50%",
-          backgroundColor: "var(--bg-200)",
-          border: "1px solid",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
-          transition: "background-color 0.2s ease, border-color 0.2s ease",
-          padding: "0",
-          color: "var(--text)",
-          paddingRight: "2px",
-          borderColor: "var(--bg-200)"
-        },
-        tablet: {},
-        mobile: {}
-      }, __props, {
+  }, __props, { label: "Slider" }), "relative", className)} style={inlineStyle({ "--gap": `${gap}` }, __props)}>
+  <div class={style({}, __props, { label: "Viewport" })} data-el="viewport"><div class={style({ base: { gap: "{{gap}}px" } }, __props, { label: "Container" }) + " flex"} style={`--m-base-gap: ${gap}px`} data-el="container"><slot /></div></div>
+  <div class={style({}, __props, { label: "Navigation" }) + " mt-6 flex justify-center gap-2"}>
+    <button class={style({}, __props, {
         interactive: [
           { postfix: ":hover", style: { base: { borderColor: "var(--border)" } } }
         ],
         label: "Prev button"
-      })} data-el="prev" aria-label="Previous slide"><Icon icon="chevron-left" size={20} /></button>
-    <button class={style({
-        base: {
-          width: "44px",
-          height: "44px",
-          borderRadius: "50%",
-          backgroundColor: "var(--bg-200)",
-          border: "1px solid",
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          cursor: "pointer",
-          transition: "background-color 0.2s ease, border-color 0.2s ease",
-          padding: "0",
-          color: "var(--text)",
-          paddingLeft: "2px",
-          borderColor: "var(--bg-200)"
-        },
-        tablet: {},
-        mobile: {}
-      }, __props, {
+      }) + " p-[0] pr-0.5 flex justify-center items-center w-11 h-11 bg-[var(--bg-200)] text-text border-[1px_solid] rounded-[50%] border-[var(--bg-200)] cursor-pointer transition-[background-color_0.2s_ease,_border-color_0.2s_ease]"} data-el="prev" aria-label="Previous slide"><Icon icon="chevron-left" size={20} /></button>
+    <button class={style({}, __props, {
         interactive: [
           { postfix: ":hover", style: { base: { borderColor: "var(--border)" } } }
         ],
         label: "Next button"
-      })} data-el="next" aria-label="Next slide"><Icon icon="chevron-right" size={20} /></button>
+      }) + " p-[0] pl-0.5 flex justify-center items-center w-11 h-11 bg-[var(--bg-200)] text-text border-[1px_solid] rounded-[50%] border-[var(--bg-200)] cursor-pointer transition-[background-color_0.2s_ease,_border-color_0.2s_ease]"} data-el="next" aria-label="Next slide"><Icon icon="chevron-right" size={20} /></button>
   </div>
-  <div class={style({
-      base: {
-        display: "flex",
-        justifyContent: "center",
-        gap: "8px",
-        marginTop: "24px"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props, { label: "Pagination" })} data-el="pagination" />
+  <div class={style({}, __props, { label: "Pagination" }) + " mt-6 flex justify-center gap-2"} data-el="pagination" />
 </div>
 
 

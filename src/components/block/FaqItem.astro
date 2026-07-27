@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style } from 'meno-astro';
 import Heading from '../ui/Heading.astro';
 import Icon from '../ui/Icon.astro';
 import Text from '../ui/Text.astro';
@@ -12,26 +12,8 @@ const __props = resolveProps(Astro, {
 });
 const { question, answer, isOpen, fade, class: className } = __props;
 ---
-<div class={style({
-    base: { borderBottom: "1px solid", borderColor: "var(--border)" },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true, label: "Item" })} class={isOpen ? "is-open" : "" || undefined} fade={fade || undefined}>
-  <dt class={style({
-      base: {
-        padding: "20px 0 8px",
-        fontWeight: "600",
-        cursor: "pointer",
-        opacity: "0.6",
-        transition: "opacity .2s",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "space-between",
-        gap: "16px"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props, {
+<div class={cx(style({}, __props, { label: "Item" }), className)} class={`border-b-[1px_solid] border-border ${isOpen ? "is-open" : ""}`} fade={fade || undefined}>
+  <dt class={style({}, __props, {
       interactive: [
         { name: "on hover", postfix: ":hover", style: { base: { opacity: "1" } } },
         {
@@ -41,22 +23,9 @@ const { question, answer, isOpen, fade, class: className } = __props;
         }
       ],
       label: "question"
-    })} data-el="question">
-    {""}
-    <div class={style({ base: { flex: "1", minWidth: "0", marginBottom: "calc(-1 * var(--h3-s))" } }, __props)}><Heading text={question} tag="4" variant="default" size="3" /></div>
-    <span class={style({
-        base: {
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
-          flexShrink: "0",
-          alignSelf: "center",
-          transition: "transform 0.3s ease",
-          marginBottom: "8px"
-        },
-        tablet: {},
-        mobile: {}
-      }, __props, {
+    }) + " p-[20px_0_8px] flex justify-between items-center gap-4 font-[600] opacity-60 cursor-pointer transition-[opacity_.2s]"} data-el="question">
+    <div class="mb-[calc(-1_*_var(--h3-s))] flex-1 min-w-[0]"><Heading text={question} tag="4" variant="default" size="3" /></div>
+    <span class={style({}, __props, {
         interactive: [
           {
             name: "is open",
@@ -65,19 +34,9 @@ const { question, answer, isOpen, fade, class: className } = __props;
           }
         ],
         label: "icon"
-      })}><Icon icon="chevron-down" size={20} /></span>
+      }) + " mb-2 flex justify-center items-center shrink-0 self-center transition-[transform_0.3s_ease]"}><Icon icon="chevron-down" size={20} /></span>
   </dt>
-  <dd class={style({
-      base: {
-        margin: "0",
-        maxWidth: "800px",
-        display: "grid",
-        gridTemplateRows: "0fr",
-        transition: "grid-template-rows 0.3s ease"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props, {
+  <dd class={style({}, __props, {
       interactive: [
         {
           name: "is open",
@@ -86,14 +45,7 @@ const { question, answer, isOpen, fade, class: className } = __props;
         }
       ],
       label: "answer"
-    })} data-el="answer">
-    <div class={style({ base: { overflow: "hidden", minHeight: "0" } }, __props)}>
-      <div class={style({ base: { paddingBottom: "30px" } }, __props)}>
-        {""}
-        <Text size="default" text={`${answer} `} variant="default" />
-      </div>
-    </div>
-  </dd>
+    }) + " m-[0] grid max-w-[800px] grid-rows-[0fr] transition-[grid-template-rows_0.3s_ease]"} data-el="answer"><div class="min-h-[0] overflow-hidden"><div class="pb-[30px]"><Text size="default" text={`${answer} `} variant="default" /></div></div></dd>
 </div>
 
 

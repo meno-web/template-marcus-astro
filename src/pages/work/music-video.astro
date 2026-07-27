@@ -1,0 +1,22 @@
+---
+import { BaseLayout } from 'meno-astro/components';
+import CaseStudyBody from '../../components/section/CaseStudyBody.astro';
+import Heading from '../../components/ui/Heading.astro';
+import Layout from '../../components/layout/Layout.astro';
+import Text from '../../components/ui/Text.astro';
+import '../../styles/theme.css';
+
+const meta = {
+  title: "Music Video — Marcus Cole",
+  description: "Music Video — Director of Photography"
+};
+---
+<BaseLayout meta={meta}>
+  <Layout>
+    <CaseStudyBody theme="dark" backText="Back to Work" backLink="/work" category="Music Video" title="Music Video" image="/images/pasted-image-1773394149639.webp">
+      <Text text="A high-energy music video blending performance footage with abstract visual sequences. The project required precise choreography between camera movement and the artist's performance." />
+      <Heading text="Production" size="3" tag="2" isMb0={true} />
+      <Text text="Shot over two days in a converted warehouse space, the video used a combination of Steadicam, drone, and handheld work to create a dynamic visual rhythm that matched the energy of the track." />
+    </CaseStudyBody>
+  </Layout>
+</BaseLayout>

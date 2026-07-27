@@ -53,72 +53,20 @@ const {
       <Text text={text} size="large" fade="0.4" align="center" maxWidth="" />
     )}
   </SectionHeader>
-  <div class={style({ base: { overflowX: "auto" } }, __props)} fade={0.4}>
-    <table class={style({ base: { width: "100%", borderCollapse: "collapse", minWidth: "500px" } }, __props)}>
+  <div fade={0.4} class="overflow-x-auto">
+    <table class="w-full min-w-[500px] [border-collapse:collapse]">
       <thead>
         <tr>
-          <th class={style({
-              base: {
-                textAlign: "left",
-                padding: "16px 24px",
-                fontSize: "14px",
-                fontWeight: "600",
-                color: "var(--text-secondary)",
-                borderBottom: "2px solid var(--border)",
-                textTransform: "uppercase",
-                letterSpacing: "0.5px"
-              }
-            }, __props)}>Feature</th>
-          <th class={style({
-              base: {
-                textAlign: "center",
-                padding: "16px 24px",
-                fontSize: "16px",
-                fontWeight: "600",
-                color: "var(--text)",
-                borderBottom: "2px solid var(--border)"
-              }
-            }, __props)}>{column1Title}</th>
-          <th class={style({
-              base: {
-                textAlign: "center",
-                padding: "16px 24px",
-                fontSize: "16px",
-                fontWeight: "600",
-                color: "var(--text)",
-                borderBottom: "2px solid ",
-                backgroundColor: "var(--bg-100)"
-              },
-              tablet: {},
-              mobile: {}
-            }, __props)}>{column2Title}</th>
+          <th class="p-[16px_24px] text-text-secondary border-b-[2px_solid_var(--border)] text-[14px] font-[600] text-left uppercase tracking-[0.5px]">Feature</th>
+          <th class="p-[16px_24px] text-text border-b-[2px_solid_var(--border)] text-[16px] font-[600] text-center">{column1Title}</th>
+          <th class="p-[16px_24px] bg-[var(--bg-100)] text-text border-b-[2px_solid_] text-[16px] font-[600] text-center">{column2Title}</th>
         </tr>
       </thead>
       {list(items).map((item, itemIndex) => (
         <tr>
-          <td class={style({
-              base: {
-                padding: "16px 24px",
-                fontSize: "15px",
-                color: "var(--text)",
-                borderBottom: "1px solid var(--border-100)"
-              }
-            }, __props)}>{item.title}</td>
-          <td class={style({
-              base: {
-                textAlign: "center",
-                padding: "16px 24px",
-                borderBottom: "1px solid var(--border-100)"
-              }
-            }, __props)}>{item.value}</td>
-          <td class={style({
-              base: {
-                textAlign: "center",
-                padding: "16px 24px",
-                borderBottom: "1px solid var(--border-100)",
-                backgroundColor: "var(--surface)"
-              }
-            }, __props)}>{item.label}</td>
+          <td class="p-[16px_24px] text-text border-b-[1px_solid_var(--border-100)] text-[15px]">{item.title}</td>
+          <td class="p-[16px_24px] border-b-[1px_solid_var(--border-100)] text-center">{item.value}</td>
+          <td class="p-[16px_24px] bg-surface border-b-[1px_solid_var(--border-100)] text-center">{item.label}</td>
         </tr>
       ))}
     </table>

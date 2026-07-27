@@ -1,5 +1,5 @@
 ---
-import { inlineStyle, resolveProps, style } from 'meno-astro';
+import { cx, inlineStyle, resolveProps, style } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   maxWidth: { type: "string", default: "800px" },
@@ -7,14 +7,4 @@ const __props = resolveProps(Astro, {
 });
 const { maxWidth, fade, class: className } = __props;
 ---
-<div class={style({
-    base: {
-      maxWidth: "{{maxWidth}}",
-      margin: "0 auto",
-      backgroundColor: "var(--bg)",
-      borderRadius: "8px",
-      overflow: "hidden",
-      border: "1px solid",
-      borderColor: "var(--border)"
-    }
-  }, __props, { root: true })} style={inlineStyle({ "max-width": `${maxWidth}` }, __props)} fade={fade || undefined}><slot /></div>
+<div class={cx(style({ base: { maxWidth: "{{maxWidth}}" } }, __props), "m-[0_auto] bg-bg border-[1px_solid] rounded-[8px] border-border overflow-hidden", className)} style={inlineStyle({ "max-width": `${maxWidth}` }, __props)} fade={fade || undefined}><slot /></div>

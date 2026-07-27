@@ -68,32 +68,14 @@ const {
 } = __props;
 ---
 <Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
-  <div class={style({
-      base: {
-        display: "grid",
-        gridTemplateColumns: "2fr 1fr 1fr 1fr",
-        gap: "40px"
-      },
-      tablet: { gridTemplateColumns: "1fr 1fr" },
-      mobile: { gridTemplateColumns: "1fr" }
-    }, __props)}>
+  <div class="grid gap-10 grid-cols-[2fr_1fr_1fr_1fr] max-lg:grid-cols-[1fr_1fr] max-sm:grid-cols-[1fr]">
     <div>
-      <div class={style({
-          base: {
-            fontSize: "22px",
-            fontWeight: "700",
-            color: "var(--text)",
-            marginBottom: "16px",
-            letterSpacing: "-0.01em"
-          },
-          tablet: {},
-          mobile: {}
-        }, __props)}>{brandName}</div>
+      <div class="mb-4 text-text text-[22px] font-[700] tracking-[-0.01em]">{brandName}</div>
       <Text text={tagline} maxWidth="320px" />
     </div>
     <div>
       <Subtitle text={column1Title} variant="default" />
-      <nav class={style({ base: { display: "flex", flexDirection: "column", gap: "12px" } }, __props)}>
+      <nav class="flex flex-col gap-3">
         {list(column1Links).map((link, linkIndex) => (
           <FooterLink link={{ href: link.href }} text={link.text} />
         ))}
@@ -101,7 +83,7 @@ const {
     </div>
     <div>
       <Subtitle text={column2Title} variant="default" />
-      <nav class={style({ base: { display: "flex", flexDirection: "column", gap: "12px" } }, __props)}>
+      <nav class="flex flex-col gap-3">
         {list(column2Links).map((link, linkIndex) => (
           <FooterLink link={{ href: link.href }} text={link.text} />
         ))}
@@ -109,26 +91,16 @@ const {
     </div>
     <div>
       <Subtitle text={column3Title} variant="default" />
-      <nav class={style({ base: { display: "flex", flexDirection: "column", gap: "12px" } }, __props)}>
+      <nav class="flex flex-col gap-3">
         {list(column3Links).map((link, linkIndex) => (
           <FooterLink link={{ href: link.href }} text={link.text} />
         ))}
       </nav>
     </div>
   </div>
-  <div class={style({
-      base: {
-        borderTop: "1px solid var(--border)",
-        marginTop: "48px",
-        paddingTop: "24px",
-        display: "flex",
-        justifyContent: "space-between",
-        alignItems: "center"
-      },
-      mobile: { flexDirection: "column", gap: "16px", textAlign: "center" }
-    }, __props)}>
+  <div class="pt-6 mt-12 flex justify-between items-center border-t-[1px_solid_var(--border)] max-sm:flex-col max-sm:gap-4 max-sm:text-center">
     <Text text={copyright} size="small" />
-    <div class={style({ base: { display: "flex", gap: "24px" } }, __props)}>
+    <div class="flex gap-6">
       <FooterLink link={{ href: "" }} text="Privacy policy" />
       <FooterLink text="Terms of Service" link={{ href: "" }} />
     </div>

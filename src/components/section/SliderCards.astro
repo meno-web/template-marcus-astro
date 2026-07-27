@@ -94,17 +94,9 @@ const {
   </SectionHeader>
   <Slider gap={20} autoplay={autoplay} loop={loop} columns="3" cropped={cropped} fade="0.4">
     {list(items).map((item, itemIndex) => (
-      <div class={style({
-          base: {
-            backgroundColor: "var(--bg-100)",
-            borderRadius: "12px",
-            overflow: "hidden"
-          },
-          tablet: {},
-          mobile: {}
-        }, __props, { label: "Card" })}>
+      <div class={style({}, __props, { label: "Card" }) + " bg-[var(--bg-100)] rounded-[12px] overflow-hidden"}>
         <Image image={item.image} aspectRatio="16/9" height="auto" width="100%" />
-        <div class={style({ base: { padding: "24px" } }, __props, { label: "Card Body" })}>
+        <div class={style({}, __props, { label: "Card Body" }) + " p-6"}>
           <Heading text={item.title} size="4" />
           <Text size="default" variant="default" text={item.text} />
         </div>

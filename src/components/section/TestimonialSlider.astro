@@ -1,5 +1,6 @@
 ---
 import { list, resolveProps, style } from 'meno-astro';
+import { MenoImage } from 'meno-astro/components';
 import Icon from '../ui/Icon.astro';
 import QuoteText from '../ui/QuoteText.astro';
 import Section from '../ui/Section.astro';
@@ -55,26 +56,19 @@ const { items, autoplay, loop, theme, class: className } = __props;
 const isEditorMode = false;
 ---
 <Section theme={theme} spaceTop="default" maxWidth="900" class={style({}, __props, { root: true })}>
-  <div class={style({ base: { position: "relative" } }, __props, { label: "Testimonial Slider" })} data-el="slider">
-    <div class={style({ base: { position: "relative" } }, __props, { label: "Slides" })} data-el="slides">
+  <div class={style({}, __props, { label: "Testimonial Slider" }) + " relative"} data-el="slider">
+    <div class={style({}, __props, { label: "Slides" }) + " relative"} data-el="slides">
       {list(items).map((item, itemIndex) => (
         <Fragment>
           {(item.isVisible || !isEditorMode) && (
-            <div class={style({ base: { display: "flex", flexDirection: "column", alignItems: "center" } }, __props, { label: "Slide" })} data-el="slide">
-              <blockquote class={style({ base: { margin: "0", padding: "0" } }, __props)}><QuoteText text={item.quote} maxWidth="100%" align="center" size="2" tag="3" fade="0" /></blockquote>
+            <div class={style({}, __props, { label: "Slide" }) + " flex flex-col items-center"} data-el="slide">
+              <blockquote class="p-[0] m-[0]"><QuoteText text={item.quote} maxWidth="100%" align="center" size="2" tag="3" fade="0" /></blockquote>
               <Spacer size="32" />
-              <div class={style({ base: { display: "flex", alignItems: "center", gap: "16px" } }, __props)}>
-                <img class={style({
-                    base: {
-                      width: "56px",
-                      height: "56px",
-                      borderRadius: "50%",
-                      objectFit: "cover"
-                    }
-                  }, __props)} src={item.avatar || undefined} alt={item.name || undefined} />
+              <div class="flex items-center gap-4">
+                <MenoImage src={item.avatar || undefined} alt={item.name || undefined} class="w-14 h-14 rounded-[50%] object-cover" />
                 <div>
-                  <div class={style({ base: { fontWeight: "600", color: "var(--text)" } }, __props)}>{item.name}</div>
-                  <div class={style({ base: { color: "var(--text-100)", fontSize: "14px" } }, __props)}>{item.role}</div>
+                  <div class="text-text font-[600]">{item.name}</div>
+                  <div class="text-[var(--text-100)] text-[14px]">{item.role}</div>
                 </div>
               </div>
             </div>
@@ -82,31 +76,8 @@ const isEditorMode = false;
         </Fragment>
       ))}
     </div>
-    <div class={style({
-        base: {
-          display: "flex",
-          gap: "8px",
-          justifyContent: "center",
-          marginTop: "24px"
-        }
-      }, __props, { label: "Navigation" })} data-el="nav">
-      <button class={style({
-          base: {
-            width: "44px",
-            height: "44px",
-            borderRadius: "50%",
-            backgroundColor: "var(--bg)",
-            border: "1px solid var(--border)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            transition: "background-color 0.2s ease, border-color 0.2s ease",
-            padding: "0",
-            color: "var(--text)",
-            paddingRight: "2px"
-          }
-        }, __props, {
+    <div class={style({}, __props, { label: "Navigation" }) + " mt-6 flex justify-center gap-2"} data-el="nav">
+      <button class={style({}, __props, {
           interactive: [
             {
               postfix: ":hover",
@@ -116,24 +87,8 @@ const isEditorMode = false;
             }
           ],
           label: "Prev button"
-        })} data-el="prev" aria-label="Previous testimonial"><Icon icon="chevron-left" size={20} /></button>
-      <button class={style({
-          base: {
-            width: "44px",
-            height: "44px",
-            borderRadius: "50%",
-            backgroundColor: "var(--bg)",
-            border: "1px solid var(--border)",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-            cursor: "pointer",
-            transition: "background-color 0.2s ease, border-color 0.2s ease",
-            padding: "0",
-            color: "var(--text)",
-            paddingLeft: "2px"
-          }
-        }, __props, {
+        }) + " p-[0] pr-0.5 flex justify-center items-center w-11 h-11 bg-bg text-text border-[1px_solid_var(--border)] rounded-[50%] cursor-pointer transition-[background-color_0.2s_ease,_border-color_0.2s_ease]"} data-el="prev" aria-label="Previous testimonial"><Icon icon="chevron-left" size={20} /></button>
+      <button class={style({}, __props, {
           interactive: [
             {
               postfix: ":hover",
@@ -143,16 +98,9 @@ const isEditorMode = false;
             }
           ],
           label: "Next button"
-        })} data-el="next" aria-label="Next testimonial"><Icon icon="chevron-right" size={20} /></button>
+        }) + " p-[0] pl-0.5 flex justify-center items-center w-11 h-11 bg-bg text-text border-[1px_solid_var(--border)] rounded-[50%] cursor-pointer transition-[background-color_0.2s_ease,_border-color_0.2s_ease]"} data-el="next" aria-label="Next testimonial"><Icon icon="chevron-right" size={20} /></button>
     </div>
-    <div class={style({
-        base: {
-          display: "flex",
-          justifyContent: "center",
-          gap: "8px",
-          marginTop: "24px"
-        }
-      }, __props, { label: "Pagination" })} data-el="pagination" />
+    <div class={style({}, __props, { label: "Pagination" }) + " mt-6 flex justify-center gap-2"} data-el="pagination" />
   </div>
 </Section>
 

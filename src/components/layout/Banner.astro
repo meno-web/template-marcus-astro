@@ -1,6 +1,7 @@
 ---
-import { resolveProps, style, when } from 'meno-astro';
+import { cx, resolveProps, richTextWithComponents, style, variants, when } from 'meno-astro';
 import Icon from '../ui/Icon.astro';
+import { cmsComponents } from '../../cmsComponents';
 
 const __props = resolveProps(Astro, {
   text: {
@@ -16,44 +17,15 @@ const __props = resolveProps(Astro, {
 });
 const { text, variant, isDismissible, class: className } = __props;
 ---
-<div class={style({
-    base: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      gap: "12px",
-      padding: "10px 80px",
-      fontSize: "var(--ts-fs)",
-      textAlign: "center",
-      backgroundColor: {
-        _mapping: true,
-        prop: "variant",
-        values: { default: "var(--bg-100)", primary: "var(--primary)" }
-      },
-      color: {
-        _mapping: true,
-        prop: "variant",
-        values: { default: "var(--text)", primary: "#fff" }
-      },
-      position: "relative",
-      zIndex: "101"
-    },
-    tablet: { padding: "10px 40px" },
-    mobile: { padding: "10px 20px" }
-  }, __props, { root: true, label: "banner" })}>
-  <span class={style({}, __props, { label: "text" })}><Fragment set:html={text} /></span>
+<div class={cx(style({ base: {} }, __props, { label: "banner" }), variants(__props, {
+    variant: {
+      default: "bg-[var(--bg-100)] text-(--text)",
+      primary: "bg-(--primary) text-[#fff]"
+    }
+  }), "p-[10px_80px] flex justify-center items-center gap-3 text-(length:--ts-fs) text-center relative z-101 max-lg:p-[10px_40px] max-sm:p-[10px_20px]", className)}>
+  <span class={style({}, __props, { label: "text" })}><Fragment set:html={richTextWithComponents(text, cmsComponents)} /></span>
   {when({ _mapping: true, prop: "isDismissible", values: { true: true, false: false } }, __props) && (
-    <button class={style({
-        base: {
-          background: "none",
-          border: "none",
-          cursor: "pointer",
-          color: "inherit",
-          padding: "4px",
-          display: "flex",
-          alignItems: "center"
-        }
-      }, __props, {
+    <button class={style({}, __props, {
         interactive: [
           {
             name: "on hover",
@@ -62,7 +34,7 @@ const { text, variant, isDismissible, class: className } = __props;
           }
         ],
         label: "close button"
-      })} data-el="close-btn"><Icon icon="x" size={16} /></button>
+      }) + " p-1 flex items-center [background:none] text-inherit border-[none] cursor-pointer"} data-el="close-btn"><Icon icon="x" size={16} /></button>
   )}
 </div>
 

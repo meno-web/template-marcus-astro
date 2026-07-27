@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, variants } from 'meno-astro';
 import Image from './Image.astro';
 
 const __props = resolveProps(Astro, {
@@ -30,71 +30,22 @@ const {
   class: className,
 } = __props;
 ---
-<section class={style({
-    base: {
-      position: "relative",
-      paddingTop: {
-        _mapping: true,
-        prop: "spaceTop",
-        values: { default: "var(--s-p)", small: "var(--se-p)", none: "0" }
-      },
-      paddingBottom: {
-        _mapping: true,
-        prop: "spaceBottom",
-        values: { default: "var(--s-p)", small: "var(--se-p)", none: "0" }
-      },
-      backgroundColor: "var(--bg)",
-      width: "100%",
-      overflow: {
-        _mapping: true,
-        prop: "cropped",
-        values: { true: "hidden", false: "visible" }
-      }
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })} theme={theme || undefined} fade={fade || undefined}>
+<section class={cx(variants(__props, {
+    spaceTop: { default: "pt-(--s-p)", small: "pt-(--se-p)", none: "pt-[0]" },
+    spaceBottom: { default: "pb-(--s-p)", small: "pb-(--se-p)", none: "pb-[0]" },
+    cropped: { true: "overflow-hidden", false: "overflow-visible" }
+  }), "w-full bg-bg relative", className)} theme={theme || undefined} fade={fade || undefined}>
   {backgroundImage !== "" && (
-    <div class={style({
-        base: {
-          position: "absolute",
-          top: "0",
-          left: "0",
-          right: "0",
-          bottom: "0",
-          zIndex: "0"
-        },
-        tablet: {},
-        mobile: {}
-      }, __props)}>
+    <div class="absolute top-[0] right-[0] bottom-[0] left-[0] z-0">
       <Image image={backgroundImage} alt="" width="100%" height="100%" objectFit="cover" border={false} sizes="" />
-      <div class={style({
-          base: {
-            position: "absolute",
-            top: "0",
-            left: "0",
-            right: "0",
-            bottom: "0",
-            backgroundColor: "rgba(0, 0, 0, 0.15)"
-          },
-          tablet: {},
-          mobile: {}
-        }, __props)} />
+      <div class="bg-[rgba(0,_0,_0,_0.15)] absolute top-[0] right-[0] bottom-[0] left-[0]" />
     </div>
   )}
-  <div class={style({
-      base: {
-        position: "relative",
-        zIndex: "1",
-        padding: "0 80px",
-        maxWidth: {
-          _mapping: true,
-          prop: "maxWidth",
-          values: { "640": "640px", "900": "1060px", "1280": "var(--c-s)" }
-        },
-        margin: "auto"
-      },
-      tablet: { padding: "0 40px" },
-      mobile: { padding: "0 20px" }
-    }, __props)}><slot /></div>
+  <div class={variants(__props, {
+      maxWidth: {
+        "640": "max-w-[640px]",
+        "900": "max-w-[1060px]",
+        "1280": "max-w-(--c-s)"
+      }
+    }) + " p-[0_80px] m-auto relative z-1 max-lg:p-[0_40px] max-sm:p-[0_20px]"}><slot /></div>
 </section>

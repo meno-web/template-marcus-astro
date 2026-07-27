@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style, variants } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   variant: { type: "select", default: "default", options: ["default", "light"] },
@@ -7,16 +7,4 @@ const __props = resolveProps(Astro, {
 });
 const { variant, fade, class: className } = __props;
 ---
-<div class={style({
-    base: {
-      padding: "24px",
-      backgroundColor: {
-        _mapping: true,
-        prop: "variant",
-        values: { default: "var(--bg-100)", light: "var(--bg-200)" }
-      },
-      borderRadius: "6px"
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true, label: "card" })} fade={fade || undefined}><slot /></div>
+<div class={cx(style({ base: {} }, __props, { label: "card" }), variants(__props, { variant: { default: "bg-[var(--bg-100)]", light: "bg-[var(--bg-200)]" } }), "p-6 rounded-[6px]", className)} fade={fade || undefined}><slot /></div>

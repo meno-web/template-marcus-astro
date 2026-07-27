@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style } from 'meno-astro';
 import { Embed } from 'meno-astro/components';
 
 const __props = resolveProps(Astro, {
@@ -8,24 +8,8 @@ const __props = resolveProps(Astro, {
 });
 const { text, isOpen, class: className } = __props;
 ---
-<li class={style({ base: { listStyle: "none", position: "relative" } }, __props, { root: true, label: "NavDropdown" })}>
-  <button class={style({
-      base: {
-        color: "var(--text)",
-        background: "none",
-        border: "none",
-        fontFamily: "inherit",
-        fontSize: "inherit",
-        display: "flex",
-        alignItems: "center",
-        gap: "8px",
-        padding: "32px 12px",
-        cursor: "pointer",
-        transition: "opacity 0.2s"
-      },
-      tablet: { padding: "24px 20px" },
-      mobile: {}
-    }, __props, {
+<li class={cx(style({}, __props, { label: "NavDropdown" }), "[list-style:none] relative", className)}>
+  <button class={style({}, __props, {
       interactive: [
         {
           name: "hover",
@@ -35,15 +19,9 @@ const { text, isOpen, class: className } = __props;
         }
       ],
       label: "Trigger"
-    })} data-el="trigger" aria-expanded="false" aria-haspopup="true">
+    }) + " p-[32px_12px] flex items-center gap-2 [background:none] text-text border-[none] [font-size:inherit] font-[inherit] cursor-pointer transition-[opacity_0.2s] max-lg:p-[24px_20px]"} data-el="trigger" aria-expanded="false" aria-haspopup="true">
     <span>{text}</span>
-    <Embed html={`<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`} class={style({
-        base: {
-          display: "flex",
-          alignItems: "center",
-          transition: "transform 0.2s ease"
-        }
-      }, __props, {
+    <Embed html={`<svg width="12" height="12" viewBox="0 0 12 12" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>`} class={style({}, __props, {
         interactive: [
           {
             name: "rotate on open",
@@ -53,34 +31,9 @@ const { text, isOpen, class: className } = __props;
           }
         ],
         label: "Chevron"
-      })} data-el="chevron" />
+      }) + " flex items-center transition-[transform_0.2s_ease]"} data-el="chevron" />
   </button>
-  <div class={style({
-      base: {
-        display: "none",
-        position: "absolute",
-        top: "100%",
-        left: "-5px",
-        minWidth: "200px",
-        backgroundColor: "var(--bg)",
-        border: "1px solid var(--border-100)",
-        borderRadius: "8px",
-        boxShadow: "0 4px 16px rgba(0,0,0,0.1)",
-        zIndex: "200",
-        padding: "8px 0"
-      },
-      tablet: {
-        position: "static",
-        border: "none",
-        borderRadius: "0",
-        boxShadow: "none",
-        paddingLeft: "20px",
-        padding: "0 0 0 20px",
-        minWidth: "unset",
-        backgroundColor: "transparent"
-      },
-      mobile: {}
-    }, __props, {
+  <div class={style({}, __props, {
       interactive: [
         {
           name: "show on open",
@@ -90,7 +43,7 @@ const { text, isOpen, class: className } = __props;
         }
       ],
       label: "Panel"
-    })} data-el="panel"><ul class={style({ base: { listStyle: "none", padding: "0", margin: "0" } }, __props, { label: "DropdownLinks" })}><slot /></ul></div>
+    }) + " p-[8px_0] hidden min-w-[200px] bg-bg border-[1px_solid_var(--border-100)] rounded-[8px] shadow-[0_4px_16px_rgba(0,0,0,0.1)] absolute top-full left-[-5px] z-200 max-lg:p-[0_0_0_20px] max-lg:pl-5 max-lg:min-w-[unset] max-lg:bg-transparent max-lg:border-[none] max-lg:rounded-none max-lg:shadow-none max-lg:static"} data-el="panel"><ul class={style({}, __props, { label: "DropdownLinks" }) + " p-[0] m-[0] [list-style:none]"}><slot /></ul></div>
 </li>
 
 

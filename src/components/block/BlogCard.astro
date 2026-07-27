@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style } from 'meno-astro';
 import Heading from '../ui/Heading.astro';
 import Image from '../ui/Image.astro';
 import Spacer from '../ui/Spacer.astro';
@@ -15,28 +15,13 @@ const __props = resolveProps(Astro, {
 });
 const { href, image, title, date, excerpt, fade, class: className } = __props;
 ---
-<a class={style({
-    base: {
-      display: "grid",
-      gridTemplateColumns: "400px 1fr",
-      gap: "32px",
-      alignItems: "start",
-      paddingTop: "32px",
-      paddingBottom: "32px",
-      borderBottom: "1px solid var(--border-100)",
-      textDecoration: "none",
-      color: "inherit"
-    },
-    tablet: { gridTemplateColumns: "200px 1fr", gap: "24px" },
-    mobile: { gridTemplateColumns: "1fr", gap: "16px" }
-  }, __props, {
-    root: true,
+<a class={cx(style({}, __props, {
     interactive: [
       { postfix: ":hover h2", style: { base: { color: "var(--primary)" } } }
     ]
-  })} href={href || undefined} fade={fade || undefined}>
+  }), "pt-8 pb-8 grid items-start gap-8 text-inherit border-b-[1px_solid_var(--border-100)] no-underline grid-cols-[400px_1fr] max-lg:gap-6 max-lg:grid-cols-[200px_1fr] max-sm:gap-4 max-sm:grid-cols-[1fr]", className)} href={href || undefined} fade={fade || undefined}>
   <Image image={image} alt={title} objectFit="cover" height="100%" border={true} rounded="medium" />
-  <div class={style({ base: { display: "flex", flexDirection: "column" }, tablet: {}, mobile: {} }, __props)}>
+  <div class="flex flex-col">
     <Text text={date} size="small" variant="light" />
     <Spacer size="8" />
     <Heading text={title} tag="2" size="4" />

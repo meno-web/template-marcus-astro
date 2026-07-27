@@ -1,7 +1,7 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 
 const __props = resolveProps(Astro, { fade: { type: "string", default: "" } });
 const { fade, class: className } = __props;
 ---
-<div class={style({ base: { width: "100%" } }, __props, { root: true })} fade={fade || undefined}><slot /></div>
+<div class={cx("w-full", className)} fade={fade || undefined}><slot /></div>

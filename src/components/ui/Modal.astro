@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style } from 'meno-astro';
 import { Embed } from 'meno-astro/components';
 
 const __props = resolveProps(Astro, {
@@ -9,25 +9,7 @@ const __props = resolveProps(Astro, {
 });
 const { modalId, isOpen, fade, class: className } = __props;
 ---
-<div class={style({
-    base: {
-      position: "fixed",
-      top: "0",
-      left: "0",
-      width: "100%",
-      height: "100%",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      zIndex: "1000",
-      opacity: "0",
-      visibility: "hidden",
-      transition: "opacity 0.3s ease, visibility 0.3s ease"
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, {
-    root: true,
+<div class={cx(style({}, __props, {
     interactive: [
       {
         name: "is open",
@@ -37,38 +19,9 @@ const { modalId, isOpen, fade, class: className } = __props;
       }
     ],
     label: "Modal"
-  })} data-modal-id={modalId || undefined} fade={fade || undefined}>
-  <div class={style({
-      base: {
-        position: "absolute",
-        width: "100%",
-        height: "100%",
-        backgroundColor: "rgba(0,0,0,0.2)"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props, { label: "Backdrop" })} data-el="backdrop" />
-  <Embed html={`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`} class={style({
-      base: {
-        position: "absolute",
-        top: "16px",
-        right: "16px",
-        zIndex: "1001",
-        color: "var(--text)",
-        width: "40px",
-        height: "40px",
-        cursor: "pointer",
-        display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "0",
-        backgroundColor: "var(--bg)",
-        borderRadius: " 4px",
-        transition: "background-color .2s"
-      },
-      tablet: {},
-      mobile: {}
-    }, __props, {
+  }), "flex justify-center items-center w-full h-full opacity-0 fixed top-[0] left-[0] z-1000 transition-[opacity_0.3s_ease,_visibility_0.3s_ease] invisible", className)} data-modal-id={modalId || undefined} fade={fade || undefined}>
+  <div class={style({}, __props, { label: "Backdrop" }) + " w-full h-full bg-[rgba(0,0,0,0.2)] absolute"} data-el="backdrop" />
+  <Embed html={`<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-icon lucide-x"><path d="M18 6 6 18"/><path d="m6 6 12 12"/></svg>`} class={style({}, __props, {
       interactive: [
         {
           name: "on hover",
@@ -77,7 +30,7 @@ const { modalId, isOpen, fade, class: className } = __props;
         }
       ],
       label: "Close Button"
-    })} data-el="close-btn" />
+    }) + " p-[0] flex justify-center items-center w-10 h-10 bg-bg text-text rounded-[_4px] absolute top-4 right-4 z-1001 cursor-pointer transition-[background-color_.2s]"} data-el="close-btn" />
   <slot />
 </div>
 

@@ -24,7 +24,7 @@ const { title, text, image, theme, class: className } = __props;
 ---
 <Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
   <Stack vertical="top" horizontal="center">
-    <div class={style({ base: { width: "100%", maxWidth: "900px" }, tablet: {}, mobile: {} }, __props)}><Image image={image} height="400px" border={false} rounded="large" objectFit="cover" fade="0" /></div>
+    <div class="w-full max-w-[900px]"><Image image={image} height="400px" border={false} rounded="large" objectFit="cover" fade="0" /></div>
     <Spacer size="64" />
     <Heading text={title} maxWidth="480px" align="center" size="1" tag="1" variant="default" fade="0.2" />
     {text && (

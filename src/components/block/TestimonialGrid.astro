@@ -1,26 +1,15 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, variants } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   columns: { type: "select", default: "3", options: ["2", "3", "4"] }
 });
 const { columns, class: className } = __props;
 ---
-<div class={style({
-    base: {
-      display: "grid",
-      gridTemplateColumns: {
-        _mapping: true,
-        prop: "columns",
-        values: {
-          "2": "repeat(2, 1fr)",
-          "3": "repeat(3, 1fr)",
-          "4": "repeat(4, 1fr)"
-        }
-      },
-      gap: "24px",
-      alignItems: "stretch"
-    },
-    tablet: { gridTemplateColumns: "repeat(2, 1fr)", gap: "20px" },
-    mobile: { gridTemplateColumns: "1fr", gap: "16px" }
-  }, __props, { root: true })}><slot /></div>
+<div class={cx(variants(__props, {
+    columns: {
+      "2": "grid-cols-[repeat(2,_1fr)]",
+      "3": "grid-cols-[repeat(3,_1fr)]",
+      "4": "grid-cols-[repeat(4,_1fr)]"
+    }
+  }), "grid items-stretch gap-6 max-lg:gap-5 max-lg:grid-cols-[repeat(2,_1fr)] max-sm:gap-4 max-sm:grid-cols-[1fr]", className)}><slot /></div>

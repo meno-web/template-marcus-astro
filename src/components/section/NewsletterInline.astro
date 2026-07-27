@@ -35,25 +35,15 @@ const {
 ---
 <Section theme={theme} spaceTop="default" class={style({}, __props, { root: true })}>
   <Stack vertical="top" horizontal="center">
-    <div class={style({
-        base: {
-          maxWidth: "600px",
-          textAlign: "center",
-          display: "flex",
-          flexDirection: "column",
-          alignItems: "center"
-        },
-        tablet: {},
-        mobile: {}
-      }, __props)}>
+    <div class="flex flex-col items-center max-w-[600px] text-center">
       <Heading text={title} maxWidth="" align="center" size="2" tag="2" fade="0" />
       {text && (
         <Text text={text} size="large" align="center" maxWidth="460px" isMarginBottom={true} fade="0.2" />
       )}
       <Spacer size="32" />
-      <div class={style({ base: { width: "100%", maxWidth: "460px" }, tablet: {}, mobile: {} }, __props)} fade={0.4}>
+      <div fade={0.4} class="w-full max-w-[460px]">
         <Form>
-          <div class={style({ base: { display: "flex", gap: "8px" }, tablet: {}, mobile: {} }, __props)}>
+          <div class="flex gap-2">
             <Input placeholder={placeholderText} />
             <Submit text={buttonText} />
           </div>

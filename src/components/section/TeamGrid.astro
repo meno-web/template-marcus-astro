@@ -61,18 +61,8 @@ const { subtitle, title, text, items, theme, class: className } = __props;
   </SectionHeader>
   <Grid columns="4" gap="24" fade="0.4">
     {list(items).map((item, itemIndex) => (
-      <div class={style({ base: { textAlign: "center" } }, __props)}>
-        <div class={style({
-            base: {
-              width: "160px",
-              height: "160px",
-              borderRadius: "50%",
-              overflow: "hidden",
-              marginBottom: "16px",
-              marginLeft: "auto",
-              marginRight: "auto"
-            }
-          }, __props)}><Image image={item.image} alt={item.title} objectFit="cover" width="100%" height="100%" /></div>
+      <div class="text-center">
+        <div class="mr-auto mb-4 ml-auto w-40 h-40 rounded-[50%] overflow-hidden"><Image image={item.image} alt={item.title} objectFit="cover" width="100%" height="100%" /></div>
         <Heading text={item.title} size="5" tag="3" align="center" />
         <Text text={item.text} size="small" variant="light" align="center" />
       </div>

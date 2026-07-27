@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 import { Link } from 'meno-astro/components';
 
 const __props = resolveProps(Astro, {
@@ -8,13 +8,4 @@ const __props = resolveProps(Astro, {
 });
 const { text, link, class: className } = __props;
 ---
-<Link href={link} class={style({
-    base: {
-      fontSize: "16px",
-      lineHeight: "1.6",
-      color: "var(--text)",
-      textDecoration: "none"
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })}>{text}</Link>
+<Link href={link} class={cx("text-text text-[16px] no-underline leading-[1.6]", className)}>{text}</Link>

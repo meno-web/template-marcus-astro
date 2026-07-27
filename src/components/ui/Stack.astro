@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, variants } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   vertical: {
@@ -18,31 +18,17 @@ const { vertical, horizontal, fade, class: className } = __props;
 
 const __meno = { category: "ui" };
 ---
-<div class={style({
-    base: {
-      display: "flex",
-      flexDirection: "column",
-      justifyContent: {
-        _mapping: true,
-        prop: "vertical",
-        values: {
-          center: "center",
-          spaceBetween: "spaceBetween",
-          top: "flex-start",
-          bottom: "flex-end"
-        }
-      },
-      alignItems: {
-        _mapping: true,
-        prop: "horizontal",
-        values: {
-          left: "flex-start",
-          center: "center",
-          right: "flex-end",
-          spaceBetween: "space-between"
-        }
-      }
+<div class={cx(variants(__props, {
+    vertical: {
+      center: "justify-center",
+      spaceBetween: "[justify-content:spaceBetween]",
+      top: "justify-start",
+      bottom: "justify-end"
     },
-    tablet: {},
-    mobile: {}
-  }, __props, { root: true })} fade={fade || undefined}><slot /></div>
+    horizontal: {
+      left: "items-start",
+      center: "items-center",
+      right: "items-end",
+      spaceBetween: "[align-items:space-between]"
+    }
+  }), "flex flex-col", className)} fade={fade || undefined}><slot /></div>

@@ -1,12 +1,12 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   singleOpen: { type: "boolean", default: false }
 });
 const { singleOpen, class: className } = __props;
 ---
-<dl class={style({ base: { display: "flex", flexDirection: "column", gap: "0" } }, __props, { root: true })}><slot /></dl>
+<dl class={cx("flex flex-col gap-[0]", className)}><slot /></dl>
 
 
 <script define:vars={{ singleOpen }}>

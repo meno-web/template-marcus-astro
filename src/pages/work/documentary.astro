@@ -1,0 +1,22 @@
+---
+import { BaseLayout } from 'meno-astro/components';
+import CaseStudyBody from '../../components/section/CaseStudyBody.astro';
+import Heading from '../../components/ui/Heading.astro';
+import Layout from '../../components/layout/Layout.astro';
+import Text from '../../components/ui/Text.astro';
+import '../../styles/theme.css';
+
+const meta = {
+  title: "Documentary — Marcus Cole",
+  description: "Documentary — Director & Editor"
+};
+---
+<BaseLayout meta={meta}>
+  <Layout>
+    <CaseStudyBody theme="dark" backText="Back to Work" backLink="/work" category="Documentary" title="Documentary" image="/images/pasted-image-1773415908791.webp">
+      <Text text="A narrative short film exploring themes of memory and identity through the lens of a protagonist returning to their hometown after years away. Shot on location over five days." />
+      <Heading text="Visual Language" size="3" tag="2" isMb0={true} />
+      <Text text="The cinematography employed a dual approach — warm, desaturated tones for present-day scenes contrasted with vivid, high-contrast flashbacks. This visual dichotomy reinforced the emotional arc of the story." />
+    </CaseStudyBody>
+  </Layout>
+</BaseLayout>

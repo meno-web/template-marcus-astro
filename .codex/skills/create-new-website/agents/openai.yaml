@@ -1,0 +1,4 @@
+interface:
+  display_name: "Create New Website"
+  short_description: "Choose a direction and build a Meno website"
+  default_prompt: "Use $create-new-website to guide me through tag-based design choices, then design and structure this Astro website."

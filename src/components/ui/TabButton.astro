@@ -1,5 +1,5 @@
 ---
-import { resolveProps, style } from 'meno-astro';
+import { cx, resolveProps, style } from 'meno-astro';
 
 const __props = resolveProps(Astro, {
   isActive: { type: "boolean" },
@@ -8,23 +8,7 @@ const __props = resolveProps(Astro, {
 });
 const { isActive, text, fade, class: className } = __props;
 ---
-<button class={style({
-    base: {
-      padding: "12px 20px",
-      fontSize: "16px",
-      fontWeight: "500",
-      backgroundColor: "transparent",
-      border: "none",
-      borderBottom: "2px solid transparent",
-      color: "var(--text)",
-      cursor: "pointer",
-      transition: "all 0.2s ease",
-      whiteSpace: "nowrap"
-    },
-    tablet: {},
-    mobile: {}
-  }, __props, {
-    root: true,
+<button class={cx(style({}, __props, {
     interactive: [
       {
         postfix: ":hover",
@@ -40,4 +24,4 @@ const { isActive, text, fade, class: className } = __props;
       }
     ],
     label: "Tab"
-  })} data-tab-button="true" class={isActive ? "is-active" : "" || undefined} fade={fade || undefined}>{text}</button>
+  }), className)} data-tab-button="true" class={`p-[12px_20px] bg-transparent text-text border-[none] border-b-[2px_solid_transparent] text-[16px] font-[500] whitespace-nowrap cursor-pointer transition-[all_0.2s_ease] ${isActive ? "is-active" : ""}`} fade={fade || undefined}>{text}</button>
