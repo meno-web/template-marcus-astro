@@ -1,16 +1,22 @@
 ---
-name: create-new-website
-description: Create and structure this project's Astro website using a guided, tag-based visual-direction intake plus layout, section, block, UI, and form component layers with clear composition boundaries and project-derived component APIs. Use when building a new website or page, choosing an art direction or design tags, or creating and restructuring page sections, navigation, footers, layouts, cards, FAQs, forms, buttons, headings, text components, and other reusable interface components.
+name: build-website
+description: Build this project's Astro website — from a written brief, a Figma frame, a reference site's design language, or an existing site to reproduce — as layered layout/section/block/ui/form components with tokens in src/styles/theme.css. Use when creating a new site or page, implementing a figma.com URL, matching a reference's style, cloning an existing site, or creating and restructuring sections, navigation, footers, layouts, cards, FAQs, forms, buttons, headings, and other reusable interface components.
 ---
 
-# Create New Website
-
-> **Working from an existing site instead?** Use `website-from-inspiration` when the user
-> has a reference whose design language they want (their own content and structure, that
-> site's design system), or `clone-website` when they want the source reproduced (its
-> content, its structure, its design). This skill is for a direction invented from scratch.
+# Build Website
 
 Structure pages as a shallow composition of a shared layout and page sections. Build each section from reusable blocks, form components, and UI primitives. Derive names and props from the current project instead of treating the examples below as mandatory vocabulary.
+
+## Where the Design Comes From
+
+The architecture in this skill is the same whatever the origin. Only the front of the run differs, and it differs in exactly one way — whether the visual direction is already decided:
+
+- **A brief, or nothing at all** — the direction is undecided. Run the art-direction intake below.
+- **A Figma frame** — load `figma:figma-design-to-code` before calling any Figma MCP read tool. Its variables and type styles are the token set; honor existing Code Connect mappings instead of rebuilding those components. Skip the intake.
+- **A reference site whose look the user wants** — measure the rendered system with the browser tools and carry *ratios* (type scale steps, spacing unit, contrast relationships) rather than absolutes. Never reuse its logo, imagery, or copy. Skip the intake.
+- **An existing site to reproduce** — mirror it first, then carve the mirror into the layers below. See `.claude/docs/meno/meno-migration-docs.md`. Skip the intake.
+
+Once the direction is settled, everything from the content contract onward applies unchanged.
 
 For a new, blank, or visually undecided project, make the first user-facing design exchange a guided tag picker. Do not begin with only an open-ended request for a brief, do not ask the user to invent a visual direction from scratch, and do not start implementation before recording the chosen design profile. After a minimal repository inspection, ask specific questions with concrete proposals as described in [Establish the Art Direction](#establish-the-art-direction).
 

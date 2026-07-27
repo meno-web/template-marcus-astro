@@ -4,14 +4,24 @@ Practical playbook for turning an imported pure-CSS site (Webflow export, HTML/C
 etc.) into a scalable Meno component project, **using only the meno-astro dialect**, while
 keeping the rendered result pixel-identical.
 
-> **Structure: defer to the `/clone-website` skill.** That skill owns the end-to-end
-> procedure (mirror → tokens → carve → verify → retire) and the current **five**-layer
+> **This doc owns the migration procedure** — mirror → tokens → carve → verify → retire —
+> along with parser behavior (§0), the component-authoring pattern (§4), THE COLOR RULE
+> (§4), utility syntax (§5), and the environment facts in §7.
+>
+> **Structure: defer to the `/build-website` skill.** It owns the current **five**-layer
 > component structure — `layout/` `section/` `block/` `ui/` `form/` — plus `SectionShell`,
-> the variant-vs-instance rule, and `type:"link"` destination props. The `ui/blocks/sections`
-> trio referenced in §8 below is the older three-layer shape; prefer the five layers.
-> **This doc remains authoritative on everything else** — parser behavior (§0), the
-> component-authoring pattern (§4), THE COLOR RULE (§4), utility syntax (§5), and the
-> environment facts in §7. Those are unchanged and load-bearing.
+> and `type:"link"` destination props. The `ui/blocks/sections` trio referenced in §8 below
+> is the older three-layer shape; prefer the five layers.
+>
+> **The one judgement the carve turns on: variant or instance?** A source design-system
+> base class (`.heading-style-h1`, its token `--typography--h1`) becomes a component
+> **variant** — the properties every use shares: font size, line height, weight, family; a
+> button's padding, background, radius, hover. A **combo class**
+> (`.heading-style-h1.text-align-center`), an inline `style`, or an element-specific value
+> becomes an **instance style** — `text-align`, a one-off `margin`/`max-width`/`width`, a
+> dark-section color override. When unsure, choose the instance style: a variant earns its
+> place by being reused three or more times, and one-offs bloat the variant matrix into
+> something nobody can reason about.
 
 This doc fills the gaps between the dialect spec (`meno-astro-dialect.md`), the component
 model (`components.md`), and what the **installed runtime actually does**. Where they
@@ -264,7 +274,7 @@ Non-color bracket utilities (`text-[3.5rem]`, `gap-[8px]`, gradients) are fine i
 ## 8. Suggested component set for a marketing-site migration
 
 > Layer names below predate the five-layer structure — read `blocks/` as `block/` and
-> `sections/` as `section/`, and add `form/` for form components. See `/clone-website`.
+> `sections/` as `section/`, and add `form/` for form components. See `/build-website`.
 
 - `ui/`: `Heading` (level + size + color), `Text` (tag + size + weight + color), `Button`
   (variant + href, slot for icon), maybe `Tagline`, `Icon`/embed wrapper, `Spacer` (size).

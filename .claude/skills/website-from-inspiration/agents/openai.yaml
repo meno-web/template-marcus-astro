@@ -1,4 +1,0 @@
-interface:
-  display_name: "Website From Inspiration"
-  short_description: "Build your site with a reference site's design language"
-  default_prompt: "Use $website-from-inspiration to derive a design system from a reference site and apply it to my own content and structure."

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Build Website"
+  short_description: "Design and structure a Meno website from any source"
+  default_prompt: "Use $build-website to design and structure this Astro website — from a brief, a Figma frame, a reference site, or an existing site to reproduce."

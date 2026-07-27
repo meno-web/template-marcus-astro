@@ -1,4 +1,0 @@
-interface:
-  display_name: "Clone Website"
-  short_description: "Mirror an existing site, then rebuild it as components"
-  default_prompt: "Use $clone-website to mirror a page from an existing site, lift its design tokens, and carve it into layered Meno components."
