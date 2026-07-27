@@ -1,0 +1,24 @@
+---
+import { BaseLayout } from 'meno-astro/components';
+import CaseStudyBody from '../../components/section/CaseStudyBody.astro';
+import Heading from '../../components/ui/Heading.astro';
+import Layout from '../../components/layout/Layout.astro';
+import Text from '../../components/ui/Text.astro';
+import '../../styles/theme.css';
+
+const meta = {
+  title: "Brand Campaign — Marcus Cole",
+  description: "Commercial — Directed & Shot"
+};
+---
+<BaseLayout meta={meta}>
+  <Layout>
+    <CaseStudyBody theme="dark" backText="Back to Work" backLink="/work" category="Commercial" title="Brand Campaign" image="/images/pasted-image-1773393938666.webp">
+      <Text text="A full-scale brand campaign combining cinematic visuals with compelling narrative to elevate the client's market presence. This project involved directing and shooting across multiple locations over two weeks." />
+      <Heading text="The Brief" size="3" tag="2" isMb0={true} />
+      <Text text="The client needed a series of hero films and cutdowns for a seasonal campaign launch. The goal was to capture the brand's essence through authentic storytelling while maintaining a premium cinematic look." />
+      <Heading text="The Approach" size="3" tag="2" isMb0={true} />
+      <Text text="We opted for a naturalistic shooting style with carefully controlled lighting to create an intimate yet polished feel. Every frame was designed to tell a story while showcasing the product in its most authentic context." />
+    </CaseStudyBody>
+  </Layout>
+</BaseLayout>

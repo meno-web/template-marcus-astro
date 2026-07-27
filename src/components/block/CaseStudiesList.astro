@@ -1,17 +1,54 @@
 ---
-import { getCollection } from 'astro:content';
-import { getCollectionList, i18n, resolveProps, style } from 'meno-astro';
+import { list, resolveProps, style } from 'meno-astro';
 import { Embed, Link, MenoImage } from 'meno-astro/components';
 import Grid from '../ui/Grid.astro';
 
-const __props = resolveProps(Astro, {});
-const { class: className } = __props;
-
-const case_studiesList = await getCollectionList("case-studies", { sort: { field: "publishedAt", direction: "desc" } }, Astro, getCollection);
+const __props = resolveProps(Astro, {
+  items: {
+    type: "list",
+    itemSchema: {
+      image: {
+        type: "file",
+        accept: "image/*",
+        default: "/images/placeholder-img.webp"
+      },
+      title: { type: "string", default: "Project" },
+      category: { type: "string", default: "Category" },
+      link: { type: "link", default: "#" }
+    },
+    default: [
+      {
+        image: "/images/pasted-image-1773393938666.webp",
+        title: "Brand Campaign",
+        category: "Commercial",
+        link: "/work/brand-campaign"
+      },
+      {
+        image: "/images/pasted-image-1773415883515.webp",
+        title: "Short Film",
+        category: "Narrative",
+        link: "/work/short-film"
+      },
+      {
+        image: "/images/pasted-image-1773394149639.webp",
+        title: "Music Video",
+        category: "Music Video",
+        link: "/work/music-video"
+      },
+      {
+        image: "/images/pasted-image-1773415908791.webp",
+        title: "Documentary",
+        category: "Documentary",
+        link: "/work/documentary"
+      }
+    ]
+  }
+});
+const { items, class: className } = __props;
 ---
 <Grid columns="2" gap="24" fade="0.4" class={style({}, __props, { root: true })}>
-  {case_studiesList.map((study, studyIndex) => (
-    <Link href={i18n(study._url)} class={style({}, __props, {
+  {list(items).map((study, studyIndex) => (
+    <Link href={study.link} class={style({}, __props, {
         interactive: [
           {
             prefix: "",
@@ -28,10 +65,10 @@ const case_studiesList = await getCollectionList("case-studies", { sort: { field
           }
         ]
       }) + " block aspect-[4/3] text-inherit rounded-[12px] no-underline relative overflow-hidden transition-[border-radius_.2s]"}>
-      <MenoImage src={i18n(study.image) || undefined} alt={i18n(study.title) || undefined} class="w-full h-full transition-[transform_0.3s_ease] object-cover" />
+      <MenoImage src={study.image || undefined} alt={study.title || undefined} class="w-full h-full transition-[transform_0.3s_ease] object-cover" />
       <div data-el="overlay" class="p-6 [background:linear-gradient(transparent,_rgba(0,0,0,0.7))] opacity-0 absolute right-[0] bottom-[0] left-[0] transition-[opacity_0.3s_ease]">
-        <h3 class="m-[0_0_4px_0] text-[#ffffff] text-[18px] font-[600]">{i18n(study.title)}</h3>
-        <p class="m-[0] text-[rgba(255,255,255,0.7)] text-[14px]">{i18n(study.category)}</p>
+        <h3 class="m-[0_0_4px_0] text-[#ffffff] text-[18px] font-[600]">{study.title}</h3>
+        <p class="m-[0] text-[rgba(255,255,255,0.7)] text-[14px]">{study.category}</p>
       </div>
       <div data-el="cursor" class="flex justify-center items-center w-[72px] h-[72px] bg-accent rounded-[50%] opacity-0 transform-[translate(-50%,_-50%)] absolute top-[0] left-[0] z-10 pointer-events-none transition-[opacity_0.2s]"><Embed html={`<svg width='20' height='20' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M3 8H13M13 8L8.5 3.5M13 8L8.5 12.5' stroke='currentColor' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>`} class="h-[19px] text-[var(--black)] transform-[rotate(-45deg)]" /></div>
     </Link>
@@ -39,7 +76,7 @@ const case_studiesList = await getCollectionList("case-studies", { sort: { field
 </Grid>
 
 
-<script define:vars={{  }}>
+<script define:vars={{ items }}>
 (function(el, props){
 var cursors = el.querySelectorAll('[data-el="cursor"]');
 
@@ -80,5 +117,5 @@ cursors.forEach(function(cursor) {
   animate();
 });
 
-})((function(){var s=document.currentScript,e=s&&s.previousElementSibling;while(e&&(e.nodeName==='STYLE'||e.nodeName==='SCRIPT'))e=e.previousElementSibling;return e||null;})(), {});
+})((function(){var s=document.currentScript,e=s&&s.previousElementSibling;while(e&&(e.nodeName==='STYLE'||e.nodeName==='SCRIPT'))e=e.previousElementSibling;return e||null;})(), { items });
 </script>
