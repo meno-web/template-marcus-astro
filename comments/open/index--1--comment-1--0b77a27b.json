@@ -1,0 +1,61 @@
+{
+  "_id": "0b77a27b-8229-4b4f-9d6e-203f4cea874c",
+  "_filename": "index--1--comment-1--0b77a27b",
+  "_pagePath": "index",
+  "_seq": 1,
+  "_createdAt": "2026-08-03T11:54:42.078Z",
+  "_updatedAt": "2026-08-03T11:54:42.078Z",
+  "_commitSha": null,
+  "anchor": {
+    "nodeRef": [
+      {
+        "kind": "component",
+        "name": "Section",
+        "nth": 0
+      },
+      {
+        "kind": "component",
+        "name": "SplitContent",
+        "nth": 0
+      },
+      {
+        "kind": "component",
+        "name": "Stack",
+        "nth": 0
+      },
+      {
+        "kind": "component",
+        "name": "Heading",
+        "nth": 0
+      }
+    ],
+    "nodePath": [
+      0,
+      0,
+      1,
+      0,
+      1
+    ],
+    "nodeIdentity": {
+      "kind": "component",
+      "name": "Heading",
+      "label": "Heading"
+    },
+    "offsetXPercent": 0.5524590163934426,
+    "offsetYPercent": 0.19293024227234754,
+    "breakpoint": "base"
+  },
+  "status": "open",
+  "thread": [
+    {
+      "id": "2ea01110-b6a8-49ce-8018-215145f1a9c0",
+      "author": {
+        "login": "uplostudio",
+        "avatarUrl": "https://avatars.githubusercontent.com/u/110473855?v=4"
+      },
+      "createdAt": "2026-08-03T11:54:42.078Z",
+      "text": "comment 1",
+      "statusChange": null
+    }
+  ]
+}
