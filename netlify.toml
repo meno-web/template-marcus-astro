@@ -5,3 +5,12 @@
 
 [build.environment]
   NODE_VERSION = "22"
+# BEGIN meno locale-404 redirects (generated — do not edit between markers)
+# Locale-scoped 404s — an unmatched /<locale>/* URL serves that locale's own
+# prerendered 404 page WITH a 404 status (non-shadowing: real pages still win).
+# Unmatched URLs outside these prefixes fall through to the default /404.html.
+[[redirects]]
+  from = "/pl/*"
+  to = "/pl/404/index.html"
+  status = 404
+# END meno locale-404 redirects

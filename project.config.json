@@ -70,6 +70,13 @@
         "nativeName": "English",
         "langTag": "en-US",
         "icon": ""
+      },
+      {
+        "code": "pl",
+        "name": "Polish",
+        "nativeName": "Polski",
+        "langTag": "pl-PL",
+        "icon": ""
       }
     ]
   },

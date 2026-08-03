@@ -72,6 +72,23 @@
   --b-br: 4px;
 }
 
+[theme="light"] {
+  --text: #0a0c07;
+  --text-100: #272b1b;
+  --bg: #fbfce8;
+  --border: #d4da8e;
+  --border-100: #e8ecb0;
+  --h-span: #71794d;
+  --text-200: #535a38;
+  --bg-100: #f5f7d4;
+  --bg-200: #e8ecb0;
+  --bg-300: #d4da8e;
+  --accent: #f4fd77;
+  --accent-100: #dce462;
+  --black: #0a0c07;
+  --white: #fbfce8;
+}
+
 [theme="muted"] {
   --text: #fbfce8;
   --text-100: #e8ecb0;
