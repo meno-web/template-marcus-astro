@@ -80,8 +80,8 @@ const {
   </SectionHeader>
   <Grid columns={columns} fade="0.4">
     {list(items).map((item, itemIndex) => (
-      <div class={style({}, __props, { label: "Card" }) + " p-[32px_24px] flex flex-col items-center [background:var(--bg-100)] rounded-[0px] text-center"}>
-        <div class={style({}, __props, { label: "Icon Wrap" }) + " mb-5 flex justify-center items-center w-16 h-16 bg-accent rounded-[2px]"}><Icon size={24} icon={item.icon} /></div>
+      <div data-meno-label="Card" class="p-[32px_24px] flex flex-col items-center [background:var(--bg-100)] rounded-[0px] text-center">
+        <div data-meno-label="Icon Wrap" class="mb-5 flex justify-center items-center w-16 h-16 bg-accent rounded-[2px]"><Icon size={24} icon={item.icon} /></div>
         <Heading text={item.title} size="5" tag="3" align="center" />
         <Text text={item.text} size="small" variant="light" align="center" />
       </div>
